@@ -1,0 +1,22 @@
+/* Fix WooDash Pro modal popup display */
+.woosh-modal, .woosh-modal * {
+    z-index: 99999 !important;
+    max-width: 90vw !important;
+    max-height: 90vh !important;
+    overflow: auto !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    position: fixed !important;
+    display: block !important;
+}
+
+body.light-mode {
+  background: #fff !important;
+  color: #222 !important;
+}
+body.light-mode .some-dark-bg-class {
+  background: #f5f5f5 !important;
+  color: #222 !important;
+}
+/* Add more overrides as needed for your dashboard */
