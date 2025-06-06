@@ -1,5 +1,111 @@
 /* Admin Styles for WooDash Pro */
 
+/* General Styles */
+.woodash-dashboard {
+    margin: 20px;
+}
+
+/* Card Styles */
+.woodash-card {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Form Styles */
+.woodash-form-group {
+    margin-bottom: 15px;
+}
+
+.woodash-form-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.woodash-form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Button Styles */
+.woodash-btn {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    font-weight: 600;
+}
+
+.woodash-btn-primary {
+    background: #00CC61;
+    color: white;
+}
+
+.woodash-btn-secondary {
+    background: #f0f0f0;
+    color: #333;
+}
+
+/* Table Styles */
+.woodash-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.woodash-table th,
+.woodash-table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.woodash-table th {
+    background: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Notice Styles */
+.woodash-notice {
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+}
+
+.woodash-notice-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.woodash-notice-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Loading State */
+.woodash-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 782px) {
+    .woodash-card {
+        padding: 15px;
+    }
+    
+    .woodash-table th,
+    .woodash-table td {
+        padding: 8px;
+    }
+}
+
 /* Base styles */
 .woodash-fullscreen {
     position: fixed;
@@ -33,39 +139,14 @@
 }
 
 /* Card styles */
-.woodash-card {
-    background: white;
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #f3f4f6;
-    transition: all 0.3s ease;
-}
-
 .woodash-card:hover {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transform: translateY(-2px);
 }
 
 /* Button styles */
-.woodash-btn {
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.woodash-btn-primary {
-    background: #00CC61;
-    color: white;
-}
-
 .woodash-btn-primary:hover {
     background: #00b357;
-}
-
-.woodash-btn-secondary {
-    background: #f3f4f6;
-    color: #374151;
 }
 
 .woodash-btn-secondary:hover {

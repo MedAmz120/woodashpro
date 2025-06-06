@@ -947,11 +947,12 @@
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.1s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
-                                    <span>Total Sales</span> <span class="woodash-badge woodash-badge-success text-xs">Live</span>
+                                <h3 class="woodash-metric-title flex items-center gap-2">
+                                    <span>Total Sales</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">Live</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="total-sales">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="total-sales">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>12.5%</span>
@@ -963,23 +964,24 @@
                                 <i class="fa-solid fa-dollar-sign"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-sales" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 rounded-full" style="width: 75%"></div>
+                            </div>
                         </div>
                     </div>
-
 
                     <!-- Total Orders Card -->
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.2s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
+                                <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Total Orders</span>
-                                    <span class="woodash-badge woodash-badge-warning text-xs" id="pending-orders">Pending: 0</span>
+                                    <span class="woodash-badge woodash-badge-warning text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800">Pending: 5</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="total-orders">0</div>
-                                <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="total-orders">0</div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>8.2%</span>
                                     </span>
@@ -990,8 +992,10 @@
                                 <i class="fa-solid fa-shopping-cart"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-orders" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 65%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -999,12 +1003,12 @@
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.3s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
+                                <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Average Order Value</span>
-                                    <span class="woodash-badge woodash-badge-danger text-xs">-3.1%</span>
+                                    <span class="woodash-badge woodash-badge-danger text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">-3.1%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="aov">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="aov">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-red-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-down text-xs"></i>
                                         <span>3.1%</span>
@@ -1016,8 +1020,10 @@
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-aov" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 rounded-full" style="width: 45%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -1027,10 +1033,10 @@
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>New Customers</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+15.3%</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">+15.3%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="new-customers">0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="new-customers">0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>15.3%</span>
@@ -1042,8 +1048,10 @@
                                 <i class="fa-solid fa-users"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-customers" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-500 rounded-full" style="width: 85%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -1053,11 +1061,11 @@
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Net Profit</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+9.7%</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">+9.7%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="net-profit">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="net-profit">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>9.7%</span>
                                     </span>
@@ -1068,11 +1076,46 @@
                                 <i class="fa-solid fa-coins"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-profit" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-red-500 rounded-full" style="width: 70%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <style>
+                    /* Additional Metric Card Colors */
+                    .woodash-metric-blue {
+                        background: rgba(59, 130, 246, 0.1);
+                        color: #3B82F6;
+                    }
+
+                    .woodash-metric-purple {
+                        background: rgba(139, 92, 246, 0.1);
+                        color: #8B5CF6;
+                    }
+
+                    .woodash-metric-orange {
+                        background: rgba(249, 115, 22, 0.1);
+                        color: #F97316;
+                    }
+
+                    .woodash-metric-red {
+                        background: rgba(239, 68, 68, 0.1);
+                        color: #EF4444;
+                    }
+
+                    .woodash-badge-warning {
+                        background-color: rgba(234, 179, 8, 0.1);
+                        color: #EAB308;
+                    }
+
+                    .woodash-badge-danger {
+                        background-color: rgba(239, 68, 68, 0.1);
+                        color: #EF4444;
+                    }
+                </style>
 
                 <!-- Sales Overview -->
                 <div class="woodash-chart-container mb-8 woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
@@ -1329,7 +1372,6 @@
         </main>
     </div>
 </div>
-
 
 
 <!-- Add mobile menu toggle button -->

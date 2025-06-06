@@ -273,55 +273,34 @@ function initializeSlideshow() {
 
 // Chart initialization
 function initializeCharts() {
-    // Sales Chart
-    const salesCtx = document.getElementById('sales-chart');
-    if (salesCtx) {
-        new Chart(salesCtx.getContext('2d'), {
-            type: 'line',
-            data: { labels: [], datasets: [{ label: 'Sales', data: [], borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }] },
-            options: {
-                elements: {
-                    line: { borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }
-                },
-                responsive: true,
-                plugins: { legend: { display: false } }
-            }
-        });
-    }
-
-    // Orders Chart
-    const ordersCtx = document.getElementById('orders-chart');
-    if (ordersCtx) {
-        new Chart(ordersCtx.getContext('2d'), {
-            type: 'bar',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                datasets: [{
-                    label: 'Orders',
-                    data: [150, 230, 180, 290, 200, 250],
-                    backgroundColor: '#00CC61',
-                    borderRadius: 4
-                }]
-            },
+    const chartElements = document.querySelectorAll('.woodash-chart');
+    
+    chartElements.forEach(chartElement => {
+        const ctx = chartElement.getContext('2d');
+        const chartType = chartElement.dataset.chartType;
+        const chartData = JSON.parse(chartElement.dataset.chartData);
+        
+        new Chart(ctx, {
+            type: chartType,
+            data: chartData,
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(17, 24, 39, 0.9)',
-                        padding: 12,
-                        cornerRadius: 8,
-                        displayColors: false
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
                     }
                 },
                 scales: {
                     y: {
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
+                            display: true,
+                            drawBorder: false
                         }
                     },
                     x: {
@@ -332,7 +311,7 @@ function initializeCharts() {
                 }
             }
         });
-    }
+    });
 }
 
 // Tooltip initialization
@@ -340,34 +319,38 @@ function initializeTooltips() {
     const tooltipTriggers = document.querySelectorAll('.woodash-tooltip-trigger');
     
     tooltipTriggers.forEach(trigger => {
-        const tooltip = trigger.querySelector('.woodash-tooltip');
-        if (!tooltip) return;
-
-        trigger.addEventListener('mouseenter', () => {
-            tooltip.style.visibility = 'visible';
-            tooltip.style.opacity = '1';
+        trigger.addEventListener('mouseenter', function(e) {
+            const tooltip = this.querySelector('.woodash-tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            }
         });
-
-        trigger.addEventListener('mouseleave', () => {
-            tooltip.style.visibility = 'hidden';
-            tooltip.style.opacity = '0';
+        
+        trigger.addEventListener('mouseleave', function(e) {
+            const tooltip = this.querySelector('.woodash-tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            }
         });
     });
 }
 
 // Background animation initialization
 function initializeBackgroundAnimation() {
-    const bgAnimation = document.querySelector('.woodash-bg-animation');
-    if (!bgAnimation) return;
-
-    bgAnimation.addEventListener('mousemove', (e) => {
-        const rect = bgAnimation.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        
-        bgAnimation.style.setProperty('--mouse-x', `${x}%`);
-        bgAnimation.style.setProperty('--mouse-y', `${y}%`);
-    });
+    const dashboard = document.querySelector('.woodash-dashboard');
+    
+    if (dashboard) {
+        dashboard.addEventListener('mousemove', function(e) {
+            const rect = dashboard.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            dashboard.style.setProperty('--mouse-x', `${x}%`);
+            dashboard.style.setProperty('--mouse-y', `${y}%`);
+        });
+    }
 }
 
 // Orbs initialization
@@ -420,3 +403,41 @@ const woodashNotifications = {
 
 // Export for use in other files
 window.woodashNotifications = woodashNotifications;
+
+// Mobile menu initialization
+function initializeMobileMenu() {
+    const menuToggle = document.querySelector('.woodash-mobile-menu-toggle');
+    const sidebar = document.querySelector('.woodash-sidebar');
+    
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('woodash-sidebar-open');
+        });
+    }
+}
+
+// Notification system
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `woodash-notification woodash-notification-${type}`;
+    notification.innerHTML = `
+        <div class="flex items-center">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Export functions for use in other files
+window.woodashDashboard = {
+    showNotification
+};

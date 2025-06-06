@@ -44,6 +44,7 @@ body {
     align-items: center;
 }
 
+
 .woodash-metric-icon {
     margin-left: 0.5rem;
     font-size: 1.5rem;
@@ -560,4 +561,8 @@ body {
 
 .woodash-slide-out-left {
     animation: woodash-slide-out-left 0.5s ease-out forwards;
-} 
+}
+
+<div class="mt-4 relative">
+    <canvas id="mini-trend-[metric-name]" height="40"></canvas>
+</div> 

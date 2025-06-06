@@ -1,14 +1,78 @@
 jQuery(document).ready(function($) {
-    // Mobile menu toggle
-    $('.woodash-mobile-menu-toggle').on('click', function() {
+    'use strict';
+
+    // Handle form submissions
+    $('.woodash-form').on('submit', function(e) {
+        var $form = $(this);
+        var $submitButton = $form.find('button[type="submit"]');
+        
+        // Add loading state
+        $submitButton.addClass('woodash-loading');
+        
+        // You can add AJAX form submission here if needed
+    });
+
+    // Handle password visibility toggle
+    $('.woodash-toggle-password').on('click', function(e) {
+        e.preventDefault();
+        var $input = $(this).prev('input');
+        var $icon = $(this).find('i');
+        
+        if ($input.attr('type') === 'password') {
+            $input.attr('type', 'text');
+            $icon.removeClass('fa-eye').addClass('fa-eye-slash');
+        } else {
+            $input.attr('type', 'password');
+            $icon.removeClass('fa-eye-slash').addClass('fa-eye');
+        }
+    });
+
+    // Handle notice dismissal
+    $('.woodash-notice .notice-dismiss').on('click', function() {
+        var $notice = $(this).closest('.woodash-notice');
+        $notice.fadeOut(300, function() {
+            $(this).remove();
+        });
+    });
+
+    // Auto-dismiss notices after 5 seconds
+    setTimeout(function() {
+        $('.woodash-notice').fadeOut(300, function() {
+            $(this).remove();
+        });
+    }, 5000);
+
+    // Handle tab switching
+    $('.woodash-tab-link').on('click', function(e) {
+        e.preventDefault();
+        var target = $(this).data('tab');
+        
+        // Update active states
+        $('.woodash-tab-link').removeClass('active');
+        $(this).addClass('active');
+        
+        // Show target content
+        $('.woodash-tab-content').hide();
+        $('#' + target).show();
+    });
+
+    // Initialize tooltips
+    $('[data-tooltip]').each(function() {
+        var $element = $(this);
+        var tooltip = $element.data('tooltip');
+        
+        $element.attr('title', tooltip);
+    });
+
+    // Handle responsive menu toggle
+    $('.woodash-menu-toggle').on('click', function() {
         $('.woodash-sidebar').toggleClass('active');
     });
 
     // Close sidebar when clicking outside on mobile
     $(document).on('click', function(e) {
-        if ($(window).width() <= 768) {
-            if (!$(e.target).closest('.woodash-sidebar').length && 
-                !$(e.target).closest('.woodash-mobile-menu-toggle').length) {
+        if ($(window).width() < 768) {
+            if (!$(e.target).closest('.woodash-sidebar, .woodash-menu-toggle').length) {
                 $('.woodash-sidebar').removeClass('active');
             }
         }
@@ -147,20 +211,5 @@ jQuery(document).ready(function($) {
                 showToast('Please select at least one product', 'warning');
             }
         }
-    });
-
-    // Initialize tooltips
-    $('[data-tooltip]').each(function() {
-        const tooltip = $(`<div class="woodash-tooltip">${$(this).data('tooltip')}</div>`);
-        $(this).append(tooltip);
-        
-        $(this).hover(
-            function() {
-                tooltip.addClass('woodash-tooltip-show');
-            },
-            function() {
-                tooltip.removeClass('woodash-tooltip-show');
-            }
-        );
     });
 }); 
