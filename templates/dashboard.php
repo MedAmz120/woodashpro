@@ -709,7 +709,7 @@
                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center font-semibold text-white woodash-glow">JD</div>
                 <div>
                         <div class="font-medium text-gray-900">John Doe</div>
-                        <a href="#" class="text-sm text-[#00CC61] hover:underline">Logout</a>
+                        <a href="#" class="text-sm text-[#00CC61] hover:underline woodash-logout-btn">Logout</a>
                     </div>
                 </div>
             </div>
@@ -2261,6 +2261,25 @@ document.addEventListener('DOMContentLoaded', function() {
         copyrightYear.textContent = copyrightYear.textContent.replace('2024', new Date().getFullYear());
     }
 });
+
+jQuery(document).ready(function($) {
+    // Handle logout
+    $('.woodash-logout-btn').on('click', function(e) {
+        e.preventDefault();
+        if (confirm('Are you sure you want to disconnect from WooDash Pro?')) {
+            $.post(ajaxurl, {
+                action: 'woodash_logout',
+                nonce: woodashData.nonce
+            }, function(response) {
+                if (response.success) {
+                    window.location.href = response.data.redirect_url;
+                }
+            });
+        }
+    });
+});
 </script>
+</body>
+</html>
 
 
