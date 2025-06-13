@@ -6,6 +6,29 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <!-- Lottie player: Only load once -->
 <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+
+<div class="woodash-dashboard woodash-bg-pattern">
+    <div class="woodash-dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="woodash-sidebar woodash-scrollbar">
+            <div class="mb-8">
+                <h1 class="text-2xl font-bold woodash-gradient-text">WooDash Pro</h1>
+                <p class="text-gray-500 text-sm">Modern Analytics Dashboard</p>
+            </div>
+            
+            <nav class="space-y-1">
+                <a href="admin.php?page=woodashh-dashboard" class="woodash-nav-link active">
+                    <i class="fas fa-chart-line woodash-nav-icon woodash-metric-green"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="admin.php?page=woodashh-products" class="woodash-nav-link">
+                    <i class="fas fa-box woodash-nav-icon woodash-metric-blue"></i>
+                    <span>Products</span>
+                </a>
+                <a href="admin.php?page=woodashh-customers" class="woodash-nav-link">
+                    <i class="fas fa-users woodash-nav-icon woodash-metric-purple"></i>
+                    <span>Customers</span>
+                </a>
     <style type="text/tailwindcss">
         @layer base {
             body {
@@ -665,55 +688,118 @@
     
 <div id="woodash-dashboard" class="woodash-fullscreen woodash-bg-pattern woodash-bg-animation">
     <div class="flex woodash-content">
-        <!-- Sidebar -->
-        <aside class="woodash-sidebar w-64 bg-white/90 border-r border-gray-100 p-6 woodash-glass-effect">
-            <div class="flex items-center gap-3 mb-8 woodash-fade-in">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center woodash-glow">
-                    <i class="fa-solid fa-chart-line text-white text-xl"></i>
-                </div>
-                <h2 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h2>
+    <!-- Sidebar -->
+    <aside class="woodash-sidebar w-64 bg-white/90 border-r border-gray-100 p-6 woodash-glass-effect">
+        <div class="flex items-center gap-3 mb-8 woodash-fade-in">
+            <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center woodash-glow">
+                <i class="fa-solid fa-box text-white text-xl"></i>
             </div>
-            <nav class="space-y-1">
-                <a href="#" class="woodash-nav-link active woodash-hover-card woodash-slide-up" style="animation-delay: 0.1s">
-                    <i class="fa-solid fa-gauge w-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.2s">
-                    <i class="fa-solid fa-box w-5"></i>
-                    <span>Products</span>
-                    <span class="woodash-badge woodash-badge-success ml-auto woodash-pulse">New</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.3s">
-                    <i class="fa-solid fa-users w-5"></i>
-                    <span>Customers</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.4s">
-                    <i class="fa-solid fa-boxes-stacked w-5"></i>
-                    <span>Stock</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.5s">
-                    <i class="fa-solid fa-star w-5"></i>
-                    <span>Reviews</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s">
-                    <i class="fa-solid fa-ticket w-5"></i>
-                    <span>Coupons</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.7s">
-                    <i class="fa-solid fa-gear w-5"></i>
-                    <span>Settings</span>
-                </a>
-            </nav>
-            <div class="absolute bottom-6 left-6 right-6">
-                <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-hover-card woodash-fade-in">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center font-semibold text-white woodash-glow">JD</div>
-                <div>
-                        <div class="font-medium text-gray-900">John Doe</div>
-                        <a href="#" class="text-sm text-[#00CC61] hover:underline">Logout</a>
+            <h2 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h2>
+        </div>
+
+        <nav class="space-y-1">
+            <a href="<?php echo esc_url(admin_url('admin.php?page=woodash-pro')); ?>"
+               class="woodash-nav-link active woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.1s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-gauge text-white"></i>
                     </div>
+                    <span>Dashboard</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+            <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-products')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.2s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-box text-white"></i>
+                    </div>
+                    <span>Products</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+             <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-customers')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.3s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-users text-white"></i>
+                    </div>
+                    <span>Customers</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+             <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-stock')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.4s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-yellow-500 to-yellow-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-boxes-stacked text-white"></i>
+                    </div>
+                    <span>Stock</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+             <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-reviews')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.5s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-pink-500 to-pink-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-star text-white"></i>
+                    </div>
+                    <span>Reviews</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+             <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-coupons')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.6s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-ticket text-white"></i>
+                    </div>
+                    <span>Coupons</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+
+             <a href="<?php echo esc_url(admin_url('admin.php?page=woodashh-settings')); ?>"
+               class="woodash-nav-link woodash-hover-card woodash-slide-up group"
+               style="animation-delay: 0.7s">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-gray-500 to-gray-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                        <i class="fa-solid fa-gear text-white"></i>
+                    </div>
+                    <span>Settings</span>
+                </div>
+                <i class="fa-solid fa-chevron-right text-gray-400 group-hover:text-[#00CC61] transition-colors duration-200"></i>
+            </a>
+            <!-- User Profile -->
+            <div class="fixed bottom-0 left-0 p-4 bg-white/90 border-t border-r border-gray-100 rounded-tr-lg shadow-lg woodash-glass-effect" style="z-index:1000;">
+                <div class="flex items-center gap-3 px-2">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center">
+                        <i class="fa-solid fa-user text-white"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-sm font-medium text-gray-900 truncate">Admin User</p>
+                        <p class="text-xs text-gray-500 truncate">admin@example.com</p>
+                    </div>
+                    <button class="p-1 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                        <i class="fa-solid fa-ellipsis-vertical text-gray-400"></i>
+                    </button>
                 </div>
             </div>
-        </aside>
+        </nav>
+        
+    </aside>
+
 
         <!-- Main Content -->
         <main class="woodash-main flex-1 p-6 md:p-8">
@@ -861,11 +947,12 @@
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.1s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
-                                    <span>Total Sales</span> <span class="woodash-badge woodash-badge-success text-xs">Live</span>
+                                <h3 class="woodash-metric-title flex items-center gap-2">
+                                    <span>Total Sales</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">Live</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="total-sales">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="total-sales">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>12.5%</span>
@@ -877,23 +964,24 @@
                                 <i class="fa-solid fa-dollar-sign"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-sales" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-green-500 rounded-full" style="width: 75%"></div>
+                            </div>
                         </div>
                     </div>
-
 
                     <!-- Total Orders Card -->
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.2s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
+                                <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Total Orders</span>
-                                    <span class="woodash-badge woodash-badge-warning text-xs" id="pending-orders">Pending: 0</span>
+                                    <span class="woodash-badge woodash-badge-warning text-xs px-2 py-1 rounded-full bg-yellow-100 text-yellow-800">Pending: 5</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="total-orders">0</div>
-                                <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="total-orders">0</div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>8.2%</span>
                                     </span>
@@ -904,8 +992,10 @@
                                 <i class="fa-solid fa-shopping-cart"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-orders" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-blue-500 rounded-full" style="width: 65%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -913,12 +1003,12 @@
                     <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.3s">
                         <div class="flex items-center justify-between">
                             <div>
-                                <h3 class="woodash-metric-title">
+                                <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Average Order Value</span>
-                                    <span class="woodash-badge woodash-badge-danger text-xs">-3.1%</span>
+                                    <span class="woodash-badge woodash-badge-danger text-xs px-2 py-1 rounded-full bg-red-100 text-red-800">-3.1%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="aov">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="aov">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-red-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-down text-xs"></i>
                                         <span>3.1%</span>
@@ -930,8 +1020,10 @@
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-aov" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-purple-500 rounded-full" style="width: 45%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -941,10 +1033,10 @@
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>New Customers</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+15.3%</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">+15.3%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="new-customers">0</div>
-                                <div class="flex items-center gap-1 mt-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="new-customers">0</div>
+                                <div class="flex items-center gap-2 mt-2">
                                     <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>15.3%</span>
@@ -956,8 +1048,10 @@
                                 <i class="fa-solid fa-users"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-customers" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-orange-500 rounded-full" style="width: 85%"></div>
+                            </div>
                         </div>
                     </div>
 
@@ -967,11 +1061,11 @@
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
                                     <span>Net Profit</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+9.7%</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs px-2 py-1 rounded-full bg-green-100 text-green-800">+9.7%</span>
                                 </h3>
-                                <div class="woodash-metric-value" id="net-profit">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
+                                <div class="woodash-metric-value text-2xl font-semibold mt-2" id="net-profit">$0</div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="text-sm text-green-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>9.7%</span>
                                     </span>
@@ -982,11 +1076,46 @@
                                 <i class="fa-solid fa-coins"></i>
                             </div>
                         </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-profit" height="40"></canvas>
+                        <div class="woodash-metric-trend mt-4">
+                            <div class="h-1 bg-gray-100 rounded-full overflow-hidden">
+                                <div class="h-full bg-red-500 rounded-full" style="width: 70%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <style>
+                    /* Additional Metric Card Colors */
+                    .woodash-metric-blue {
+                        background: rgba(59, 130, 246, 0.1);
+                        color: #3B82F6;
+                    }
+
+                    .woodash-metric-purple {
+                        background: rgba(139, 92, 246, 0.1);
+                        color: #8B5CF6;
+                    }
+
+                    .woodash-metric-orange {
+                        background: rgba(249, 115, 22, 0.1);
+                        color: #F97316;
+                    }
+
+                    .woodash-metric-red {
+                        background: rgba(239, 68, 68, 0.1);
+                        color: #EF4444;
+                    }
+
+                    .woodash-badge-warning {
+                        background-color: rgba(234, 179, 8, 0.1);
+                        color: #EAB308;
+                    }
+
+                    .woodash-badge-danger {
+                        background-color: rgba(239, 68, 68, 0.1);
+                        color: #EF4444;
+                    }
+                </style>
 
                 <!-- Sales Overview -->
                 <div class="woodash-chart-container mb-8 woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
@@ -1235,101 +1364,15 @@
                 </div>
 
 
-                <!-- Thank You Message -->
-                <div class="mt-8 woodash-animate-in" style="padding-bottom: 2em;">
-                    <div class="woodash-card p-6 text-center">
-                        <h2 class="text-xl font-bold woodash-gradient-text mb-4">Welcome to WooDash Pro!</h2>
-                        <div class="prose prose-sm max-w-none text-gray-600">
-                            <p class="mb-4">
-                                Thank you for joining our dashboard. We're excited to help you manage your store better!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <footer>
+    <div class="max-w-7xl mx-auto text-center py-4 text-gray-600 text-sm">
+        <p>&copy; <?php echo date('Y'); ?> WooDash Pro. All rights reserved.</p>
+    </div>
+</footer>
         </main>
     </div>
 </div>
 
-<!-- Footer Section -->
-<footer class="bg-white border-t border-gray-100 py-8 mt-8">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <!-- Company Info -->
-            <div class="space-y-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center">
-                        <i class="fa-solid fa-chart-line text-white text-xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h3>
-                </div>
-                <p class="text-gray-600 text-sm">Your all-in-one dashboard for managing your WooCommerce store. Track sales, monitor performance, and grow your business.</p>
-                <div class="flex gap-4">
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
-                        <i class="fab fa-linkedin-in"></i>
-                    </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
-                        <i class="fab fa-instagram"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Quick Links -->
-            <div>
-                <h4 class="font-semibold text-gray-900 mb-4">Quick Links</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Dashboard</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Products</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Orders</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Customers</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Reports</a></li>
-                </ul>
-            </div>
-
-            <!-- Support -->
-            <div>
-                <h4 class="font-semibold text-gray-900 mb-4">Support</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Documentation</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Help Center</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">API Reference</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Community</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Newsletter -->
-            <div>
-                <h4 class="font-semibold text-gray-900 mb-4">Stay Updated</h4>
-                <p class="text-gray-600 text-sm mb-4">Subscribe to our newsletter for the latest updates and features.</p>
-                <form class="space-y-3">
-                    <div class="flex gap-2">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
-                        <button type="submit" class="woodash-btn woodash-btn-primary">
-                            <i class="fa-solid fa-paper-plane"></i>
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <!-- Bottom Bar -->
-        <div class="border-t border-gray-100 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-gray-600 text-sm">© 2024 WooDash Pro. All rights reserved.</p>
-            <div class="flex gap-6">
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Privacy Policy</a>
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Terms of Service</a>
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Cookie Policy</a>
-            </div>
-        </div>
-    </div>
-</footer>
 
 <!-- Add mobile menu toggle button -->
 <button id="woodash-menu-toggle" class="md:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-white shadow-lg woodash-glass-effect">
@@ -2262,5 +2305,3 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 </script>
-
-

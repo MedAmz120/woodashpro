@@ -1,67 +1,99 @@
-document.addEventListener('DOMContentLoaded', function() {
+// Utility functions
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Main initialization function that can be called both on load and after AJAX
+function initializeDashboard() {
     // Theme initialization
     if (localStorage.getItem('woodash-theme') === 'light') document.body.classList.add('light');
 
-    // Flatpickr date range picker
-    flatpickr("#date-range", {
-        mode: "range",
-        dateFormat: "Y-m-d"
-    });
+    // Initialize UI with debounced functions
+    const debouncedInitializeUI = debounce(initializeUI, 250);
+    debouncedInitializeUI();
 
-    // Light/Dark mode toggle
-    function updateModeButton() {
-        const isLight = document.body.classList.contains('light');
-        document.getElementById('toggle-mode-icon').textContent = isLight ? '☀️' : '��';
-        document.getElementById('toggle-mode-text').textContent = isLight ? 'Light Mode' : 'Dark Mode';
+    // Initialize slideshow
+    initializeSlideshow();
+
+    // Initialize date range picker if it exists
+    if (document.getElementById('date-range')) {
+        flatpickr("#date-range", {
+            mode: "range",
+            dateFormat: "Y-m-d"
+        });
     }
 
-    document.getElementById('toggle-mode').addEventListener('click', function() {
-        document.body.classList.toggle('light');
-        localStorage.setItem('woodash-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    // Initialize all event listeners
+    initializeEventListeners();
+    
+    // Initialize charts
+    initializeCharts();
+    
+    // Initialize tooltips
+    initializeTooltips();
+    
+    // Initialize background animation
+    initializeBackgroundAnimation();
+    
+    // Initialize orbs
+    initializeOrbs();
+
+    // Fetch initial dashboard data
+    fetchDashboardData();
+}
+
+// Function to initialize all event listeners
+function initializeEventListeners() {
+    // Light/Dark mode toggle
+    const toggleMode = document.getElementById('toggle-mode');
+    if (toggleMode) {
+        function updateModeButton() {
+            const isLight = document.body.classList.contains('light');
+            document.getElementById('toggle-mode-icon').textContent = isLight ? '☀️' : '🌙';
+            document.getElementById('toggle-mode-text').textContent = isLight ? 'Light Mode' : 'Dark Mode';
+        }
+
+        toggleMode.addEventListener('click', function() {
+            document.body.classList.toggle('light');
+            localStorage.setItem('woodash-theme', document.body.classList.contains('light') ? 'light' : 'dark');
+            updateModeButton();
+        });
         updateModeButton();
-    });
-    updateModeButton();
+    }
 
     // CSV Export
-    document.getElementById('export-csv').addEventListener('click', function() {
-        let dateRange = document.getElementById('date-range').value.split(' to ');
-        this.disabled = true;
-        this.textContent = 'Exporting...';
-        window.location = woodash_ajax.ajax_url +
-            '?action=woodash_export_csv&nonce=' + woodash_ajax.nonce +
-            '&date_from=' + (dateRange[0] || '') +
-            '&date_to=' + (dateRange[1] || '');
-        setTimeout(() => {
-            this.disabled = false;
-            this.textContent = 'Export CSV';
-        }, 2000);
-    });
-
-    // Date filter
-    document.getElementById('apply-date').addEventListener('click', function() {
-        fetchDashboardData();
-    });
-
-    // Loading spinner
-    function showLoading(show) {
-        let spinner = document.getElementById('woodash-loading');
-        if (spinner) spinner.style.display = show ? 'flex' : 'none';
+    const exportCsv = document.getElementById('export-csv');
+    if (exportCsv) {
+        exportCsv.addEventListener('click', function() {
+            let dateRange = document.getElementById('date-range').value.split(' to ');
+            this.disabled = true;
+            this.textContent = 'Exporting...';
+            window.location = woodash_ajax.ajax_url +
+                '?action=woodash_export_csv&nonce=' + woodash_ajax.nonce +
+                '&date_from=' + (dateRange[0] || '') +
+                '&date_to=' + (dateRange[1] || '');
+            setTimeout(() => {
+                this.disabled = false;
+                this.textContent = 'Export CSV';
+            }, 2000);
+        });
     }
 
-    // Chart.js setup
-    let salesChart = new Chart(document.getElementById('sales-chart').getContext('2d'), {
-        type: 'line',
-        data: { labels: [], datasets: [{ label: 'Sales', data: [], borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }] },
-        options: {
-            elements: {
-                line: { borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }
-            },
-            responsive: true,
-            plugins: { legend: { display: false } }
-        }
-    });
-
-    let currentGranularity = 'daily';
+    // Date filter
+    const applyDate = document.getElementById('apply-date');
+    if (applyDate) {
+        applyDate.addEventListener('click', function() {
+            fetchDashboardData();
+        });
+    }
 
     // Chart range toggle
     Array.from(document.getElementsByClassName('woodash-range-btn')).forEach(btn => {
@@ -73,84 +105,339 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Fetch dashboard data
-    function fetchDashboardData() {
-        showLoading(true);
-        let dateRange = document.getElementById('date-range').value.split(' to ');
-        jQuery.post(woodash_ajax.ajax_url, {
-            action: 'woodash_get_data',
-            nonce: woodash_ajax.nonce,
-            date_from: dateRange[0] || '',
-            date_to: dateRange[1] || '',
-            granularity: currentGranularity
-        }, function(response) {
-            showLoading(false);
-            if (!response || response.error) {
-                alert('Failed to load dashboard data.');
-                return;
-            }
-            document.getElementById('total-sales').textContent = '$' + response.total_sales;
-            document.getElementById('total-orders').textContent = response.total_orders;
-            document.getElementById('aov').textContent = '$' + response.aov;
+    // Export buttons
+    const exportProductsCsv = document.getElementById('export-products-csv');
+    if (exportProductsCsv) {
+        exportProductsCsv.addEventListener('click', handleExportClick);
+    }
 
-            // Top products
-            let productsHtml = '';
-            response.top_products.forEach(p => {
-                productsHtml += `<tr><td>${p.name}</td><td>${p.sales}</td></tr>`;
-            });
-            document.getElementById('top-products').innerHTML = productsHtml;
+    const exportCustomersCsv = document.getElementById('export-customers-csv');
+    if (exportCustomersCsv) {
+        exportCustomersCsv.addEventListener('click', handleExportClick);
+    }
+}
 
-            // Top customers
-            let customersHtml = '';
-            response.top_customers.forEach(c => {
-                customersHtml += `<tr><td>${c.name}</td><td>${c.orders}</td></tr>`;
-            });
-            document.getElementById('top-customers').innerHTML = customersHtml;
+// Handle export button clicks
+function handleExportClick() {
+    let dateRange = document.getElementById('date-range').value.split(' to ');
+    let granularity = currentGranularity;
+    this.disabled = true;
+    this.textContent = 'Exporting...';
+    window.location = woodash_ajax.ajax_url +
+        '?action=' + (this.id === 'export-products-csv' ? 'woodash_export_products_csv' : 'woodash_export_customers_csv') +
+        '&nonce=' + woodash_ajax.nonce +
+        '&date_from=' + (dateRange[0] || '') +
+        '&date_to=' + (dateRange[1] || '') +
+        '&granularity=' + granularity;
+    setTimeout(() => {
+        this.disabled = false;
+        this.textContent = 'Export CSV';
+    }, 2000);
+}
 
-            // Sales chart
-            salesChart.data.labels = response.sales_overview.labels;
-            salesChart.data.datasets[0].data = response.sales_overview.data;
-            salesChart.update();
-        }).fail(function() {
-            showLoading(false);
-            alert('Error: Could not fetch dashboard data.');
+// Initialize on DOM content loaded
+document.addEventListener('DOMContentLoaded', initializeDashboard);
+
+// Listen for AJAX content updates
+document.addEventListener('woodashContentUpdated', initializeDashboard);
+
+// Slideshow initialization
+function initializeSlideshow() {
+    const slideshow = document.querySelector('.woodash-slideshow');
+    if (!slideshow) return;
+
+    const slides = slideshow.querySelectorAll('.woodash-slide');
+    const dots = document.querySelectorAll('.woodash-slide-dot');
+    const prevBtn = document.querySelector('.woodash-slide-prev');
+    const nextBtn = document.querySelector('.woodash-slide-next');
+    
+    let currentSlide = 0;
+    let slideInterval;
+    const slideDuration = 5000; // 5 seconds per slide
+
+    // Function to show a specific slide
+    function showSlide(index) {
+        // Hide all slides
+        slides.forEach(slide => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateX(100%)';
+            slide.style.zIndex = '0';
+        });
+
+        // Show the current slide
+        slides[index].style.opacity = '1';
+        slides[index].style.transform = 'translateX(0)';
+        slides[index].style.zIndex = '1';
+
+        // Update dots
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-[#00CC61]', i === index);
+            dot.classList.toggle('bg-gray-300', i !== index);
+        });
+
+        currentSlide = index;
+    }
+
+    // Function to show next slide
+    function nextSlide() {
+        const next = (currentSlide + 1) % slides.length;
+        showSlide(next);
+    }
+
+    // Function to show previous slide
+    function prevSlide() {
+        const prev = (currentSlide - 1 + slides.length) % slides.length;
+        showSlide(prev);
+    }
+
+    // Add click event listeners to dots
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            showSlide(index);
+            startSlideshow();
+        });
+    });
+
+    // Add click event listeners to navigation buttons
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            prevSlide();
+            startSlideshow();
         });
     }
 
-    // Initial load
-    fetchDashboardData();
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            clearInterval(slideInterval);
+            nextSlide();
+            startSlideshow();
+        });
+    }
 
-    // Export Top Products CSV
-    document.getElementById('export-products-csv').addEventListener('click', function() {
-        let dateRange = document.getElementById('date-range').value.split(' to ');
-        let granularity = currentGranularity;
-        this.disabled = true;
-        this.textContent = 'Exporting...';
-        window.location = woodash_ajax.ajax_url +
-            '?action=woodash_export_products_csv&nonce=' + woodash_ajax.nonce +
-            '&date_from=' + (dateRange[0] || '') +
-            '&date_to=' + (dateRange[1] || '') +
-            '&granularity=' + granularity;
-        setTimeout(() => {
-            this.disabled = false;
-            this.textContent = 'Export CSV';
-        }, 2000);
+    // Function to start the slideshow
+    function startSlideshow() {
+        slideInterval = setInterval(nextSlide, slideDuration);
+    }
+
+    // Add hover pause functionality
+    slideshow.addEventListener('mouseenter', () => {
+        clearInterval(slideInterval);
     });
 
-    // Export Top Customers CSV
-    document.getElementById('export-customers-csv').addEventListener('click', function() {
-        let dateRange = document.getElementById('date-range').value.split(' to ');
-        let granularity = currentGranularity;
-        this.disabled = true;
-        this.textContent = 'Exporting...';
-        window.location = woodash_ajax.ajax_url +
-            '?action=woodash_export_customers_csv&nonce=' + woodash_ajax.nonce +
-            '&date_from=' + (dateRange[0] || '') +
-            '&date_to=' + (dateRange[1] || '') +
-            '&granularity=' + granularity;
-        setTimeout(() => {
-            this.disabled = false;
-            this.textContent = 'Export CSV';
-        }, 2000);
+    slideshow.addEventListener('mouseleave', () => {
+        startSlideshow();
     });
-});
+
+    // Add touch swipe functionality
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    slideshow.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    slideshow.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left
+                nextSlide();
+            } else {
+                // Swipe right
+                prevSlide();
+            }
+        }
+    }
+
+    // Add CSS transitions
+    slides.forEach(slide => {
+        slide.style.transition = 'all 0.5s ease-in-out';
+        slide.style.position = 'absolute';
+        slide.style.width = '100%';
+        slide.style.height = '100%';
+    });
+
+    // Show first slide and start slideshow
+    showSlide(0);
+    startSlideshow();
+}
+
+// Chart initialization
+function initializeCharts() {
+    const chartElements = document.querySelectorAll('.woodash-chart');
+    
+    chartElements.forEach(chartElement => {
+        const ctx = chartElement.getContext('2d');
+        const chartType = chartElement.dataset.chartType;
+        const chartData = JSON.parse(chartElement.dataset.chartData);
+        
+        new Chart(ctx, {
+            type: chartType,
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            padding: 20,
+                            usePointStyle: true
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            display: true,
+                            drawBorder: false
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    });
+}
+
+// Tooltip initialization
+function initializeTooltips() {
+    const tooltipTriggers = document.querySelectorAll('.woodash-tooltip-trigger');
+    
+    tooltipTriggers.forEach(trigger => {
+        trigger.addEventListener('mouseenter', function(e) {
+            const tooltip = this.querySelector('.woodash-tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '1';
+                tooltip.style.visibility = 'visible';
+            }
+        });
+        
+        trigger.addEventListener('mouseleave', function(e) {
+            const tooltip = this.querySelector('.woodash-tooltip');
+            if (tooltip) {
+                tooltip.style.opacity = '0';
+                tooltip.style.visibility = 'hidden';
+            }
+        });
+    });
+}
+
+// Background animation initialization
+function initializeBackgroundAnimation() {
+    const dashboard = document.querySelector('.woodash-dashboard');
+    
+    if (dashboard) {
+        dashboard.addEventListener('mousemove', function(e) {
+            const rect = dashboard.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            
+            dashboard.style.setProperty('--mouse-x', `${x}%`);
+            dashboard.style.setProperty('--mouse-y', `${y}%`);
+        });
+    }
+}
+
+// Orbs initialization
+function initializeOrbs() {
+    const orbs = document.querySelectorAll('.woodash-orb');
+    
+    orbs.forEach(orb => {
+        // Random position
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        
+        orb.style.left = `${x}%`;
+        orb.style.top = `${y}%`;
+        
+        // Random size
+        const size = Math.random() * 100 + 50;
+        orb.style.width = `${size}px`;
+        orb.style.height = `${size}px`;
+        
+        // Random color
+        const hue = Math.random() * 360;
+        orb.style.backgroundColor = `hsla(${hue}, 100%, 50%, 0.1)`;
+        
+        // Random animation delay
+        const delay = Math.random() * 5;
+        orb.style.animationDelay = `${delay}s`;
+    });
+}
+
+// Notification system
+const woodashNotifications = {
+    show: function(message, type = 'success') {
+        const notification = document.createElement('div');
+        notification.className = `woodash-notification woodash-notification-${type} woodash-animate-in`;
+        notification.innerHTML = message;
+        
+        document.body.appendChild(notification);
+        
+        // Remove after 5 seconds
+        setTimeout(() => {
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateY(-20px)';
+            
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 5000);
+    }
+};
+
+// Export for use in other files
+window.woodashNotifications = woodashNotifications;
+
+// Mobile menu initialization
+function initializeMobileMenu() {
+    const menuToggle = document.querySelector('.woodash-mobile-menu-toggle');
+    const sidebar = document.querySelector('.woodash-sidebar');
+    
+    if (menuToggle && sidebar) {
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('woodash-sidebar-open');
+        });
+    }
+}
+
+// Notification system
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `woodash-notification woodash-notification-${type}`;
+    notification.innerHTML = `
+        <div class="flex items-center">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-2"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        setTimeout(() => {
+            notification.remove();
+        }, 300);
+    }, 3000);
+}
+
+// Export functions for use in other files
+window.woodashDashboard = {
+    showNotification
+};

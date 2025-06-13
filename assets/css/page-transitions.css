@@ -1,0 +1,34 @@
+/* Loading state */
+body.loading {
+    cursor: wait;
+}
+
+body.loading::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #4F46E5, #7C3AED);
+    animation: loading 1s infinite linear;
+    z-index: 9999;
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Page transition animations */
+#woodash-main-content {
+    transition: opacity 0.3s ease-in-out;
+}
+
+body.loading #woodash-main-content {
+    opacity: 0.5;
+} 
