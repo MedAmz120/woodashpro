@@ -1,26 +1,27 @@
 <!-- Google Fonts & Font Awesome for icons -->
-<link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-<script src="https://cdn.tailwindcss.com"></script>
-<!-- Chart.js: Use a valid CDN and only load once -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<!-- Lottie player: Only load once -->
-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <style type="text/tailwindcss">
-        @layer base {
-            body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F8FAFC;
-            transition: all 0.3s ease;
-        }
-        }
-        .woodash-card {
-        @apply bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md;
-    }
-    .woodash-metric-card {
-        @apply woodash-card p-6 flex flex-col justify-between min-h-[140px] relative overflow-hidden;
-    }
-    .woodash-metric-title {
+<!-- Removed external Inter font; using system font stack -->
+-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+-<script src="https://cdn.tailwindcss.com"></script>
+-<!-- Chart.js: Use a valid CDN and only load once -->
+-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+-<!-- Lottie player: Only load once -->
+-<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
++<!-- External libraries are enqueued via WordPress. Duplicate CDN tags removed. -->
+     <style type="text/tailwindcss">
+         @layer base {
+             body {
+             font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+             background-color: #F8FAFC;
+             transition: all 0.3s ease;
+         }
+         }
+         .woodash-card {
+         @apply bg-white rounded-xl shadow-sm border border-gray-100 transition-all duration-300 hover:shadow-md;
+     }
+     .woodash-metric-card {
+         @apply woodash-card p-6 flex flex-col justify-between min-h-[160px] h-full relative overflow-hidden;
+     }
+     .woodash-metric-title {
         @apply text-gray-600 text-sm font-medium tracking-wide mb-2;
     }
     .woodash-metric-value {
@@ -383,7 +384,7 @@
         }
     }
     .woodash-float {
-        animation: woodash-float 3s ease-in-out infinite;
+        animation: none;
     }
     @keyframes woodash-float {
         0%, 100% {
@@ -410,7 +411,7 @@
         animation: woodash-spin 1s linear infinite;
     }
     .woodash-bounce {
-        animation: woodash-bounce 1s infinite;
+        animation: none;
     }
     .woodash-fade-in {
         animation: woodash-fade-in 0.5s ease-out;
@@ -425,7 +426,7 @@
         animation: woodash-scale 1s ease-in-out infinite;
     }
     .woodash-glow {
-        animation: woodash-glow 2s ease-in-out infinite;
+        animation: none;
     }
     @keyframes woodash-subtle-glow {
         0%, 100% {
@@ -709,7 +710,7 @@
                     <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center font-semibold text-white woodash-glow">JD</div>
                 <div>
                         <div class="font-medium text-gray-900">John Doe</div>
-                        <a href="#" class="text-sm text-[#00CC61] hover:underline">Logout</a>
+                        <a href="#" class="text-sm text-[#00CC61] hover:underline woodash-logout-btn">Logout</a>
                     </div>
                 </div>
             </div>
@@ -856,9 +857,9 @@
                 </div>
 
                 <!-- Stat Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 items-stretch">
                     <!-- Total Sales Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.1s">
+                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.1s">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -873,7 +874,7 @@
                                     <span class="text-xs text-gray-500">vs last month</span>
                                 </div>
                             </div>
-                            <div class="woodash-metric-icon woodash-metric-green woodash-float">
+                            <div class="woodash-metric-icon woodash-metric-green">
                                 <i class="fa-solid fa-dollar-sign"></i>
                             </div>
                         </div>
@@ -884,12 +885,12 @@
 
 
                     <!-- Total Orders Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.2s">
+                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.2s">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
                                     <span>Total Orders</span>
-                                    <span class="woodash-badge woodash-badge-warning text-xs" id="pending-orders">Pending: 0</span>
+                                    <span class="woodash-badge woodash-badge-warning text-xs" id="pending-orders">Processing : 0</span>
                                 </h3>
                                 <div class="woodash-metric-value" id="total-orders">0</div>
                                 <div class="flex items-center gap-1 mt-1">
@@ -900,7 +901,7 @@
                                     <span class="text-xs text-gray-500">vs last month</span>
                                 </div>
                             </div>
-                            <div class="woodash-metric-icon woodash-metric-blue woodash-float">
+                            <div class="woodash-metric-icon woodash-metric-blue">
                                 <i class="fa-solid fa-shopping-cart"></i>
                             </div>
                         </div>
@@ -910,7 +911,7 @@
                     </div>
 
                     <!-- Average Order Value Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.3s">
+                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.3s">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -926,7 +927,7 @@
                                     <span class="text-xs text-gray-500">vs last month</span>
                                 </div>
                             </div>
-                            <div class="woodash-metric-icon woodash-metric-purple woodash-float">
+                            <div class="woodash-metric-icon woodash-metric-purple">
                                 <i class="fa-solid fa-chart-line"></i>
                             </div>
                         </div>
@@ -936,7 +937,7 @@
                     </div>
 
                     <!-- New Customers Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
+                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.4s">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
@@ -952,38 +953,12 @@
                                     <span class="text-xs text-gray-500">vs last month</span>
                                 </div>
                             </div>
-                            <div class="woodash-metric-icon woodash-metric-orange woodash-float">
+                            <div class="woodash-metric-icon woodash-metric-orange">
                                 <i class="fa-solid fa-users"></i>
                             </div>
                         </div>
                         <div class="mt-4 relative">
                             <canvas id="mini-trend-customers" height="40"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Net Profit Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.5s">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="woodash-metric-title flex items-center gap-2">
-                                    <span>Net Profit</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+9.7%</span>
-                                </h3>
-                                <div class="woodash-metric-value" id="net-profit">$0</div>
-                                <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
-                                        <i class="fa-solid fa-arrow-up text-xs"></i>
-                                        <span>9.7%</span>
-                                    </span>
-                                    <span class="text-xs text-gray-500">vs last month</span>
-                                </div>
-                            </div>
-                            <div class="woodash-metric-icon woodash-metric-red woodash-float">
-                                <i class="fa-solid fa-coins"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4 relative">
-                            <canvas id="mini-trend-profit" height="40"></canvas>
                         </div>
                     </div>
                 </div>
@@ -1357,12 +1332,7 @@ mark('init');
 // Optimize asset loading
 function loadAssets() {
     const assets = [
-        { type: 'style', url: 'https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap' },
-        { type: 'style', url: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css' },
-        { type: 'script', url: 'https://cdn.tailwindcss.com' },
-        { type: 'script', url: 'https://cdn.jsdelivr.net/npm/chart.js' },
-        { type: 'script', url: 'https://cdn.jsdelivr.net/npm/apexcharts' },
-        { type: 'script', url: 'https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js' }
+        // Assets are enqueued via WordPress; avoid dynamic reloading here to prevent duplicates
     ];
 
     return Promise.all(assets.map(asset => {
@@ -1529,6 +1499,11 @@ function cleanupResources() {
     if (rafId) {
         cancelAnimationFrame(rafId);
     }
+    // Clear slideshow interval if present
+    if (window.__woodashSlideInterval) {
+        clearInterval(window.__woodashSlideInterval);
+        window.__woodashSlideInterval = null;
+    }
 }
 
 // Initialize with performance monitoring
@@ -1582,6 +1557,55 @@ function initializeUI() {
 
     // Cleanup on page unload
     window.addEventListener('unload', cleanupResources);
+
+    // Initialize slideshow
+    const slideshow = document.querySelector('.woodash-slideshow');
+    if (slideshow) {
+        const slides = Array.from(slideshow.querySelectorAll('.woodash-slide'));
+        const dots = Array.from(document.querySelectorAll('.woodash-slide-dot'));
+        const prevBtn = document.querySelector('.woodash-slide-prev');
+        const nextBtn = document.querySelector('.woodash-slide-next');
+        let currentSlideIndex = 0;
+        let slideIntervalLocal;
+
+        function setActiveSlide(index) {
+            slides.forEach((slide, i) => slide.classList.toggle('active', i === index));
+            dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+        }
+
+        function goToSlide(index) {
+            if (slides.length === 0) return;
+            currentSlideIndex = (index + slides.length) % slides.length;
+            setActiveSlide(currentSlideIndex);
+        }
+
+        function startAutoRotate() {
+            stopAutoRotate();
+            slideIntervalLocal = setInterval(() => goToSlide(currentSlideIndex + 1), 5000);
+            window.__woodashSlideInterval = slideIntervalLocal;
+        }
+
+        function stopAutoRotate() {
+            if (slideIntervalLocal) {
+                clearInterval(slideIntervalLocal);
+                slideIntervalLocal = null;
+                window.__woodashSlideInterval = null;
+            }
+        }
+
+        // Initial state
+        setActiveSlide(0);
+        startAutoRotate();
+
+        // Controls
+        nextBtn?.addEventListener('click', () => { goToSlide(currentSlideIndex + 1); startAutoRotate(); });
+        prevBtn?.addEventListener('click', () => { goToSlide(currentSlideIndex - 1); startAutoRotate(); });
+        dots.forEach((dot, i) => dot.addEventListener('click', () => { goToSlide(i); startAutoRotate(); }));
+
+        // Pause on hover
+        slideshow.addEventListener('mouseenter', stopAutoRotate);
+        slideshow.addEventListener('mouseleave', startAutoRotate);
+    }
 }
 
 // Initialize dashboard when DOM is ready
@@ -1745,522 +1769,194 @@ function initSalesChart() {
                 tooltip: {
                     backgroundColor: 'rgba(0, 0, 0, 0.8)',
                     padding: 12,
-                    titleFont: { family: 'Inter', size: 14 },
-                    bodyFont: { family: 'Inter', size: 13 }
+                    titleFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 14 },
+                    bodyFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 13 }
                 }
             },
             scales: {
                 y: {
                     beginAtZero: true,
-                    grid: { color: 'rgba(0, 0, 0, 0.05)' },
-                    ticks: { font: { family: 'Inter' } }
-                },
-                x: {
-                    grid: { display: false },
-                    ticks: { font: { family: 'Inter' } }
+                    grid: { color: 'rgba(0, 0, 0, 0.1)' }
                 }
-            },
-            animation: {
-                duration: 1000,
-                easing: 'easeOutQuart'
             }
         }
     });
 }
 
-function initMiniChart(chartId) {
+// Initialize mini charts
+async function initMiniChart(chartId) {
     const ctx = document.getElementById(chartId)?.getContext('2d');
     if (!ctx) return;
 
-    new Chart(ctx, {
+    // Use local fallback mini data (no external calls)
+    const res = { data: woodashGenerateFallbackSeries(chartId), labels: [] };
+    // res can be null/undefined or unexpected; use fallback when needed
+
+    // Determine base color per metric
+    const baseColor = chartId === 'mini-trend-orders' ? '#00B357'
+                     : chartId === 'mini-trend-aov' ? '#00CC61'
+                     : chartId === 'mini-trend-customers' ? '#00B357'
+                     : chartId === 'mini-trend-profit' ? '#00CC61'
+                     : '#00CC61';
+
+    // Subtle vertical gradient fill
+    const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+    gradient.addColorStop(0, 'rgba(0, 204, 97, 0.18)');
+    gradient.addColorStop(1, 'rgba(0, 204, 97, 0)');
+
+    // Normalize data structure
+    const series = Array.isArray(res?.data) ? res.data : (Array.isArray(res) ? res : []);
+    const labels = Array.isArray(res?.labels) && res.labels.length === series.length
+        ? res.labels
+        : series.map((_, i) => i + 1);
+
+    const chartConfig = {
         type: 'line',
         data: {
-            labels: ['', '', '', '', '', ''],
+            labels,
             datasets: [{
-                data: [4, 3, 5, 2, 4, 3],
-                borderColor: '#00CC61',
-                tension: 0.4,
-                pointRadius: 0
+                label: chartId.replace('mini-trend-', ''),
+                data: series,
+                borderColor: baseColor,
+                borderWidth: 2,
+                tension: 0.35,
+                fill: true,
+                backgroundColor: gradient,
+                pointRadius: 0,
+                pointHoverRadius: 2,
+                pointHitRadius: 6
             }]
         },
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            plugins: { legend: { display: false } },
+            layout: {
+                padding: { top: 2, bottom: 2 }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            },
             scales: {
                 x: { display: false },
                 y: { display: false }
             },
-            animation: {
-                duration: 1000,
-                easing: 'easeOutQuart'
+            elements: {
+                line: { capBezierPoints: true },
+                point: { radius: 0 }
             }
         }
-    });
+    };
+
+    createOptimizedChart(ctx, chartConfig);
 }
 
-// Optimize notification system
-const notificationQueue = [];
-let isProcessingNotifications = false;
+// Initialize top products chart
+function initTopProductsChart() {
+    const ctx = document.getElementById('top-products-chart')?.getContext('2d');
+    if (!ctx) return;
 
-function showNotification(message, type = 'success') {
-    notificationQueue.push({ message, type });
-    if (!isProcessingNotifications) {
-        processNotificationQueue();
-    }
+    const data = fetchData('/api/top-products');
+    if (!data) return;
+
+    const chartConfig = {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Sales',
+                data: data.data,
+                backgroundColor: '#00CC61',
+                borderColor: '#00CC61',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 12,
+                    titleFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 14 },
+                    bodyFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 13 }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0, 0, 0, 0.1)' }
+                }
+            }
+        }
+    };
+
+    createOptimizedChart(ctx, chartConfig);
 }
 
-function processNotificationQueue() {
-    if (notificationQueue.length === 0) {
-        isProcessingNotifications = false;
-        return;
-    }
+// Initialize top customers chart
+function initTopCustomersChart() {
+    const ctx = document.getElementById('top-customers-chart')?.getContext('2d');
+    if (!ctx) return;
 
-    isProcessingNotifications = true;
-    const { message, type } = notificationQueue.shift();
-    
-    const notification = document.createElement('div');
-    notification.className = `woodash-notification woodash-notification-${type}`;
-    notification.innerHTML = `
-        <div class="flex items-center gap-3">
-            <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}"></i>
-            <p>${message}</p>
-        </div>
-    `;
-    
-    document.body.appendChild(notification);
-    
-    requestAnimationFrame(() => {
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            setTimeout(() => {
-                notification.remove();
-                processNotificationQueue();
-            }, 300);
-        }, 3000);
-    });
+    const data = fetchData('/api/top-customers');
+    if (!data) return;
+
+    const chartConfig = {
+        type: 'bar',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Total Spent',
+                data: data.data,
+                backgroundColor: '#00CC61',
+                borderColor: '#00CC61',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 12,
+                    titleFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 14 },
+                    bodyFont: { family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif", size: 13 }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    grid: { color: 'rgba(0, 0, 0, 0.1)' }
+                }
+            }
+        }
+    };
+
+    createOptimizedChart(ctx, chartConfig);
 }
 
-// Optimize slideshow functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const slideshow = document.querySelector('.woodash-slideshow');
-    if (!slideshow) return;
-
-    const slides = slideshow.querySelectorAll('.woodash-slide');
-    const dots = document.querySelectorAll('.woodash-slide-dot');
-    const prevBtn = document.querySelector('.woodash-slide-prev');
-    const nextBtn = document.querySelector('.woodash-slide-next');
-    let currentSlide = 0;
-    let slideInterval;
-    let isTransitioning = false;
-
-    function showSlide(index) {
-        if (isTransitioning) return;
-        isTransitioning = true;
-
-        requestAnimationFrame(() => {
-            slides.forEach(slide => slide.classList.remove('active'));
-            dots.forEach(dot => dot.classList.remove('active'));
-
-            slides[index].classList.add('active');
-            dots[index].classList.add('active');
-            currentSlide = index;
-
-            setTimeout(() => {
-                isTransitioning = false;
-            }, 300);
-        });
+// Fallback mini-chart data generator
+function woodashGenerateFallbackSeries(chartId, length = 12) {
+    const seeds = {
+        'mini-trend-sales': 120,
+        'mini-trend-orders': 40,
+        'mini-trend-aov': 65,
+        'mini-trend-customers': 20,
+        'mini-trend-profit': 80
+    };
+    const base = seeds[chartId] ?? 50;
+    const series = [];
+    let value = base;
+    for (let i = 0; i < length; i++) {
+        const drift = (Math.sin(i / 2) + Math.cos(i / 3)) * 2;
+        const noise = (Math.random() - 0.5) * 3;
+        value = Math.max(0, value + drift + noise);
+        series.push(Math.round(value * 100) / 100);
     }
-
-    function nextSlide() {
-        let next = currentSlide + 1;
-        if (next >= slides.length) next = 0;
-        showSlide(next);
-    }
-
-    function prevSlide() {
-        let prev = currentSlide - 1;
-        if (prev < 0) prev = slides.length - 1;
-        showSlide(prev);
-    }
-
-    // Initialize slideshow
-    showSlide(0);
-
-    // Add click event listeners with debouncing
-    dots.forEach((dot, index) => {
-        dot.addEventListener('click', debounce(() => {
-            showSlide(index);
-            resetInterval();
-        }, 300));
-    });
-
-    prevBtn?.addEventListener('click', debounce(() => {
-        prevSlide();
-        resetInterval();
-    }, 300));
-
-    nextBtn?.addEventListener('click', debounce(() => {
-        nextSlide();
-        resetInterval();
-    }, 300));
-
-    function startInterval() {
-        slideInterval = setInterval(nextSlide, 5000);
-    }
-
-    function resetInterval() {
-        clearInterval(slideInterval);
-        startInterval();
-    }
-
-    startInterval();
-
-    slideshow.addEventListener('mouseenter', () => {
-        clearInterval(slideInterval);
-    });
-
-    slideshow.addEventListener('mouseleave', () => {
-        startInterval();
-    });
-});
-
-// Optimize search functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('woodash-search');
-    const searchResults = document.getElementById('woodash-search-results');
-    const clearButton = document.querySelector('.woodash-search-clear');
-    let searchTimeout;
-
-    if (!searchInput || !searchResults) return;
-
-    const handleSearch = debounce((query) => {
-        if (query.length < 2) {
-            searchResults.innerHTML = '';
-            clearButton?.classList.add('hidden');
-            return;
-        }
-
-        clearButton?.classList.remove('hidden');
-
-        searchResults.innerHTML = `
-            <div class="woodash-search-loading">
-                <div class="woodash-search-loading-spinner"></div>
-                <p class="mt-2 text-sm text-gray-500">Searching...</p>
-            </div>
-        `;
-
-        // Simulate search delay
-        setTimeout(() => {
-            // Your search logic here
-            const results = {
-                orders: [],
-                products: [],
-                customers: []
-            };
-
-            if (Object.values(results).every(arr => arr.length === 0)) {
-                searchResults.innerHTML = `
-                    <div class="woodash-search-empty">
-                        <i class="fa-solid fa-search mb-3 text-gray-400 text-2xl"></i>
-                        <p>No results found for "${query}"</p>
-                        <p class="text-sm text-gray-400 mt-1">Try different keywords</p>
-                    </div>
-                `;
-                return;
-            }
-
-            // Build results HTML with categories
-            let resultsHTML = '';
-            
-            if (results.orders.length > 0) {
-                resultsHTML += `
-                    <div class="woodash-search-category">Orders</div>
-                    ${results.orders.map(result => createResultItem(result)).join('')}
-                `;
-            }
-            
-            if (results.products.length > 0) {
-                resultsHTML += `
-                    <div class="woodash-search-category">Products</div>
-                    ${results.products.map(result => createResultItem(result)).join('')}
-                `;
-            }
-            
-            if (results.customers.length > 0) {
-                resultsHTML += `
-                    <div class="woodash-search-category">Customers</div>
-                    ${results.customers.map(result => createResultItem(result)).join('')}
-                `;
-            }
-
-            searchResults.innerHTML = resultsHTML;
-
-            // Add click handlers to search results
-            searchResults.querySelectorAll('.woodash-search-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const type = item.dataset.type;
-                    const title = item.querySelector('.woodash-search-item-title').textContent;
-                    searchResults.classList.remove('active');
-                    searchInput.blur();
-                });
-            });
-        }, 500);
-    }, 300);
-
-    searchInput.addEventListener('input', (e) => {
-        handleSearch(e.target.value.trim());
-    });
-
-    // Optimize keyboard shortcut
-    document.addEventListener('keydown', (e) => {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-            e.preventDefault();
-            searchInput.focus();
-        }
-    });
-
-    // Optimize click outside handler
-    document.addEventListener('click', (e) => {
-        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-            searchResults.classList.remove('active');
-        }
-    });
-
-    clearButton?.addEventListener('click', () => {
-        searchInput.value = '';
-        searchResults.innerHTML = '';
-        clearButton.classList.add('hidden');
-    });
-});
-
-// Optimize background animation
-document.addEventListener('DOMContentLoaded', function() {
-    const bgAnimation = document.querySelector('.woodash-bg-animation');
-    if (!bgAnimation) return;
-
-    // Create orbs with optimized interaction
-    const orbs = ['orb-1', 'orb-2', 'orb-3'];
-    orbs.forEach(orb => {
-        const element = document.createElement('div');
-        element.className = `woodash-orb woodash-${orb}`;
-        bgAnimation.appendChild(element);
-    });
-
-    // Create optimized particles
-    const fragment = document.createDocumentFragment();
-    for (let i = 0; i < 15; i++) { // Reduced number of particles
-        const particle = document.createElement('div');
-        particle.className = 'woodash-particle';
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        particle.style.animationDelay = Math.random() * 5 + 's';
-        fragment.appendChild(particle);
-    }
-    bgAnimation.appendChild(fragment);
-
-    // Create optimized lines
-    const linesFragment = document.createDocumentFragment();
-    for (let i = 1; i <= 4; i++) {
-        const line = document.createElement('div');
-        line.className = `woodash-line woodash-line-${i}`;
-        linesFragment.appendChild(line);
-    }
-    bgAnimation.appendChild(linesFragment);
-
-    // Optimize mouse movement tracking
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
-    let rafId = null;
-
-    const handleMouseMove = debounce((e) => {
-        const rect = e.target.getBoundingClientRect();
-        targetX = ((e.clientX - rect.left) / rect.width) * 100;
-        targetY = ((e.clientY - rect.top) / rect.height) * 100;
-    }, 16);
-
-    bgAnimation.addEventListener('mousemove', handleMouseMove);
-
-    function updateMousePosition() {
-        mouseX += (targetX - mouseX) * 0.1;
-        mouseY += (targetY - mouseY) * 0.1;
-        bgAnimation.style.setProperty('--mouse-x', mouseX + '%');
-        bgAnimation.style.setProperty('--mouse-y', mouseY + '%');
-        rafId = requestAnimationFrame(updateMousePosition);
-    }
-    updateMousePosition();
-
-    // Cleanup on page unload
-    window.addEventListener('unload', () => {
-        if (rafId) {
-            cancelAnimationFrame(rafId);
-        }
-    });
-});
-
-// Footer Functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Newsletter Subscription
-    const newsletterForm = document.querySelector('footer form');
-    if (newsletterForm) {
-        newsletterForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const emailInput = this.querySelector('input[type="email"]');
-            const email = emailInput.value.trim();
-            
-            if (!email || !isValidEmail(email)) {
-                showNotification('Please enter a valid email address', 'error');
-                return;
-            }
-
-            try {
-                // Show loading state
-                const submitButton = this.querySelector('button[type="submit"]');
-                const originalContent = submitButton.innerHTML;
-                submitButton.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
-                submitButton.disabled = true;
-
-                // Simulate API call
-                await new Promise(resolve => setTimeout(resolve, 1000));
-
-                // Success
-                showNotification('Thank you for subscribing to our newsletter!', 'success');
-                emailInput.value = '';
-                
-                // Reset button
-                submitButton.innerHTML = originalContent;
-                submitButton.disabled = false;
-            } catch (error) {
-                showNotification('Failed to subscribe. Please try again.', 'error');
-            }
-        });
-    }
-
-    // Social Media Links
-    const socialLinks = document.querySelectorAll('footer .flex.gap-4 a');
-    socialLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const platform = this.querySelector('i').classList[1].split('-')[1];
-            showNotification(`Opening ${platform} in a new window...`, 'success');
-            // Add your social media URLs here
-            const urls = {
-                'facebook-f': 'https://facebook.com/your-page',
-                'twitter': 'https://twitter.com/your-handle',
-                'linkedin-in': 'https://linkedin.com/company/your-company',
-                'instagram': 'https://instagram.com/your-account'
-            };
-            window.open(urls[platform], '_blank');
-        });
-    });
-
-    // Quick Links and Support Links
-    const footerLinks = document.querySelectorAll('footer ul li a');
-    footerLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const linkText = this.textContent;
-            showNotification(`Navigating to ${linkText}...`, 'success');
-            // Add your navigation logic here
-        });
-    });
-
-    // Legal Links
-    const legalLinks = document.querySelectorAll('footer .flex.gap-6 a');
-    legalLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            const policy = this.textContent;
-            showNotification(`Opening ${policy}...`, 'success');
-            // Add your legal document URLs here
-        });
-    });
-
-    // Email validation helper
-    function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-
-    // Enhanced notification system
-    function showNotification(message, type = 'success') {
-        const notification = document.createElement('div');
-        notification.className = `woodash-notification woodash-notification-${type} woodash-fade-in`;
-        notification.innerHTML = `
-            <div class="flex items-center gap-3">
-                <i class="fa-solid ${type === 'success' ? 'fa-circle-check text-green-500' : 'fa-circle-exclamation text-red-500'}"></i>
-                <p>${message}</p>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Position the notification
-        notification.style.position = 'fixed';
-        notification.style.top = '20px';
-        notification.style.right = '20px';
-        notification.style.zIndex = '9999';
-        
-        // Animate in
-        requestAnimationFrame(() => {
-            notification.style.transform = 'translateX(0)';
-            notification.style.opacity = '1';
-        });
-
-        // Remove after delay
-        setTimeout(() => {
-            notification.style.transform = 'translateX(100%)';
-            notification.style.opacity = '0';
-            setTimeout(() => {
-                notification.remove();
-            }, 300);
-        }, 3000);
-    }
-
-    // Add hover effects to footer sections
-    const footerSections = document.querySelectorAll('footer > div > div');
-    footerSections.forEach(section => {
-        section.addEventListener('mouseenter', () => {
-            section.style.transform = 'translateY(-5px)';
-            section.style.transition = 'transform 0.3s ease';
-        });
-        section.addEventListener('mouseleave', () => {
-            section.style.transform = 'translateY(0)';
-        });
-    });
-
-    // Add scroll to top button
-    const scrollTopButton = document.createElement('button');
-    scrollTopButton.className = 'fixed bottom-8 right-8 w-12 h-12 rounded-full bg-[#00CC61] text-white shadow-lg flex items-center justify-center hover:bg-[#00b357] transition-colors duration-200 woodash-fade-in';
-    scrollTopButton.innerHTML = '<i class="fa-solid fa-arrow-up"></i>';
-    scrollTopButton.style.display = 'none';
-    document.body.appendChild(scrollTopButton);
-
-    // Show/hide scroll to top button
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            scrollTopButton.style.display = 'flex';
-        } else {
-            scrollTopButton.style.display = 'none';
-        }
-    });
-
-    // Scroll to top functionality
-    scrollTopButton.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
-
-    // Add current year to copyright
-    const copyrightYear = document.querySelector('footer .text-gray-600.text-sm');
-    if (copyrightYear) {
-        copyrightYear.textContent = copyrightYear.textContent.replace('2024', new Date().getFullYear());
-    }
-});
+    return series;
+}
 </script>
-
-
