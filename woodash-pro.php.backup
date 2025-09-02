@@ -1,0 +1,1513 @@
+<?php
+/*
+Plugin Name: WooDash Pro
+Plugin URI: https://woodashpro.com
+Description: Advanced WooCommerce analytics dashboard with real-time insights, customizable reports, and modern UI.
+Version: 2.0.0
+Author: WooDash Team
+Author URI: https://woodashpro.com
+Text Domain: woodash-pro
+Domain Path: /languages
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+WC requires at least: 5.0
+WC tested up to: 8.5
+License: GPL v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Network: false
+*/
+
+// Prevent direct access
+if (!defined('ABSPATH')) {
+    exit('Direct access forbidden.');
+}
+
+// Define plugin constants
+define('WOODASH_PRO_VERSION', '2.0.0');
+define('WOODASH_PRO_PLUGIN_FILE', __FILE__);
+define('WOODASH_PRO_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('WOODASH_PRO_PLUGIN_URL', plugin_dir_url(__FILE__));
+define('WOODASH_PRO_PLUGIN_BASENAME', plugin_basename(__FILE__));
+
+// Initialize the plugin
+class WoodashPro {
+    private static $instance = null;
+    
+    public static function get_instance() {
+        if (null === self::$instance) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+    
+    private function __construct() {
+        add_action('plugins_loaded', array($this, 'init'));
+        register_activation_hook(__FILE__, array($this, 'activate'));
+        register_deactivation_hook(__FILE__, array($this, 'deactivate'));
+        register_uninstall_hook(__FILE__, array('WoodashPro', 'uninstall'));
+    }
+    
+    public function init() {
+        // Check dependencies
+        if (!$this->check_dependencies()) {
+            return;
+        }
+        
+        // Load plugin files
+        $this->load_files();
+        
+        // Initialize plugin features
+        $this->init_hooks();
+        
+        // Load textdomain
+        load_plugin_textdomain('woodash-pro', false, dirname(WOODASH_PRO_PLUGIN_BASENAME) . '/languages');
+    }
+    
+    private function check_dependencies() {
+        if (!class_exists('WooCommerce')) {
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-error"><p>';
+                echo '<strong>' . esc_html__('WooDash Pro', 'woodash-pro') . '</strong> ';
+                echo esc_html__('requires WooCommerce to be installed and activated.', 'woodash-pro');
+                echo '</p></div>';
+            });
+            return false;
+        }
+        
+        if (version_compare(PHP_VERSION, '7.4', '<')) {
+            add_action('admin_notices', function() {
+                echo '<div class="notice notice-error"><p>';
+                echo '<strong>' . esc_html__('WooDash Pro', 'woodash-pro') . '</strong> ';
+                echo esc_html__('requires PHP 7.4 or higher.', 'woodash-pro');
+                echo '</p></div>';
+            });
+            return false;
+        }
+        
+        return true;
+    }
+    
+    private function load_files() {
+        // Load helper functions first
+        require_once WOODASH_PRO_PLUGIN_DIR . 'includes/functions.php';
+        
+        // Core classes (only load if files exist, fallback gracefully)
+        $core_files = array(
+            'includes/class-woodash-logger.php',
+            'includes/class-woodash-cache.php',
+            'includes/class-woodash-settings.php',
+            'includes/class-woodash-dashboard.php',
+            'includes/class-woodash-api.php',
+            'includes/class-woodash-analytics.php',
+        );
+        
+        foreach ($core_files as $file) {
+            $file_path = WOODASH_PRO_PLUGIN_DIR . $file;
+            if (file_exists($file_path)) {
+                require_once $file_path;
+            }
+        }
+        
+        // Data endpoints
+        if (file_exists(WOODASH_PRO_PLUGIN_DIR . 'includes/data-endpoints.php')) {
+            require_once WOODASH_PRO_PLUGIN_DIR . 'includes/data-endpoints.php';
+        }
+    }
+    
+    private function init_hooks() {
+        // Initialize core features (only if classes exist)
+        if (class_exists('Woodash_Logger')) {
+            Woodash_Logger::init();
+        }
+        
+        if (class_exists('Woodash_Settings')) {
+            new Woodash_Settings();
+        }
+        
+        if (class_exists('Woodash_Dashboard')) {
+            new Woodash_Dashboard();
+        }
+        
+        if (class_exists('Woodash_API')) {
+            new Woodash_API();
+        }
+        
+        if (class_exists('Woodash_Analytics')) {
+            new Woodash_Analytics();
+        }
+        
+        // Admin menu and UI
+        add_action('admin_menu', array($this, 'admin_menu'));
+        add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+        add_action('admin_head', array($this, 'admin_head_styles'));
+        
+        // AJAX handlers
+        add_action('wp_ajax_woodash_toggle_wp_dashboard', array($this, 'ajax_toggle_wp_dashboard'));
+        add_action('wp_ajax_woodash_toggle_dashboard', array($this, 'ajax_toggle_dashboard'));
+        add_action('wp_ajax_woodash_logout', array($this, 'ajax_logout'));
+        add_action('wp_ajax_woodash_get_data', array($this, 'ajax_get_data'));
+        
+        // Admin bar
+        add_action('admin_bar_menu', array($this, 'admin_bar_menu'), 100);
+        
+        // Hide WordPress menus if needed
+        add_action('admin_menu', array($this, 'maybe_hide_wp_menus'), 999);
+        
+        // REST API
+        add_action('rest_api_init', array($this, 'register_rest_routes'));
+    }
+    
+    public function admin_menu() {
+        $is_connected = get_option('woodash_connected', false);
+        $hide_dashboard = get_option('woodash_hide_dashboard', false);
+        
+        if ($is_connected && !$hide_dashboard) {
+            // Main dashboard page
+            add_menu_page(
+                __('WooDash Pro', 'woodash-pro'),
+                __('WooDash Pro', 'woodash-pro'),
+                'manage_options',
+                'woodash-pro',
+                array($this, 'dashboard_page'),
+                'dashicons-chart-area',
+                56
+            );
+            
+            // Add submenu pages
+            add_submenu_page('woodash-pro', __('Orders', 'woodash-pro'), __('Orders', 'woodash-pro'), 'manage_woocommerce', 'woodash-pro-orders', array($this, 'orders_page'));
+            add_submenu_page('woodash-pro', __('Products', 'woodash-pro'), __('Products', 'woodash-pro'), 'manage_woocommerce', 'woodash-pro-products', array($this, 'products_page'));
+            add_submenu_page('woodash-pro', __('Customers', 'woodash-pro'), __('Customers', 'woodash-pro'), 'manage_woocommerce', 'woodash-pro-customers', array($this, 'customers_page'));
+            add_submenu_page('woodash-pro', __('Analytics', 'woodash-pro'), __('Analytics', 'woodash-pro'), 'manage_woocommerce', 'woodash-pro-analytics', array($this, 'analytics_page'));
+            add_submenu_page('woodash-pro', __('Reports', 'woodash-pro'), __('Reports', 'woodash-pro'), 'manage_woocommerce', 'woodash-pro-reports', array($this, 'reports_page'));
+            add_submenu_page('woodash-pro', __('Settings', 'woodash-pro'), __('Settings', 'woodash-pro'), 'manage_options', 'woodash-pro-settings', array($this, 'settings_page'));
+        } else if (!$is_connected) {
+            add_menu_page(
+                __('WooDash Pro', 'woodash-pro'),
+                __('WooDash Pro', 'woodash-pro'),
+                'manage_options',
+                'woodash-pro-activate',
+                array($this, 'activation_page'),
+                'dashicons-chart-area',
+                56
+            );
+        }
+    }
+    
+    public function enqueue_admin_scripts($hook) {
+        if (strpos($hook, 'woodash-pro') === false) {
+            return;
+        }
+        
+        // Enqueue styles
+        wp_enqueue_style(
+            'woodash-tailwind',
+            WOODASH_PRO_PLUGIN_URL . 'assets/css/tailwind.min.css',
+            array(),
+            WOODASH_PRO_VERSION
+        );
+        
+        wp_enqueue_style(
+            'woodash-admin',
+            WOODASH_PRO_PLUGIN_URL . 'assets/css/admin.css',
+            array('woodash-tailwind'),
+            WOODASH_PRO_VERSION
+        );
+        
+        // Enqueue scripts
+        wp_enqueue_script('jquery');
+        wp_enqueue_script('wp-api');
+        
+        wp_enqueue_script(
+            'chartjs',
+            'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.min.js',
+            array(),
+            '4.4.0',
+            true
+        );
+        
+        wp_enqueue_script(
+            'woodash-dashboard',
+            WOODASH_PRO_PLUGIN_URL . 'assets/js/dashboard.js',
+            array('jquery', 'chartjs', 'wp-api'),
+            WOODASH_PRO_VERSION,
+            true
+        );
+        
+        // Localize script
+        wp_localize_script('woodash-dashboard', 'woodashData', array(
+            'ajaxurl' => admin_url('admin-ajax.php'),
+            'nonce' => wp_create_nonce('woodash_nonce'),
+            'restUrl' => rest_url('woodash/v1/'),
+            'restNonce' => wp_create_nonce('wp_rest'),
+            'today' => current_time('Y-m-d'),
+            'debug' => defined('WP_DEBUG') && WP_DEBUG,
+            'i18n' => array(
+                'loading' => __('Loading...', 'woodash-pro'),
+                'error' => __('Error loading data', 'woodash-pro'),
+                'noData' => __('No data available', 'woodash-pro'),
+            )
+        ));
+    }
+    
+    public function admin_head_styles() {
+        if (!woodash_is_plugin_page()) {
+            return;
+        }
+        ?>
+        <style>
+        #toplevel_page_woodash-pro { background: #00994a !important; opacity: 1 !important; }
+        #toplevel_page_woodash-pro .wp-menu-name, #toplevel_page_woodash-pro .wp-menu-image:before { color: #fff !important; }
+        #toplevel_page_woodash-pro:hover, #toplevel_page_woodash-pro.wp-has-current-submenu { background: #007a3d !important; }
+        .woodash-fullscreen {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 9999; background: #F8FAFC;
+        }
+        </style>
+        <?php
+    }
+    
+    public function admin_bar_menu($wp_admin_bar) {
+        if (!current_user_can('manage_options')) {
+            return;
+        }
+        
+        $is_connected = get_option('woodash_connected', false);
+        if (!$is_connected) {
+            return;
+        }
+        
+        $hide_dashboard = get_option('woodash_hide_dashboard', false);
+        $icon = $hide_dashboard ? 'visibility' : 'hidden';
+        $title = $hide_dashboard ? __('Show WooDash Pro', 'woodash-pro') : __('Hide WooDash Pro', 'woodash-pro');
+        
+        $wp_admin_bar->add_node(array(
+            'id' => 'woodash-toggle-dashboard',
+            'title' => '<span class="ab-icon dashicons dashicons-' . $icon . '"></span><span class="ab-label">' . $title . '</span>',
+            'href' => '#',
+            'meta' => array('class' => 'woodash-toggle-btn')
+        ));
+        
+        // WordPress dashboard toggle
+        $hide_wp_dashboard = get_option('woodash_hide_wp_dashboard', false);
+        $wp_icon = $hide_wp_dashboard ? 'wordpress' : 'wordpress-alt';
+        $wp_title = $hide_wp_dashboard ? __('Show WordPress Menu', 'woodash-pro') : __('Hide WordPress Menu', 'woodash-pro');
+        
+        $wp_admin_bar->add_node(array(
+            'id' => 'woodash-toggle-wp-dashboard',
+            'title' => '<span class="ab-icon dashicons dashicons-' . $wp_icon . '"></span><span class="ab-label">' . $wp_title . '</span>',
+            'href' => '#',
+            'meta' => array('class' => 'woodash-wp-toggle-btn')
+        ));
+    }
+    
+    public function maybe_hide_wp_menus() {
+        $hide_wp_dashboard = get_option('woodash_hide_wp_dashboard', false);
+        
+        if ($hide_wp_dashboard) {
+            // Remove default WordPress menu items
+            remove_menu_page('index.php');                  // Dashboard
+            remove_menu_page('edit.php');                   // Posts
+            remove_menu_page('upload.php');                 // Media
+            remove_menu_page('edit.php?post_type=page');    // Pages
+            remove_menu_page('edit-comments.php');          // Comments
+            remove_menu_page('themes.php');                 // Appearance
+            remove_menu_page('plugins.php');                // Plugins
+            remove_menu_page('users.php');                  // Users
+            remove_menu_page('tools.php');                  // Tools
+            remove_menu_page('options-general.php');        // Settings
+            
+            // Remove WooCommerce menu items if they exist
+            remove_menu_page('woocommerce');
+            remove_menu_page('edit.php?post_type=product');
+            remove_menu_page('wc-admin&path=/analytics/overview');
+        }
+    }
+    
+    // AJAX handlers
+    public function ajax_toggle_wp_dashboard() {
+        check_ajax_referer('woodash_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Unauthorized', 'woodash-pro'));
+        }
+        
+        $current_state = get_option('woodash_hide_wp_dashboard', false);
+        $new_state = !$current_state;
+        
+        update_option('woodash_hide_wp_dashboard', $new_state);
+        
+        wp_send_json_success(array(
+            'hidden' => $new_state,
+            'message' => $new_state 
+                ? __('WordPress dashboard hidden', 'woodash-pro') 
+                : __('WordPress dashboard shown', 'woodash-pro')
+        ));
+    }
+    
+    public function ajax_toggle_dashboard() {
+        check_ajax_referer('woodash_nonce', 'nonce');
+        
+        if (!current_user_can('manage_options')) {
+            wp_die(__('Unauthorized', 'woodash-pro'));
+        }
+        
+        $current_state = get_option('woodash_hide_dashboard', false);
+        $new_state = !$current_state;
+        
+        update_option('woodash_hide_dashboard', $new_state);
+        
+        wp_send_json_success(array(
+            'hidden' => $new_state,
+            'message' => $new_state 
+                ? __('WooDash Pro dashboard hidden', 'woodash-pro') 
+                : __('WooDash Pro dashboard shown', 'woodash-pro')
+        ));
+    }
+    
+    public function ajax_logout() {
+        check_ajax_referer('woodash_nonce', 'nonce');
+        
+        delete_option('woodash_connected');
+        delete_option('woodash_store_id');
+        delete_option('woodash_api_key');
+        
+        wp_send_json_success(array(
+            'redirect_url' => admin_url('admin.php?page=woodash-pro-activate')
+        ));
+    }
+    
+    public function ajax_get_data() {
+        check_ajax_referer('woodash_nonce', 'nonce');
+        
+        if (!current_user_can('manage_woocommerce')) {
+            wp_send_json_error(__('Unauthorized', 'woodash-pro'), 403);
+        }
+        
+        // Get date parameters
+        $date_from = sanitize_text_field($_POST['date_from'] ?? '');
+        $date_to = sanitize_text_field($_POST['date_to'] ?? '');
+        $granularity = sanitize_text_field($_POST['granularity'] ?? 'daily');
+        
+        if (empty($date_from) && empty($date_to)) {
+            $today = current_time('Y-m-d');
+            $date_from = $today;
+            $date_to = $today;
+        }
+        
+        // Get analytics data
+        if (class_exists('Woodash_Analytics')) {
+            $analytics = new Woodash_Analytics();
+            $data = $analytics->get_dashboard_data($date_from, $date_to, $granularity);
+            wp_send_json($data);
+        } else {
+            // Fallback to basic WooCommerce data
+            $this->get_basic_analytics_data($date_from, $date_to);
+        }
+    }
+    
+    private function get_basic_analytics_data($date_from, $date_to) {
+        $args = array(
+            'status' => array('wc-completed'),
+            'limit' => -1,
+            'return' => 'ids'
+        );
+        
+        if ($date_from) {
+            $args['date_created']['after'] = $date_from . ' 00:00:00';
+        }
+        if ($date_to) {
+            $args['date_created']['before'] = $date_to . ' 23:59:59';
+        }
+        
+        $order_ids = wc_get_orders($args);
+        $total_sales = 0;
+        $orders = array();
+        
+        foreach ($order_ids as $order_id) {
+            $order = wc_get_order($order_id);
+            if ($order) {
+                $total_sales += (float) $order->get_total();
+                $orders[] = $order;
+            }
+        }
+        
+        $total_orders = count($orders);
+        $aov = $total_orders > 0 ? round($total_sales / $total_orders, 2) : 0;
+        
+        wp_send_json(array(
+            'total_sales' => wc_format_decimal($total_sales, 2),
+            'total_orders' => $total_orders,
+            'aov' => $aov,
+            'top_products' => array(),
+            'top_customers' => array(),
+            'sales_overview' => array('labels' => array(), 'data' => array())
+        ));
+    }
+    
+    public function register_rest_routes() {
+        register_rest_route('woodash/v1', '/check-auth', array(
+            'methods' => 'GET',
+            'callback' => array($this, 'rest_check_auth'),
+            'permission_callback' => '__return_true'
+        ));
+    }
+    
+    public function rest_check_auth() {
+        if (!is_user_logged_in()) {
+            return new WP_REST_Response(array(
+                'is_logged_in' => false,
+                'message' => __('User not logged in', 'woodash-pro')
+            ));
+        }
+        
+        $user = wp_get_current_user();
+        return new WP_REST_Response(array(
+            'is_logged_in' => true,
+            'user_id' => $user->ID,
+            'user_email' => $user->user_email,
+            'display_name' => $user->display_name
+        ));
+    }
+    
+    // Page callbacks
+    public function dashboard_page() {
+        $this->load_template('dashboard');
+    }
+    
+    public function orders_page() {
+        $this->load_template('orders');
+    }
+    
+    public function products_page() {
+        $this->load_template('products');
+    }
+    
+    public function customers_page() {
+        $this->load_template('customers');
+    }
+    
+    public function analytics_page() {
+        $this->load_template('analytics');
+    }
+    
+    public function reports_page() {
+        $this->load_template('reports');
+    }
+    
+    public function settings_page() {
+        $this->load_template('settings');
+    }
+    
+    public function activation_page() {
+        $this->load_template('activation');
+    }
+    
+    private function load_template($template) {
+        $template_file = WOODASH_PRO_PLUGIN_DIR . 'templates/' . $template . '.php';
+        if (file_exists($template_file)) {
+            include $template_file;
+        } else {
+            echo '<div class="notice notice-error"><p>' . 
+                 sprintf(__('Template file not found: %s', 'woodash-pro'), $template) . 
+                 '</p></div>';
+        }
+    }
+    
+    public function activate() {
+        // Set default options
+        update_option('woodash_hide_wp_dashboard', false);
+        update_option('woodash_hide_dashboard', false);
+        update_option('woodash_version', WOODASH_PRO_VERSION);
+        
+        // Create necessary database tables if needed
+        $this->create_tables();
+        
+        // Flush rewrite rules
+        flush_rewrite_rules();
+        
+        // Log activation if logger is available
+        if (class_exists('Woodash_Logger')) {
+            Woodash_Logger::log('Plugin activated', array('version' => WOODASH_PRO_VERSION));
+        }
+    }
+    
+    public function deactivate() {
+        // Show WordPress dashboard when plugin is deactivated
+        update_option('woodash_hide_wp_dashboard', false);
+        
+        // Clear cache if cache class is available
+        if (class_exists('Woodash_Cache')) {
+            Woodash_Cache::clear_all();
+        }
+        
+        // Log deactivation if logger is available
+        if (class_exists('Woodash_Logger')) {
+            Woodash_Logger::log('Plugin deactivated');
+        }
+    }
+    
+    public static function uninstall() {
+        // Remove plugin options
+        $options_to_delete = array(
+            'woodash_hide_wp_dashboard',
+            'woodash_hide_dashboard',
+            'woodash_connected',
+            'woodash_store_id',
+            'woodash_api_key',
+            'woodash_version'
+        );
+        
+        foreach ($options_to_delete as $option) {
+            delete_option($option);
+        }
+        
+        // Remove user meta
+        delete_metadata('user', 0, 'woodash_preferences', '', true);
+        
+        // Remove transients
+        global $wpdb;
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_woodash_%'");
+        $wpdb->query("DELETE FROM {$wpdb->options} WHERE option_name LIKE '_transient_timeout_woodash_%'");
+        
+        // Remove custom tables
+        $table_name = $wpdb->prefix . 'woodash_analytics_cache';
+        $wpdb->query("DROP TABLE IF EXISTS {$table_name}");
+    }
+    
+    private function create_tables() {
+        global $wpdb;
+        
+        $charset_collate = $wpdb->get_charset_collate();
+        
+        // Analytics cache table
+        $table_name = $wpdb->prefix . 'woodash_analytics_cache';
+        $sql = "CREATE TABLE $table_name (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            cache_key varchar(255) NOT NULL,
+            cache_value longtext NOT NULL,
+            expires_at datetime NOT NULL,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY cache_key (cache_key),
+            KEY expires_at (expires_at)
+        ) $charset_collate;";
+        
+        require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
+        dbDelta($sql);
+    }
+}
+
+// Initialize the plugin
+WoodashPro::get_instance();
+
+// Check for WooCommerce dependency
+function woodash_check_dependencies() {
+    if (!class_exists('WooCommerce')) {
+        add_action('admin_notices', function() {
+            echo '<div class="notice notice-error"><p><strong>WooDash Pro</strong> requires WooCommerce to be installed and activated. Please install WooCommerce first.</p></div>';
+        });
+        return false;
+    }
+    return true;
+}
+
+// Only proceed if dependencies are met
+if (!woodash_check_dependencies()) {
+    return;
+}
+
+// Enable debugging
+if (!defined('WP_DEBUG')) {
+    define('WP_DEBUG', true);
+}
+if (!defined('WP_DEBUG_LOG')) {
+    define('WP_DEBUG_LOG', true);
+}
+if (!defined('WP_DEBUG_DISPLAY')) {
+    define('WP_DEBUG_DISPLAY', false);
+}
+@ini_set('display_errors', 0);
+
+// Plugin activation hook - Hide WordPress dashboard by default
+register_activation_hook(__FILE__, function() {
+    // Hide WordPress dashboard by default when plugin is activated
+    update_option('woodash_hide_wp_dashboard', true);
+});
+
+// Plugin deactivation hook - Restore WordPress dashboard
+register_deactivation_hook(__FILE__, function() {
+    // Show WordPress dashboard when plugin is deactivated
+    update_option('woodash_hide_wp_dashboard', false);
+});
+
+// Hide admin bar and menu when viewing plugin page
+function woodash_hide_admin_bar() {
+    if (isset($_GET['page']) && $_GET['page'] === 'woodash-pro') {
+        add_filter('show_admin_bar', '__return_false');
+        add_action('admin_head', 'woodash_hide_admin_bar_style');
+    }
+}
+add_action('init', 'woodash_hide_admin_bar');
+
+function woodash_hide_admin_bar_style() { ?>
+    <style>
+        #wpadminbar { display: none !important; }
+        html { margin-top: 0 !important; }
+        #wpcontent { margin-left: 0 !important; padding-left: 0 !important; }
+        #adminmenumain { display: none !important; }
+        #wpfooter { display: none !important; }
+        .woodash-fullscreen {
+            position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 9999; background: #F8FAFC;
+        }
+    </style>
+<?php }
+
+// Enqueue scripts and styles
+add_action('admin_enqueue_scripts', function($hook) {
+    if ($hook !== 'toplevel_page_woodash-pro') return;
+    wp_enqueue_style('woodash-tailwind', plugins_url('assets/css/tailwind.min.css', __FILE__));
+    wp_enqueue_script('chartjs', 'https://cdn.jsdelivr.net/npm/chart.js', [], null, true);
+    // Ensure wpApiSettings (root, nonce) are available in admin
+    wp_enqueue_script('wp-api');
+    wp_enqueue_script('woodash-dashboard', plugins_url('templates/dashboard.js', __FILE__), ['jquery','chartjs','wp-api'], null, true);
+    wp_localize_script('woodash-dashboard', 'woodashData', [
+        'ajaxurl' => admin_url('admin-ajax.php'),
+        'nonce'   => wp_create_nonce('woodash_nonce'),
+        'today'   => current_time('Y-m-d'),
+        'debug'   => true
+    ]);
+});
+
+// Option: store activation status
+function woodashh_is_activated() {
+    return get_option('woodashh_activated', false);
+}
+
+// Dashboard visibility toggle functionality
+function woodash_is_dashboard_hidden() {
+    return get_option('woodash_hide_dashboard', false);
+}
+
+// Admin menu
+add_action('admin_menu', function() {
+    $is_connected = get_option('woodash_connected');
+    $hide_dashboard = woodash_is_dashboard_hidden();
+    
+    if ($is_connected && !$hide_dashboard) {
+        // Main dashboard page
+        add_menu_page('WooDash Pro', 'WooDash Pro', 'manage_options', 'woodash-pro', 'woodash_pro_dashboard_page', 'dashicons-chart-area', 56);
+        
+        // Add submenu pages
+        add_submenu_page('woodash-pro', 'Orders', 'Orders', 'manage_woocommerce', 'woodash-pro-orders', 'woodash_pro_orders_page');
+        add_submenu_page('woodash-pro', 'Products', 'Products', 'manage_woocommerce', 'woodash-pro-products', 'woodash_pro_products_page');
+        add_submenu_page('woodash-pro', 'Customers', 'Customers', 'manage_woocommerce', 'woodash-pro-customers', 'woodash_pro_customers_page');
+        add_submenu_page('woodash-pro', 'Stock', 'Stock', 'manage_woocommerce', 'woodash-pro-stock', 'woodash_pro_stock_page');
+        add_submenu_page('woodash-pro', 'Reviews', 'Reviews', 'manage_woocommerce', 'woodash-pro-reviews', 'woodash_pro_reviews_page');
+        add_submenu_page('woodash-pro', 'Coupons', 'Coupons', 'manage_woocommerce', 'woodash-pro-coupons', 'woodash_pro_coupons_page');
+        add_submenu_page('woodash-pro', 'Analytics', 'Analytics', 'manage_woocommerce', 'woodash-pro-analytics', 'woodash_pro_analytics_page');
+        add_submenu_page('woodash-pro', 'Marketing', 'Marketing', 'manage_woocommerce', 'woodash-pro-marketing', 'woodash_pro_marketing_page');
+        add_submenu_page('woodash-pro', 'Reports', 'Reports', 'manage_woocommerce', 'woodash-pro-reports', 'woodash_pro_reports_page');
+        add_submenu_page('woodash-pro', 'Settings', 'Settings', 'manage_options', 'woodash-pro-settings', 'woodash_pro_settings_page');
+    } else if (!$is_connected) {
+        add_menu_page('WooDash Pro', 'WooDash Pro', 'manage_options', 'woodash-pro-activate', 'woodashh_activation_page', 'dashicons-chart-area', 56);
+    }
+});
+
+// Add toggle icon to admin bar
+add_action('admin_bar_menu', function($wp_admin_bar) {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    
+    $is_connected = get_option('woodash_connected');
+    if (!$is_connected) {
+        return;
+    }
+    
+    $hide_dashboard = woodash_is_dashboard_hidden();
+    $icon = $hide_dashboard ? 'visibility' : 'hidden';
+    $title = $hide_dashboard ? 'Show WooDash Pro' : 'Hide WooDash Pro';
+    
+    $wp_admin_bar->add_node(array(
+        'id' => 'woodash-toggle-dashboard',
+        'title' => '<span class="ab-icon dashicons dashicons-' . $icon . '"></span><span class="ab-label">' . $title . '</span>',
+        'href' => '#',
+        'meta' => array(
+            'class' => 'woodash-toggle-btn'
+        )
+    ));
+}, 100);
+
+// API credentials option
+function woodashh_get_api_credentials() {
+    return get_option('woodashh_api_credentials', [
+        'consumer_key' => '',
+        'consumer_secret' => '',
+        'site_url' => ''
+    ]);
+}
+
+// Test platform connection
+function woodashh_test_api_connection($credentials) {
+    $endpoint = 'https://saas.mohamedamzil.pw/wp-json/woodash/v1/verify';
+    $site_url = str_replace('http://', 'https://', $credentials['site_url']);
+
+    $args = [
+        'method' => 'POST',
+        'headers' => [ 'Content-Type' => 'application/json' ],
+        'body' => json_encode([
+            'site_url' => $site_url,
+            'api_key' => $credentials['api_key'],
+            'user_id' => $credentials['user_id']
+        ]),
+        'sslverify' => true,
+        'timeout' => 30,
+        'redirection' => 5,
+        'httpversion' => '1.1',
+        'blocking' => true,
+        'data_format' => 'body'
+    ];
+
+    error_log('WooDash Pro: Attempting to connect to platform with credentials: ' . print_r([
+        'site_url' => $site_url,
+        'user_id' => $credentials['user_id']
+    ], true));
+
+    $response = wp_remote_post($endpoint, $args);
+
+    if (is_wp_error($response)) {
+        $error_message = $response->get_error_message();
+        error_log('WooDash Pro API Error: ' . $error_message);
+        if (strpos($error_message, 'SSL') !== false) {
+            return new WP_Error('ssl_error', 'SSL connection failed. Please ensure your site has a valid SSL certificate.');
+        } elseif (strpos($error_message, 'Could not resolve host') !== false) {
+            return new WP_Error('dns_error', 'Could not connect to the platform. Please check your internet connection.');
+        } else {
+            return new WP_Error('connection_error', 'Connection failed: ' . $error_message);
+        }
+    }
+
+    $response_code = wp_remote_retrieve_response_code($response);
+    $response_body = wp_remote_retrieve_body($response);
+
+    error_log('WooDash Pro API Response Code: ' . $response_code);
+    error_log('WooDash Pro API Response Body: ' . $response_body);
+
+    if ($response_code === 200) {
+        $body = json_decode($response_body, true);
+        if (isset($body['success']) && $body['success'] === true) {
+            return true;
+        } else {
+            $message = isset($body['message']) ? $body['message'] : 'Unknown error';
+            return new WP_Error('platform_error', $message);
+        }
+    }
+
+    error_log('WooDash Pro: Connection failed with response code: ' . $response_code);
+    return new WP_Error('http_error', 'Connection failed with status code: ' . $response_code);
+}
+
+// Hide WordPress default dashboard menu items
+add_action('admin_menu', function() {
+    $hide_wp_dashboard = get_option('woodash_hide_wp_dashboard', false);
+    
+    if ($hide_wp_dashboard) {
+        // Remove default WordPress menu items
+        remove_menu_page('index.php');                  // Dashboard
+        remove_menu_page('edit.php');                   // Posts
+        remove_menu_page('upload.php');                 // Media
+        remove_menu_page('edit.php?post_type=page');    // Pages
+        remove_menu_page('edit-comments.php');          // Comments
+        remove_menu_page('themes.php');                 // Appearance
+        remove_menu_page('plugins.php');                // Plugins
+        remove_menu_page('users.php');                  // Users
+        remove_menu_page('tools.php');                  // Tools
+        remove_menu_page('options-general.php');        // Settings
+        
+        // Remove WooCommerce menu items if they exist
+        remove_menu_page('woocommerce');
+        remove_menu_page('edit.php?post_type=product');
+        remove_menu_page('wc-admin&path=/analytics/overview');
+    }
+}, 999); // High priority to ensure it runs after other menus are added
+
+// Add WordPress dashboard toggle to admin bar
+add_action('admin_bar_menu', function($wp_admin_bar) {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    
+    $hide_wp_dashboard = get_option('woodash_hide_wp_dashboard', false);
+    $icon = $hide_wp_dashboard ? 'wordpress' : 'wordpress-alt';
+    $title = $hide_wp_dashboard ? 'Show WordPress Menu' : 'Hide WordPress Menu';
+    
+    $wp_admin_bar->add_node(array(
+        'id' => 'woodash-toggle-wp-dashboard',
+        'title' => '<span class="ab-icon dashicons dashicons-' . $icon . '"></span><span class="ab-label">' . $title . '</span>',
+        'href' => '#',
+        'meta' => array(
+            'class' => 'woodash-wp-toggle-btn'
+        )
+    ));
+}, 101);
+
+// AJAX: Toggle WordPress dashboard visibility
+add_action('wp_ajax_woodash_toggle_wp_dashboard', function() {
+    check_ajax_referer('woodash_wp_toggle_nonce', 'nonce');
+    
+    if (!current_user_can('manage_options')) {
+        wp_die('Unauthorized');
+    }
+    
+    $current_state = get_option('woodash_hide_wp_dashboard', false);
+    $new_state = !$current_state;
+    
+    update_option('woodash_hide_wp_dashboard', $new_state);
+    
+    wp_send_json_success(array(
+        'hidden' => $new_state,
+        'message' => $new_state ? 'WordPress dashboard hidden' : 'WordPress dashboard shown'
+    ));
+});
+
+// AJAX: Toggle dashboard visibility
+add_action('wp_ajax_woodash_toggle_dashboard', function() {
+    check_ajax_referer('woodash_toggle_nonce', 'nonce');
+    
+    if (!current_user_can('manage_options')) {
+        wp_die('Unauthorized');
+    }
+    
+    $current_state = get_option('woodash_hide_dashboard', false);
+    $new_state = !$current_state;
+    
+    update_option('woodash_hide_dashboard', $new_state);
+    
+    wp_send_json_success(array(
+        'hidden' => $new_state,
+        'message' => $new_state ? 'WooDash Pro dashboard hidden' : 'WooDash Pro dashboard shown'
+    ));
+});
+
+// Add JavaScript for toggle functionality
+add_action('admin_enqueue_scripts', function() {
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+    
+    wp_enqueue_script('woodash-toggle', false, array('jquery'), '1.0.0', true);
+    wp_add_inline_script('woodash-toggle', '
+        jQuery(document).ready(function($) {
+            // Toggle WooDash Pro dashboard
+            $("#wp-admin-bar-woodash-toggle-dashboard").on("click", function(e) {
+                e.preventDefault();
+                
+                var $this = $(this);
+                var $icon = $this.find(".dashicons");
+                var $label = $this.find(".ab-label");
+                
+                // Show loading state
+                $icon.removeClass("dashicons-visibility dashicons-hidden").addClass("dashicons-update");
+                $label.text("Toggling...");
+                
+                $.ajax({
+                    url: ajaxurl,
+                    type: "POST",
+                    data: {
+                        action: "woodash_toggle_dashboard",
+                        nonce: "' . wp_create_nonce('woodash_toggle_nonce') . '"
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            var hidden = response.data.hidden;
+                            if (hidden) {
+                                $icon.removeClass("dashicons-update").addClass("dashicons-visibility");
+                                $label.text("Show WooDash Pro");
+                            } else {
+                                $icon.removeClass("dashicons-update").addClass("dashicons-hidden");
+                                $label.text("Hide WooDash Pro");
+                            }
+                            
+                            // Show notification
+                            if (typeof wp !== "undefined" && wp.notices) {
+                                wp.notices.create({
+                                    message: response.data.message,
+                                    type: "success",
+                                    isDismissible: true
+                                });
+                            }
+                            
+                            // Reload page to reflect menu changes
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function() {
+                        $icon.removeClass("dashicons-update").addClass("dashicons-warning");
+                        $label.text("Error");
+                        
+                        setTimeout(function() {
+                            var hidden = ' . (woodash_is_dashboard_hidden() ? 'true' : 'false') . ';
+                            if (hidden) {
+                                $icon.removeClass("dashicons-warning").addClass("dashicons-visibility");
+                                $label.text("Show WooDash Pro");
+                            } else {
+                                $icon.removeClass("dashicons-warning").addClass("dashicons-hidden");
+                                $label.text("Hide WooDash Pro");
+                            }
+                        }, 2000);
+                    }
+                });
+            });
+            
+            // Toggle WordPress dashboard
+            $("#wp-admin-bar-woodash-toggle-wp-dashboard").on("click", function(e) {
+                e.preventDefault();
+                
+                var $this = $(this);
+                var $icon = $this.find(".dashicons");
+                var $label = $this.find(".ab-label");
+                
+                // Show loading state
+                $icon.removeClass("dashicons-wordpress dashicons-wordpress-alt").addClass("dashicons-update");
+                $label.text("Toggling...");
+                
+                $.ajax({
+                    url: ajaxurl,
+                    type: "POST",
+                    data: {
+                        action: "woodash_toggle_wp_dashboard",
+                        nonce: "' . wp_create_nonce('woodash_wp_toggle_nonce') . '"
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            var hidden = response.data.hidden;
+                            if (hidden) {
+                                $icon.removeClass("dashicons-update").addClass("dashicons-wordpress");
+                                $label.text("Show WordPress Menu");
+                            } else {
+                                $icon.removeClass("dashicons-update").addClass("dashicons-wordpress-alt");
+                                $label.text("Hide WordPress Menu");
+                            }
+                            
+                            // Show notification
+                            if (typeof wp !== "undefined" && wp.notices) {
+                                wp.notices.create({
+                                    message: response.data.message,
+                                    type: "success",
+                                    isDismissible: true
+                                });
+                            }
+                            
+                            // Reload page to reflect menu changes
+                            setTimeout(function() {
+                                window.location.reload();
+                            }, 1000);
+                        }
+                    },
+                    error: function() {
+                        $icon.removeClass("dashicons-update").addClass("dashicons-warning");
+                        $label.text("Error");
+                        
+                        setTimeout(function() {
+                            var hidden = ' . (get_option('woodash_hide_wp_dashboard', false) ? 'true' : 'false') . ';
+                            if (hidden) {
+                                $icon.removeClass("dashicons-warning").addClass("dashicons-wordpress");
+                                $label.text("Show WordPress Menu");
+                            } else {
+                                $icon.removeClass("dashicons-warning").addClass("dashicons-wordpress-alt");
+                                $label.text("Hide WordPress Menu");
+                            }
+                        }, 2000);
+                    }
+                });
+            });
+        });
+    ');
+});
+
+// AJAX: Generate API keys
+add_action('wp_ajax_woodashh_generate_keys', function() {
+    check_ajax_referer('woodashh_generate_keys', 'nonce');
+    try {
+        $user = wp_get_current_user();
+        $app_name = 'WooDash Pro - ' . get_bloginfo('name');
+        error_log('WooDash Pro: Creating application password for user ' . $user->ID . ' with name: ' . $app_name);
+        $new_password = WP_Application_Passwords::create_new_application_password($user->ID, [ 'name' => $app_name ]);
+        error_log('WooDash Pro: Application password response: ' . print_r($new_password, true));
+        if (is_wp_error($new_password)) throw new Exception($new_password->get_error_message());
+        if (!is_array($new_password) || empty($new_password)) throw new Exception('Failed to generate application password - invalid response format');
+        $api_key = $new_password[0] ?? null;
+        if (!$api_key) throw new Exception('Failed to get application password - no password in response');
+        error_log('WooDash Pro: Successfully generated API key');
+        update_option('woodashh_api_credentials', [
+            'api_key' => $api_key,
+            'site_url' => get_site_url(),
+            'user_id' => $user->ID
+        ]);
+        $credentials = [
+            'api_key' => $api_key,
+            'site_url' => get_site_url(),
+            'user_id' => $user->ID
+        ];
+        $connection_result = woodashh_test_api_connection($credentials);
+        if (is_wp_error($connection_result)) {
+            wp_send_json_error(['message' => $connection_result->get_error_message()]);
+        } else {
+            wp_send_json_success(['api_key' => $api_key, 'site_url' => get_site_url() ]);
+        }
+    } catch (Exception $e) {
+        error_log('WooDash Pro Error: ' . $e->getMessage());
+        wp_send_json_error(['message' => $e->getMessage()]);
+    }
+});
+
+// Activation page callback
+function woodashh_activation_page() { ?>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; background: #f8f9fa;">
+        <div style="max-width: 480px; background: #fff; border-radius: 16px; box-shadow: 0 4px 32px rgba(0,0,0,0.07); padding: 40px 32px; text-align: center; font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;">
+            <div style="margin-bottom: 24px;">
+                <img src="https://saas.mohamedamzil.pw/wp-content/uploads/2023/09/WooDash-600-x-180-px-transp.png" alt="WooDash Logo" style="width: 180px; height: auto; margin-bottom: 16px;">
+                <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 8px; background: linear-gradient(90deg, #00CC61, #00b357); -webkit-background-clip: text; -webkit-text-fill-color: transparent; padding: 10px 0;">Connect WooDash Pro</h2>
+                <p style="color: #555; font-size: 1.1rem; margin-bottom: 0;">To use WooDash Pro, please connect your site to your account.<br>Click the button below to get started.</p>
+            </div>
+            <a href="#" id="woodashh-connect-btn" style="display: inline-block; background: #19b677; color: #fff; font-weight: 600; font-size: 1.1rem; padding: 14px 36px; border-radius: 5px; box-shadow: 0 2px 8px rgba(25,182,119,0.08); text-decoration: none; transition: background 0.2s, box-shadow 0.2s; margin-top: 16px;">
+                <span class="dashicons dashicons-admin-links" style="vertical-align: middle; margin-right: 8px;"></span> Connect to SaaS
+            </a>
+            <script>
+            function woodashDebug(message, data) {
+                console.log('WooDash Debug:', message, data);
+                jQuery.ajax({ url: ajaxurl, type: 'POST', data: { action: 'woodashh_log', nonce: '<?php echo wp_create_nonce("woodashh_log"); ?>', message: message, data: JSON.stringify(data) } });
+            }
+            document.getElementById('woodashh-connect-btn').addEventListener('click', function(e) {
+                e.preventDefault();
+                woodashDebug('Connect button clicked');
+                this.innerHTML = '<span class="dashicons dashicons-update" style="animation: spin 1s linear infinite;"></span> Connecting...';
+                this.style.pointerEvents = 'none';
+                var siteUrl = '<?php echo get_site_url(); ?>';
+                var platformUrl = 'https://saas.mohamedamzil.pw/connect-woodash/?site_url=' + encodeURIComponent(siteUrl);
+                var popup = window.open(platformUrl, 'woodash_connect', 'width=800,height=600');
+                window.addEventListener('message', function(event) {
+                    woodashDebug('Received message', event.data);
+                    if (event.origin !== 'https://saas.mohamedamzil.pw') { woodashDebug('Invalid origin', event.origin); return; }
+                    if (event.data.type === 'woodash_connect_success') {
+                        woodashDebug('Connection successful', event.data);
+                        jQuery.post(ajaxurl, { action: 'woodash_store_connection', store_id: event.data.store_id, api_key: event.data.api_key, nonce: '<?php echo wp_create_nonce('woodash_connect'); ?>' }, function(response) {
+                            woodashDebug('Connection stored', response);
+                            if (response.success) { if (window.opener) { window.close(); } window.location.href = response.data.redirect_url; }
+                            else { woodashDebug('Failed to store connection', response); alert('Failed to complete connection: ' + response.data); resetButton(); }
+                        }).fail(function(xhr, status, error) { woodashDebug('Connection request failed', { status, error }); alert('Failed to complete connection. Please try again.'); resetButton(); });
+                    } else if (event.data.type === 'woodash_connect_error') { alert(event.data.message || 'Connection failed. Please try again.'); resetButton(); }
+                });
+            });
+            function resetButton() { var btn = document.getElementById('woodashh-connect-btn'); btn.innerHTML = '<span class="dashicons dashicons-admin-links" style="vertical-align: middle; margin-right: 8px;"></span> Connect to SaaS'; btn.style.pointerEvents = 'auto'; }
+            </script>
+            <style>@keyframes spin { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);} }</style>
+        </div>
+    </div>
+<?php }
+
+// AJAX: debug logger
+add_action('wp_ajax_woodashh_log', function() {
+    check_ajax_referer('woodashh_log', 'nonce');
+    $message = sanitize_text_field($_POST['message']);
+    $data = json_decode(stripslashes($_POST['data']), true);
+    woodash_log($message, $data);
+    wp_send_json_success();
+});
+
+// AJAX: store connection
+add_action('wp_ajax_woodash_store_connection', function() {
+    check_ajax_referer('woodash_connect', 'nonce');
+    $store_id = sanitize_text_field($_POST['store_id']);
+    $api_key = sanitize_text_field($_POST['api_key']);
+    update_option('woodash_connected', true);
+    update_option('woodash_store_id', $store_id);
+    update_option('woodash_api_key', $api_key);
+    wp_send_json_success([ 'redirect_url' => admin_url('admin.php?page=woodash-pro') ]);
+});
+
+// AJAX: logout
+add_action('wp_ajax_woodash_logout', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    delete_option('woodash_connected');
+    delete_option('woodash_store_id');
+    delete_option('woodash_api_key');
+    wp_send_json_success([ 'redirect_url' => admin_url('admin.php?page=woodash-pro-activate') ]);
+});
+
+// AJAX: check subscription (admin-ajax)
+add_action('wp_ajax_woodash_check_subscription', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    $user_id = get_current_user_id();
+    $has_subscription = false;
+    if (class_exists('WC_Subscriptions')) {
+        $subscriptions = wcs_get_users_subscriptions($user_id);
+        foreach ($subscriptions as $subscription) {
+            if ($subscription->get_status() === 'active') { $has_subscription = true; break; }
+        }
+    }
+    if (!$has_subscription) {
+        wp_send_json_error([ 'message' => 'No active subscription found', 'redirect_url' => 'https://saas.mohamedamzil.pw/pricing/' ]);
+    }
+    wp_send_json_success();
+});
+
+// Dashboard page
+function woodash_pro_dashboard_page() {
+    wp_enqueue_style('woodash-tailwind', plugins_url('assets/css/tailwind.min.css', __FILE__));
+    wp_enqueue_script('chartjs', 'https://cdn.jsdelivr.net/npm/chart.js', [], null, true);
+    wp_enqueue_script('woodash-dashboard', plugins_url('templates/dashboard.js', __FILE__), ['jquery','chartjs','wp-api'], null, true);
+    wp_localize_script('woodash-dashboard', 'woodashData', [ 'ajaxurl' => admin_url('admin-ajax.php'), 'nonce' => wp_create_nonce('woodash_nonce') ]);
+    include plugin_dir_path(__FILE__) . 'templates/dashboard.php';
+}
+
+// Orders page
+function woodash_pro_orders_page() {
+    include plugin_dir_path(__FILE__) . 'templates/orders.php';
+}
+
+// Products page
+function woodash_pro_products_page() {
+    include plugin_dir_path(__FILE__) . 'templates/products.php';
+}
+
+// Customers page
+function woodash_pro_customers_page() {
+    include plugin_dir_path(__FILE__) . 'templates/customers.php';
+}
+
+// Stock page
+function woodash_pro_stock_page() {
+    include plugin_dir_path(__FILE__) . 'templates/stock.php';
+}
+
+// Reviews page
+function woodash_pro_reviews_page() {
+    include plugin_dir_path(__FILE__) . 'templates/reviews.php';
+}
+
+// Coupons page
+function woodash_pro_coupons_page() {
+    include plugin_dir_path(__FILE__) . 'templates/coupons.php';
+}
+
+// Analytics page
+function woodash_pro_analytics_page() {
+    include plugin_dir_path(__FILE__) . 'templates/analytics.php';
+}
+
+// Marketing page
+function woodash_pro_marketing_page() {
+    include plugin_dir_path(__FILE__) . 'templates/marketing.php';
+}
+
+// Reports page
+function woodash_pro_reports_page() {
+    include plugin_dir_path(__FILE__) . 'templates/reports.php';
+}
+
+// Settings page
+function woodash_pro_settings_page() {
+    include plugin_dir_path(__FILE__) . 'templates/settings.php';
+}
+
+// Additional data endpoints include (if exists)
+$include_file = plugin_dir_path(__FILE__) . 'includes/data-endpoints.php';
+if (file_exists($include_file)) { require_once $include_file; }
+
+// AJAX: analytics data (enhanced logging)
+add_action('wp_ajax_woodash_get_data', function() {
+    // Debug capture pre-check
+    $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'UNKNOWN';
+    $headers = function_exists('getallheaders') ? getallheaders() : [];
+    $raw_input = file_get_contents('php://input');
+    $parsed_body = [];
+    if (!empty($raw_input)) { parse_str($raw_input, $parsed_body); }
+    $in = array_merge($_GET, $_POST, $parsed_body);
+    woodash_log('AJAX woodash_get_data: request received (pre-check)', [
+        'method' => $method,
+        'headers' => $headers,
+        'raw_post' => $_POST,
+        'raw_get' => $_GET,
+        'php_input' => $raw_input,
+        'parsed_body' => $parsed_body,
+        'merged' => $in,
+        'server_time' => current_time('mysql')
+    ]);
+
+    // Ensure nonce present for check
+    if (!isset($_REQUEST['nonce']) && isset($parsed_body['nonce'])) {
+        $_REQUEST['nonce'] = sanitize_text_field($parsed_body['nonce']);
+    }
+
+    check_ajax_referer('woodash_nonce', 'nonce');
+    if (!current_user_can('manage_woocommerce')) wp_send_json_error('Unauthorized', 403);
+
+    // Read inputs
+    $date_from = isset($in['date_from']) ? sanitize_text_field($in['date_from']) : '';
+    $date_to = isset($in['date_to']) ? sanitize_text_field($in['date_to']) : '';
+    $granularity = isset($in['granularity']) ? sanitize_text_field($in['granularity']) : 'daily';
+
+    if (empty($date_from) && empty($date_to)) {
+        $today = current_time('Y-m-d');
+        $date_from = $today;
+        $date_to = $today;
+    }
+
+    woodash_log('AJAX woodash_get_data: computed dates', [ 'date_from' => $date_from, 'date_to' => $date_to, 'granularity' => $granularity ]);
+
+    $args = [ 'status' => ['wc-completed'], 'limit' => -1, 'return' => 'ids' ];
+    if ($date_from) $args['date_created']['after'] = $date_from . ' 00:00:00';
+    if ($date_to) $args['date_created']['before'] = $date_to . ' 23:59:59';
+
+    woodash_log('AJAX woodash_get_data: wc_get_orders args', $args);
+
+    $order_ids = wc_get_orders($args);
+    woodash_log('AJAX woodash_get_data: orders fetched', [ 'count' => is_array($order_ids) ? count($order_ids) : 0, 'ids_sample' => array_slice((array)$order_ids, 0, 10) ]);
+
+    $total_sales = 0; $orders = [];
+    foreach ($order_ids as $order_id) { $order = wc_get_order($order_id); $total_sales += (float) $order->get_total(); $orders[] = $order; }
+    $total_orders = count($orders);
+    $aov = $total_orders > 0 ? round($total_sales / $total_orders, 2) : 0;
+
+    $sales_overview = ['labels' => [], 'data' => []];
+    $grouped = [];
+    foreach ($orders as $order) {
+        $date = $order->get_date_created(); if (!$date) continue;
+        if ($granularity === 'daily') { $key = $date->date_i18n('Y-m-d'); }
+        elseif ($granularity === 'weekly') { $key = $date->date_i18n('o-\WW'); }
+        else { $key = $date->date_i18n('Y-m'); }
+        if (!isset($grouped[$key])) $grouped[$key] = 0;
+        $grouped[$key] += (float) $order->get_total();
+    }
+    ksort($grouped);
+    $sales_overview['labels'] = array_keys($grouped);
+    $sales_overview['data'] = array_values($grouped);
+
+    woodash_log('AJAX woodash_get_data: aggregates', [ 'total_sales' => $total_sales, 'total_orders' => $total_orders, 'aov' => $aov, 'sales_overview' => $sales_overview ]);
+
+    // Top products
+    $product_sales = [];
+    foreach ($orders as $order) {
+        foreach ($order->get_items() as $item) {
+            $pid = $item->get_product_id(); if (!isset($product_sales[$pid])) $product_sales[$pid] = 0; $product_sales[$pid] += $item->get_quantity();
+        }
+    }
+    arsort($product_sales);
+    $top_products = [];
+    foreach (array_slice($product_sales, 0, 5, true) as $pid => $qty) {
+        $product = wc_get_product($pid);
+        $top_products[] = [ 'name' => $product ? $product->get_name() : __('Unknown'), 'sales' => $qty ];
+    }
+
+    // Top customers
+    $customer_orders = [];
+    foreach ($orders as $order) { $cid = $order->get_customer_id(); if (!$cid) continue; if (!isset($customer_orders[$cid])) $customer_orders[$cid] = 0; $customer_orders[$cid]++; }
+    arsort($customer_orders);
+    $top_customers = [];
+    foreach (array_slice($customer_orders, 0, 5, true) as $cid => $count) {
+        $user = get_userdata($cid);
+        $top_customers[] = [ 'name' => $user ? $user->display_name : __('Guest'), 'orders' => $count ];
+    }
+
+    woodash_log('AJAX woodash_get_data: response payload', [ 'total_sales' => wc_format_decimal($total_sales, 2), 'total_orders' => $total_orders, 'aov' => $aov, 'top_products_count' => count($top_products), 'top_customers_count' => count($top_customers) ]);
+
+    wp_send_json([
+        'total_sales' => wc_format_decimal($total_sales, 2),
+        'total_orders' => $total_orders,
+        'aov' => $aov,
+        'top_products' => $top_products,
+        'top_customers' => $top_customers,
+        'sales_overview' => $sales_overview
+    ]);
+});
+
+// Export Top Products CSV
+add_action('wp_ajax_woodash_export_products_csv', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    if (!current_user_can('manage_woocommerce')) wp_die('Unauthorized', 403);
+    $date_from = isset($_GET['date_from']) ? sanitize_text_field($_GET['date_from']) : '';
+    $date_to = isset($_GET['date_to']) ? sanitize_text_field($_GET['date_to']) : '';
+    $granularity = isset($_GET['granularity']) ? sanitize_text_field($_GET['granularity']) : 'daily';
+    $args = [ 'status' => ['wc-completed'], 'limit' => -1, 'return' => 'ids' ];
+    if ($date_from) $args['date_created']['after'] = $date_from . ' 00:00:00';
+    if ($date_to) $args['date_created']['before'] = $date_to . ' 23:59:59';
+    $order_ids = wc_get_orders($args);
+    $orders = [];
+    foreach ($order_ids as $order_id) { $orders[] = wc_get_order($order_id); }
+    $product_sales = [];
+    foreach ($orders as $order) { foreach ($order->get_items() as $item) { $pid = $item->get_product_id(); if (!isset($product_sales[$pid])) $product_sales[$pid] = 0; $product_sales[$pid] += $item->get_quantity(); } }
+    arsort($product_sales);
+    header('Content-Type: text/csv'); header('Content-Disposition: attachment; filename="woodash-top-products.csv"');
+    $output = fopen('php://output', 'w'); fputcsv($output, ['Product', 'Sales']);
+    foreach (array_slice($product_sales, 0, 20, true) as $pid => $qty) { $product = wc_get_product($pid); fputcsv($output, [$product ? $product->get_name() : __('Unknown'), $qty]); }
+    fclose($output); exit;
+});
+
+// Export Top Customers CSV
+add_action('wp_ajax_woodash_export_customers_csv', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    if (!current_user_can('manage_woocommerce')) wp_die('Unauthorized', 403);
+    $date_from = isset($_GET['date_from']) ? sanitize_text_field($_GET['date_from']) : '';
+    $date_to = isset($_GET['date_to']) ? sanitize_text_field($_GET['date_to']) : '';
+    $granularity = isset($_GET['granularity']) ? sanitize_text_field($_GET['granularity']) : 'daily';
+    $args = [ 'status' => ['wc-completed'], 'limit' => -1, 'return' => 'ids' ];
+    if ($date_from) $args['date_created']['after'] = $date_from . ' 00:00:00';
+    if ($date_to) $args['date_created']['before'] = $date_to . ' 23:59:59';
+    $order_ids = wc_get_orders($args);
+    $orders = [];
+    foreach ($order_ids as $order_id) { $orders[] = wc_get_order($order_id); }
+    $customer_orders = [];
+    foreach ($orders as $order) { $cid = $order->get_customer_id(); if (!$cid) continue; if (!isset($customer_orders[$cid])) $customer_orders[$cid] = 0; $customer_orders[$cid]++; }
+    arsort($customer_orders);
+    header('Content-Type: text/csv'); header('Content-Disposition: attachment; filename="woodash-top-customers.csv"');
+    $output = fopen('php://output', 'w'); fputcsv($output, ['Customer', 'Orders']);
+    foreach (array_slice($customer_orders, 0, 20, true) as $cid => $count) { $user = get_userdata($cid); fputcsv($output, [$user ? $user->display_name : __('Guest'), $count]); }
+    fclose($output); exit;
+});
+
+// Menu item styling
+add_action('admin_head', function() { echo '<style>
+#toplevel_page_woodash-pro { background: #00994a !important; opacity: 1 !important; }
+#toplevel_page_woodash-pro .wp-menu-name, #toplevel_page_woodash-pro .wp-menu-image:before { color: #fff !important; }
+#toplevel_page_woodash-pro:hover, #toplevel_page_woodash-pro.wp-has-current-submenu { background: #007a3d !important; }
+</style>'; });
+
+// REST routes
+add_action('rest_api_init', function() {
+    register_rest_route('woodash/v1', '/check-auth', [ 'methods' => 'GET', 'callback' => 'woodash_check_auth', 'permission_callback' => '__return_true' ]);
+    register_rest_route('woodash/v1', '/check-subscription', [ 'methods' => 'GET', 'callback' => 'woodash_check_subscription', 'permission_callback' => '__return_true' ]);
+    register_rest_route('woodash/v1', '/verify', [ 'methods' => 'POST', 'callback' => 'woodash_verify_store_connection', 'permission_callback' => '__return_true' ]);
+    // CORS
+    remove_filter('rest_pre_serve_request', 'rest_send_cors_headers');
+    add_filter('rest_pre_serve_request', function($value) {
+        $origin = get_http_origin(); if ($origin) {
+            header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
+            header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Headers: Authorization, Content-Type');
+        }
+        return $value;
+    });
+});
+
+// Handle OPTIONS requests
+add_action('init', function() {
+    if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+        $origin = get_http_origin(); if ($origin) {
+            header('Access-Control-Allow-Origin: ' . esc_url_raw($origin));
+            header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+            header('Access-Control-Allow-Credentials: true');
+            header('Access-Control-Allow-Headers: Authorization, Content-Type');
+        }
+        exit;
+    }
+});
+
+// REST: check auth
+function woodash_check_auth() {
+    if (!is_user_logged_in()) {
+        return new WP_REST_Response([ 'is_logged_in' => false, 'message' => 'User not logged in' ]);
+    }
+    $user = wp_get_current_user();
+    return new WP_REST_Response([
+        'is_logged_in' => true,
+        'user_id' => $user->ID,
+        'user_email' => $user->user_email,
+        'display_name' => $user->display_name
+    ]);
+}
+
+// REST: check subscription
+function woodash_check_subscription() {
+    if (!is_user_logged_in()) {
+        return new WP_REST_Response([ 'has_subscription' => false, 'message' => 'User not logged in' ], 401);
+    }
+    $user_id = get_current_user_id(); $has_subscription = false; $subscription_details = null;
+    if (function_exists('wcs_get_users_subscriptions')) {
+        $subscriptions = wcs_get_users_subscriptions($user_id);
+        foreach ($subscriptions as $subscription) {
+            if ($subscription->get_status() === 'active') {
+                $has_subscription = true;
+                $subscription_details = [ 'id' => $subscription->get_id(), 'status' => $subscription->get_status(), 'next_payment' => $subscription->get_date('next_payment'), 'product_name' => $subscription->get_product_name() ];
+                break;
+            }
+        }
+    }
+    return new WP_REST_Response([ 'has_subscription' => $has_subscription, 'subscription_details' => $subscription_details, 'message' => $has_subscription ? 'Active subscription found' : 'No active subscription found' ]);
+}
+
+// REST: verify store connection
+function woodash_verify_store_connection($request) {
+    if (!is_user_logged_in()) { return new WP_REST_Response([ 'success' => false, 'message' => 'User not logged in' ], 401); }
+    $params = $request->get_json_params();
+    if (empty($params['site_url']) || empty($params['api_key']) || empty($params['user_id'])) { return new WP_REST_Response([ 'success' => false, 'message' => 'Missing required parameters' ], 400); }
+    $user_id = get_current_user_id(); $has_subscription = false; $subscription_id = null;
+    if (function_exists('wcs_get_users_subscriptions')) {
+        $subscriptions = wcs_get_users_subscriptions($user_id);
+        foreach ($subscriptions as $subscription) {
+            if ($subscription->get_status() === 'active') { $has_subscription = true; $subscription_id = $subscription->get_id(); break; }
+        }
+    }
+    if (!$has_subscription) { return new WP_REST_Response([ 'success' => false, 'message' => 'No active subscription found' ], 403); }
+    $connections = get_option('woodash_connected_stores', []);
+    foreach ($connections as $store_id => $connection) {
+        if ($connection['site_url'] === $params['site_url']) {
+            $connections[$store_id] = [ 'site_url' => $params['site_url'], 'user_id' => $params['user_id'], 'api_key' => $params['api_key'], 'connected_at' => current_time('mysql'), 'updated_at' => current_time('mysql'), 'status' => 'active', 'subscription_id' => $subscription_id ];
+            update_option('woodash_connected_stores', $connections);
+            return new WP_REST_Response([ 'success' => true, 'store_id' => $store_id, 'message' => 'Store connection updated successfully' ]);
+        }
+    }
+    $store_id = wp_generate_uuid4();
+    $connections[$store_id] = [ 'site_url' => $params['site_url'], 'user_id' => $params['user_id'], 'api_key' => $params['api_key'], 'connected_at' => current_time('mysql'), 'status' => 'active', 'subscription_id' => $subscription_id ];
+    update_option('woodash_connected_stores', $connections);
+    return new WP_REST_Response([ 'success' => true, 'store_id' => $store_id, 'message' => 'Store connected successfully' ]);
+}
+
+// Client debug logger (from frontend)
+add_action('wp_ajax_woodash_debug', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    $label = isset($_POST['label']) ? sanitize_text_field($_POST['label']) : 'client';
+    $data_json = isset($_POST['data']) ? wp_unslash($_POST['data']) : '';
+    $data = json_decode($data_json, true);
+    woodash_log('ClientDebug: ' . $label, $data);
+    wp_send_json_success();
+});
+
+// AJAX: Get processing orders count
+add_action('wp_ajax_woodash_get_processing_count', function() {
+    check_ajax_referer('woodash_nonce', 'nonce');
+    if (!current_user_can('manage_woocommerce')) wp_send_json_error('Unauthorized', 403);
+
+    $after = isset($_POST['after']) ? sanitize_text_field($_POST['after']) : '';
+    $before = isset($_POST['before']) ? sanitize_text_field($_POST['before']) : '';
+
+    $after_date = $after ? substr($after, 0, 10) : current_time('Y-m-d');
+    $before_date = $before ? substr($before, 0, 10) : current_time('Y-m-d');
+
+    $args = [
+        'status' => ['wc-processing'],
+        'limit' => -1,
+        'return' => 'ids',
+        'date_created' => [
+            'after' => $after_date . ' 00:00:00',
+            'before' => $before_date . ' 23:59:59',
+        ],
+    ];
+
+    $order_ids = wc_get_orders($args);
+    $count = is_array($order_ids) ? count($order_ids) : 0;
+
+    woodash_log('AJAX woodash_get_processing_count', [
+        'after' => $after,
+        'before' => $before,
+        'normalized' => [ 'after' => $after_date, 'before' => $before_date ],
+        'count' => $count,
+    ]);
+
+    wp_send_json_success([ 'processing' => $count ]);
+});

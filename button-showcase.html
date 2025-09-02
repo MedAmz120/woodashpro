@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woodash Pro Button System</title>
+    <link href="https://fonts.googleapis.com/css?family=Inter:400,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/css/buttons.css">
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-6xl mx-auto">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Woodash Pro Button System</h1>
+
+        <!-- Primary Buttons -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Primary Buttons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Default Size</h3>
+                    <button class="woodash-btn woodash-btn-primary w-full">
+                        <i class="fa fa-plus"></i> Primary Button
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Small Size</h3>
+                    <button class="woodash-btn woodash-btn-primary woodash-btn-sm w-full">
+                        <i class="fa fa-plus"></i> Small Button
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Large Size</h3>
+                    <button class="woodash-btn woodash-btn-primary woodash-btn-lg w-full">
+                        <i class="fa fa-plus"></i> Large Button
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Icon Only</h3>
+                    <button class="woodash-btn woodash-btn-primary woodash-btn-icon">
+                        <i class="fa fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secondary Buttons -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Secondary Buttons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Default</h3>
+                    <button class="woodash-btn woodash-btn-secondary w-full">
+                        <i class="fa fa-cog"></i> Secondary Button
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Ghost Style</h3>
+                    <button class="woodash-btn woodash-btn-ghost w-full">
+                        <i class="fa fa-cog"></i> Ghost Button
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Outline Style</h3>
+                    <button class="woodash-btn woodash-btn-outline w-full">
+                        <i class="fa fa-cog"></i> Outline Button
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Status Buttons -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Status Buttons</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button class="woodash-btn woodash-btn-success w-full">
+                    <i class="fa fa-check"></i> Success Button
+                </button>
+                <button class="woodash-btn woodash-btn-danger w-full">
+                    <i class="fa fa-times"></i> Danger Button
+                </button>
+                <button class="woodash-btn woodash-btn-warning w-full">
+                    <i class="fa fa-exclamation-triangle"></i> Warning Button
+                </button>
+                <button class="woodash-btn woodash-btn-info w-full">
+                    <i class="fa fa-info-circle"></i> Info Button
+                </button>
+            </div>
+        </section>
+
+        <!-- Special Effects -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Special Effects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button class="woodash-btn woodash-btn-primary woodash-btn-glow w-full">
+                    <i class="fa fa-star"></i> Glow Effect
+                </button>
+                <button class="woodash-btn woodash-btn-primary woodash-btn-shine w-full">
+                    <i class="fa fa-magic"></i> Shine Effect
+                </button>
+                <button class="woodash-btn woodash-btn-primary woodash-btn-ripple w-full">
+                    <i class="fa fa-hand-pointer"></i> Ripple Effect
+                </button>
+                <button class="woodash-btn woodash-btn-secondary woodash-btn-pulse w-full">
+                    <i class="fa fa-heart"></i> Pulse Effect
+                </button>
+            </div>
+        </section>
+
+        <!-- Button Groups -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Button Groups</h2>
+            <div class="space-y-6">
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700 mb-3">Basic Group</h3>
+                    <div class="woodash-btn-group">
+                        <button class="woodash-btn woodash-btn-secondary">Left</button>
+                        <button class="woodash-btn woodash-btn-secondary">Middle</button>
+                        <button class="woodash-btn woodash-btn-primary">Right</button>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-lg font-medium text-gray-700 mb-3">Status Group</h3>
+                    <div class="woodash-btn-group">
+                        <button class="woodash-btn woodash-btn-success">Active</button>
+                        <button class="woodash-btn woodash-btn-secondary">Inactive</button>
+                        <button class="woodash-btn woodash-btn-danger">Suspended</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Loading States -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Loading States</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Loading Button</h3>
+                    <button class="woodash-btn woodash-btn-primary woodash-btn-loading w-full" disabled>
+                        Loading...
+                    </button>
+                </div>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-medium text-gray-700">Interactive Loading</h3>
+                    <button class="woodash-btn woodash-btn-secondary w-full" onclick="toggleLoading(this)">
+                        Click to Load
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Input Showcase -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">Search Input</h2>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-700 mb-4">Modern Search Input</h3>
+                <div class="max-w-md">
+                    <div class="relative">
+                        <input type="text"
+                               class="woodash-search-input"
+                               placeholder="Search customers..."
+                               autocomplete="off">
+                        <i class="fa fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 transition-colors duration-200"></i>
+                        <button type="button"
+                                class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors duration-200 opacity-0 pointer-events-none"
+                                title="Clear search">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-4 text-sm text-gray-600">
+                    <p><strong>Features:</strong></p>
+                    <ul class="list-disc list-inside mt-2 space-y-1">
+                        <li>Smooth focus animations with green accent</li>
+                        <li>Clear button that appears when typing</li>
+                        <li>Responsive design for mobile devices</li>
+                        <li>Hover effects and transitions</li>
+                        <li>Dark mode support</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+            <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <h3 class="text-lg font-medium text-gray-700 mb-4">HTML Structure</h3>
+                <pre class="bg-gray-100 p-4 rounded text-sm overflow-x-auto"><code>&lt;!-- Primary Button --&gt;
+&lt;button class="woodash-btn woodash-btn-primary"&gt;
+    &lt;i class="fa fa-plus"&gt;&lt;/i&gt; Add Item
+&lt;/button&gt;
+
+&lt;!-- Secondary Button with Size --&gt;
+&lt;button class="woodash-btn woodash-btn-secondary woodash-btn-lg"&gt;
+    &lt;i class="fa fa-cog"&gt;&lt;/i&gt; Settings
+&lt;/button&gt;
+
+&lt;!-- Icon Only Button --&gt;
+&lt;button class="woodash-btn woodash-btn-primary woodash-btn-icon"&gt;
+    &lt;i class="fa fa-plus"&gt;&lt;/i&gt;
+&lt;/button&gt;
+
+&lt;!-- Button Group --&gt;
+&lt;div class="woodash-btn-group"&gt;
+    &lt;button class="woodash-btn woodash-btn-secondary"&gt;Edit&lt;/button&gt;
+    &lt;button class="woodash-btn woodash-btn-danger"&gt;Delete&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- CSS Classes Reference -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-6">CSS Classes Reference</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-700 mb-4">Button Variants</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-primary</code> - Main action button</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-secondary</code> - Secondary action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-success</code> - Success/confirm action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-danger</code> - Delete/destructive action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-warning</code> - Warning/caution action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-info</code> - Information action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-ghost</code> - Subtle action</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-outline</code> - Outlined style</li>
+                    </ul>
+                </div>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                    <h3 class="text-lg font-medium text-gray-700 mb-4">Button Sizes</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-sm</code> - Small size (32px height)</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn</code> - Default size (44px height)</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-lg</code> - Large size (52px height)</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-xl</code> - Extra large size (60px height)</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-icon</code> - Icon only (44px × 44px)</li>
+                        <li><code class="bg-gray-100 px-2 py-1 rounded">woodash-btn-fab</code> - Floating action button</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        function toggleLoading(button) {
+            button.classList.add('woodash-btn-loading');
+            button.disabled = true;
+            button.textContent = 'Loading...';
+
+            setTimeout(() => {
+                button.classList.remove('woodash-btn-loading');
+                button.disabled = false;
+                button.innerHTML = '<i class="fa fa-hand-pointer"></i> Click to Load';
+            }, 3000);
+        }
+    </script>
+</body>
+</html></content>
+<parameter name="filePath">c:\xampp1\htdocs\woodashpro\wp-content\plugins\WoodDash Pro\button-showcase.html

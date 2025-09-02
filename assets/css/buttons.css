@@ -1,0 +1,432 @@
+/* ===== WOODASH PRO BUTTON SYSTEM ===== */
+/* Modern, accessible, and responsive button components */
+
+/* ===== BASE BUTTON STYLES ===== */
+.woodash-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 0.75rem 1.5rem;
+	border-radius: 0.75rem;
+	font-size: 0.875rem;
+	font-weight: 600;
+	line-height: 1.25rem;
+	text-decoration: none;
+	border: 2px solid transparent;
+	cursor: pointer;
+	transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	position: relative;
+	overflow: hidden;
+	min-height: 2.75rem;
+	white-space: nowrap;
+	user-select: none;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.woodash-btn:focus {
+	outline: none;
+	box-shadow: 0 0 0 3px rgba(0, 204, 97, 0.1);
+}
+
+.woodash-btn:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+/* ===== PRIMARY BUTTONS ===== */
+.woodash-btn-primary {
+	background: linear-gradient(135deg, #00CC61 0%, #00b357 100%);
+	color: #ffffff;
+	border-color: #00CC61;
+	box-shadow: 0 4px 14px 0 rgba(0, 204, 97, 0.25);
+}
+
+.woodash-btn-primary:hover {
+	background: linear-gradient(135deg, #00b357 0%, #009945 100%);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px 0 rgba(0, 204, 97, 0.35);
+}
+
+.woodash-btn-primary:active {
+	transform: translateY(0);
+	box-shadow: 0 2px 8px 0 rgba(0, 204, 97, 0.2);
+}
+
+/* ===== SECONDARY BUTTONS ===== */
+.woodash-btn-secondary {
+	background: #ffffff;
+	color: #00CC61;
+	border-color: #e5e7eb;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.woodash-btn-secondary:hover {
+	background: #f8fafc;
+	border-color: #00CC61;
+	color: #00b357;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 12px 0 rgba(0, 204, 97, 0.15);
+}
+
+.woodash-btn-secondary:active {
+	transform: translateY(0);
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* ===== SUCCESS BUTTONS ===== */
+.woodash-btn-success {
+	background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+	color: #ffffff;
+	border-color: #10b981;
+	box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.25);
+}
+
+.woodash-btn-success:hover {
+	background: linear-gradient(135deg, #059669 0%, #047857 100%);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px 0 rgba(16, 185, 129, 0.35);
+}
+
+/* ===== DANGER BUTTONS ===== */
+.woodash-btn-danger {
+	background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+	color: #ffffff;
+	border-color: #ef4444;
+	box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.25);
+}
+
+.woodash-btn-danger:hover {
+	background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px 0 rgba(239, 68, 68, 0.35);
+}
+
+/* ===== WARNING BUTTONS ===== */
+.woodash-btn-warning {
+	background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+	color: #ffffff;
+	border-color: #f59e0b;
+	box-shadow: 0 4px 14px 0 rgba(245, 158, 11, 0.25);
+}
+
+.woodash-btn-warning:hover {
+	background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px 0 rgba(245, 158, 11, 0.35);
+}
+
+/* ===== INFO BUTTONS ===== */
+.woodash-btn-info {
+	background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+	color: #ffffff;
+	border-color: #3b82f6;
+	box-shadow: 0 4px 14px 0 rgba(59, 130, 246, 0.25);
+}
+
+.woodash-btn-info:hover {
+	background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+	transform: translateY(-1px);
+	box-shadow: 0 6px 20px 0 rgba(59, 130, 246, 0.35);
+}
+
+/* ===== GHOST BUTTONS ===== */
+.woodash-btn-ghost {
+	background: transparent;
+	color: #6b7280;
+	border-color: #e5e7eb;
+	box-shadow: none;
+}
+
+.woodash-btn-ghost:hover {
+	background: #f8fafc;
+	color: #374151;
+	border-color: #d1d5db;
+}
+
+/* ===== OUTLINE BUTTONS ===== */
+.woodash-btn-outline {
+	background: transparent;
+	color: #00CC61;
+	border-color: #00CC61;
+	box-shadow: none;
+}
+
+.woodash-btn-outline:hover {
+	background: #00CC61;
+	color: #ffffff;
+}
+
+/* ===== BUTTON SIZES ===== */
+.woodash-btn-sm {
+	padding: 0.5rem 1rem;
+	font-size: 0.75rem;
+	min-height: 2rem;
+	border-radius: 0.5rem;
+}
+
+.woodash-btn-lg {
+	padding: 1rem 2rem;
+	font-size: 1rem;
+	min-height: 3.25rem;
+	border-radius: 1rem;
+}
+
+.woodash-btn-xl {
+	padding: 1.25rem 2.5rem;
+	font-size: 1.125rem;
+	min-height: 3.75rem;
+	border-radius: 1.25rem;
+}
+
+/* ===== ICON-ONLY BUTTONS ===== */
+.woodash-btn-icon {
+	padding: 0.75rem;
+	width: 2.75rem;
+	height: 2.75rem;
+}
+
+.woodash-btn-icon-sm {
+	padding: 0.5rem;
+	width: 2rem;
+	height: 2rem;
+}
+
+.woodash-btn-icon-lg {
+	padding: 1rem;
+	width: 3.25rem;
+	height: 3.25rem;
+}
+
+/* ===== BUTTON GROUPS ===== */
+.woodash-btn-group {
+	display: inline-flex;
+	border-radius: 0.75rem;
+	overflow: hidden;
+	box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+}
+
+.woodash-btn-group .woodash-btn {
+	border-radius: 0;
+	border-right-width: 1px;
+	border-color: rgba(255, 255, 255, 0.2);
+	box-shadow: none;
+}
+
+.woodash-btn-group .woodash-btn:first-child {
+	border-top-left-radius: 0.75rem;
+	border-bottom-left-radius: 0.75rem;
+}
+
+.woodash-btn-group .woodash-btn:last-child {
+	border-top-right-radius: 0.75rem;
+	border-bottom-right-radius: 0.75rem;
+	border-right-width: 0;
+}
+
+.woodash-btn-group .woodash-btn:only-child {
+	border-radius: 0.75rem;
+	border-right-width: 0;
+}
+
+/* ===== LOADING STATE ===== */
+.woodash-btn-loading {
+	position: relative;
+	color: transparent !important;
+}
+
+.woodash-btn-loading::after {
+	content: '';
+	position: absolute;
+	width: 1rem;
+	height: 1rem;
+	top: 50%;
+	left: 50%;
+	margin-left: -0.5rem;
+	margin-top: -0.5rem;
+	border: 2px solid transparent;
+	border-top: 2px solid currentColor;
+	border-radius: 50%;
+	animation: woodash-spin 1s linear infinite;
+}
+
+@keyframes woodash-spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+/* ===== ANIMATIONS ===== */
+.woodash-btn-pulse {
+	animation: woodash-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes woodash-pulse {
+	0%, 100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+/* ===== RIPPLE EFFECT ===== */
+.woodash-btn-ripple {
+	position: relative;
+	overflow: hidden;
+}
+
+.woodash-btn-ripple::before {
+	content: '';
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border-radius: 50%;
+	background: rgba(255, 255, 255, 0.3);
+	transform: translate(-50%, -50%);
+	transition: width 0.6s, height 0.6s;
+}
+
+.woodash-btn-ripple:active::before {
+	width: 300px;
+	height: 300px;
+}
+
+/* ===== SPECIAL EFFECTS ===== */
+.woodash-btn-glow {
+	box-shadow: 0 0 20px rgba(0, 204, 97, 0.3);
+}
+
+.woodash-btn-glow:hover {
+	box-shadow: 0 0 30px rgba(0, 204, 97, 0.5);
+}
+
+.woodash-btn-shine {
+	position: relative;
+}
+
+.woodash-btn-shine::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: -100%;
+	width: 100%;
+	height: 100%;
+	background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+	transition: left 0.5s;
+}
+
+.woodash-btn-shine:hover::before {
+	left: 100%;
+}
+
+/* ===== FLOATING ACTION BUTTON ===== */
+.woodash-btn-fab {
+	position: fixed;
+	bottom: 2rem;
+	right: 2rem;
+	width: 3.5rem;
+	height: 3.5rem;
+	border-radius: 50%;
+	padding: 0;
+	box-shadow: 0 6px 20px 0 rgba(0, 204, 97, 0.3);
+	z-index: 1000;
+}
+
+.woodash-btn-fab:hover {
+	transform: scale(1.1);
+	box-shadow: 0 8px 25px 0 rgba(0, 204, 97, 0.4);
+}
+
+/* ===== RESPONSIVE ADJUSTMENTS ===== */
+@media (max-width: 640px) {
+	.woodash-btn {
+		padding: 0.625rem 1.25rem;
+		font-size: 0.8125rem;
+		min-height: 2.5rem;
+	}
+
+	.woodash-btn-sm {
+		padding: 0.5rem 1rem;
+		font-size: 0.75rem;
+		min-height: 2rem;
+	}
+
+	.woodash-btn-lg {
+		padding: 0.875rem 1.75rem;
+		font-size: 0.9375rem;
+		min-height: 3rem;
+	}
+
+	.woodash-btn-xl {
+		padding: 1rem 2rem;
+		font-size: 1rem;
+		min-height: 3.25rem;
+	}
+}
+
+/* ===== DARK MODE SUPPORT ===== */
+@media (prefers-color-scheme: dark) {
+	.woodash-btn-secondary {
+		background: #1f2937;
+		color: #00CC61;
+		border-color: #374151;
+	}
+
+	.woodash-btn-secondary:hover {
+		background: #111827;
+		border-color: #00CC61;
+	}
+
+	.woodash-btn-ghost {
+		background: transparent;
+		color: #9ca3af;
+		border-color: #374151;
+	}
+
+	.woodash-btn-ghost:hover {
+		background: #1f2937;
+		color: #f3f4f6;
+		border-color: #4b5563;
+	}
+}
+
+/* ===== ACCESSIBILITY ===== */
+@media (prefers-reduced-motion: reduce) {
+	.woodash-btn {
+		transition: none;
+	}
+
+	.woodash-btn-loading::after {
+		animation: none;
+	}
+
+	.woodash-btn-pulse {
+		animation: none;
+	}
+
+	.woodash-btn-shine::before {
+		transition: none;
+	}
+}
+
+/* ===== HIGH CONTRAST MODE ===== */
+@media (prefers-contrast: high) {
+	.woodash-btn {
+		border-width: 3px;
+	}
+
+	.woodash-btn-primary {
+		background: #000000;
+		color: #ffffff;
+		border-color: #000000;
+	}
+
+	.woodash-btn-secondary {
+		background: #ffffff;
+		color: #000000;
+		border-color: #000000;
+	}
+}
