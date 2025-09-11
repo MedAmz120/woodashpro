@@ -3,7 +3,7 @@
 Plugin Name: WooDash Pro
 Description: Modern WooCommerce analytics dashboard.
 Version: v0.0
-Author: Your Name
+Author: Mercodev
 */
 
 if (!defined('ABSPATH')) exit;
@@ -85,7 +85,7 @@ function woodashh_get_api_credentials() {
 
 // Test platform connection
 function woodashh_test_api_connection($credentials) {
-    $endpoint = 'https://saas.mohamedamzil.pw/wp-json/woodash/v1/verify';
+    $endpoint = 'https://saas2.mohamedamzil.pw/wp-json/woodash/v1/verify';
     $site_url = str_replace('http://', 'https://', $credentials['site_url']);
 
     $args = [
@@ -202,11 +202,11 @@ function woodashh_activation_page() { ?>
                 this.innerHTML = '<span class="dashicons dashicons-update" style="animation: spin 1s linear infinite;"></span> Connecting...';
                 this.style.pointerEvents = 'none';
                 var siteUrl = '<?php echo get_site_url(); ?>';
-                var platformUrl = 'https://saas.mohamedamzil.pw/connect-woodash/?site_url=' + encodeURIComponent(siteUrl);
+                var platformUrl = 'https://saas2.mohamedamzil.pw/connect-woodash/?site_url=' + encodeURIComponent(siteUrl);
                 var popup = window.open(platformUrl, 'woodash_connect', 'width=800,height=600');
                 window.addEventListener('message', function(event) {
                     woodashDebug('Received message', event.data);
-                    if (event.origin !== 'https://saas.mohamedamzil.pw') { woodashDebug('Invalid origin', event.origin); return; }
+                    if (event.origin !== 'https://saas2.mohamedamzil.pw') { woodashDebug('Invalid origin', event.origin); return; }
                     if (event.data.type === 'woodash_connect_success') {
                         woodashDebug('Connection successful', event.data);
                         jQuery.post(ajaxurl, { action: 'woodash_store_connection', store_id: event.data.store_id, api_key: event.data.api_key, nonce: '<?php echo wp_create_nonce('woodash_connect'); ?>' }, function(response) {
@@ -265,7 +265,7 @@ add_action('wp_ajax_woodash_check_subscription', function() {
         }
     }
     if (!$has_subscription) {
-        wp_send_json_error([ 'message' => 'No active subscription found', 'redirect_url' => 'https://saas.mohamedamzil.pw/pricing/' ]);
+        wp_send_json_error([ 'message' => 'No active subscription found', 'redirect_url' => 'https://saas2.mohamedamzil.pw/pricing/' ]);
     }
     wp_send_json_success();
 });

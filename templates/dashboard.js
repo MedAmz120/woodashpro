@@ -467,6 +467,50 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
     });
+
+  // Logout functionality
+  const logoutBtn = document.querySelector('.woodash-logout-btn');
+  if (logoutBtn) {
+    logoutBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      // Show loading state
+      const originalText = this.textContent;
+      this.textContent = 'Logging out...';
+      this.style.pointerEvents = 'none';
+      
+      // Call logout AJAX action
+      const params = new URLSearchParams();
+      params.append('action', 'woodash_logout');
+      params.append('nonce', woodashData.nonce);
+      
+      fetch(woodashData.ajaxurl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+        body: params.toString(),
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success && data.data && data.data.redirect_url) {
+          // Redirect to activation page
+          window.location.href = data.data.redirect_url;
+        } else {
+          // Fallback: redirect to activation page manually
+          window.location.href = 'admin.php?page=woodash-pro-activate';
+        }
+      })
+      .catch(error => {
+        console.error('Logout error:', error);
+        // Fallback: redirect to activation page manually
+        window.location.href = 'admin.php?page=woodash-pro-activate';
+      })
+      .finally(() => {
+        // Reset button state
+        this.textContent = originalText;
+        this.style.pointerEvents = 'auto';
+      });
+    });
+  }
 });
 
 
