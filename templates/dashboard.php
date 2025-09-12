@@ -11,7 +11,7 @@
          @layer base {
              body {
              font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
-             background-color: #F8FAFC;
+             background-color: #F5F5FF;
              transition: all 0.3s ease;
          }
          }
@@ -30,8 +30,8 @@
     .woodash-metric-icon {
         @apply ml-2 text-2xl rounded-full p-2 bg-opacity-10;
     }
-    .woodash-metric-green {
-        @apply bg-green-100 text-green-600;
+    .woodash-metric-purple {
+        @apply bg-purple-100 text-purple-600;
     }
     .woodash-metric-blue {
         @apply bg-blue-100 text-blue-600;
@@ -49,16 +49,16 @@
         @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 active:scale-95;
     }
     .woodash-btn-primary {
-        @apply bg-[#00CC61] text-white hover:bg-[#00b357] shadow-sm hover:shadow-md;
+        @apply bg-[#824DEB] text-white hover:bg-[#814deb] shadow-sm hover:shadow-md;
     }
     .woodash-btn-secondary {
         @apply bg-gray-100 text-gray-700 hover:bg-gray-200;
     }
     .woodash-nav-link {
-        @apply flex items-center px-4 py-3 text-gray-600 hover:text-[#00CC61] hover:bg-gray-50 rounded-lg transition-all duration-200;
+        @apply flex items-center px-4 py-3 text-gray-600 hover:text-[#824DEB] hover:bg-gray-50 rounded-lg transition-all duration-200;
     }
     .woodash-nav-link.active {
-        @apply bg-[#00CC61] bg-opacity-10 text-[#00CC61] font-medium;
+        @apply bg-[#824DEB] bg-opacity-10 text-[#824DEB] font-medium;
     }
     .woodash-table th {
         @apply px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-100;
@@ -89,7 +89,7 @@
         @apply px-2 py-1 rounded-full text-xs font-medium;
     }
     .woodash-badge-success {
-        @apply bg-green-100 text-green-700;
+        @apply bg-purple-100 text-purple-700;
     }
     .woodash-badge-warning {
         @apply bg-yellow-100 text-yellow-700;
@@ -101,7 +101,7 @@
         @apply h-2 bg-gray-100 rounded-full overflow-hidden;
     }
     .woodash-progress-bar {
-        @apply h-full bg-[#00CC61] rounded-full transition-all duration-300;
+        @apply h-full bg-[#824DEB] rounded-full transition-all duration-300;
     }
     .woodash-dropdown {
         @apply absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50;
@@ -113,7 +113,7 @@
         @apply fixed top-4 right-4 bg-white rounded-lg shadow-lg border border-gray-100 p-4 transform transition-all duration-300;
     }
     .woodash-notification-success {
-        @apply border-l-4 border-green-500;
+        @apply border-l-4 border-purple-500;
     }
     .woodash-notification-error {
         @apply border-l-4 border-red-500;
@@ -125,7 +125,7 @@
         @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg;
     }
     .woodash-gradient-text {
-        @apply bg-clip-text text-transparent bg-gradient-to-r from-[#00CC61] to-[#00b357];
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-[#824DEB] to-[#814deb];
     }
     .woodash-scrollbar {
         scrollbar-width: thin;
@@ -149,7 +149,7 @@
     }
     
     .woodash-ai-toggle {
-        @apply w-14 h-14 bg-gradient-to-br from-[#00CC61] to-[#00b357] rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer;
+        @apply w-14 h-14 bg-gradient-to-br from-[#824DEB] to-[#814deb] rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer;
         animation: woodash-ai-pulse 2s infinite;
     }
     
@@ -167,7 +167,7 @@
     }
     
     .woodash-ai-header {
-        @apply bg-gradient-to-r from-[#00CC61] to-[#00b357] p-4 text-white flex items-center justify-between;
+        @apply bg-gradient-to-r from-[#824DEB] to-[#814deb] p-4 text-white flex items-center justify-between;
     }
     
     .woodash-ai-status {
@@ -175,7 +175,7 @@
     }
     
     .woodash-ai-status-dot {
-        @apply w-2 h-2 bg-green-300 rounded-full animate-pulse;
+        @apply w-2 h-2 bg-purple-300 rounded-full animate-pulse;
     }
     
     .woodash-ai-messages {
@@ -197,7 +197,7 @@
     }
     
     .woodash-ai-message.ai .woodash-ai-message-avatar {
-        @apply bg-gradient-to-br from-[#00CC61] to-[#00b357] text-white;
+        @apply bg-gradient-to-br from-[#824DEB] to-[#814deb] text-white;
     }
     
     .woodash-ai-message.user .woodash-ai-message-avatar {
@@ -213,7 +213,7 @@
     }
     
     .woodash-ai-message.user .woodash-ai-message-content {
-        @apply bg-[#00CC61] text-white;
+        @apply bg-[#824DEB] text-white;
     }
     
     .woodash-ai-input-container {
@@ -221,11 +221,11 @@
     }
     
     .woodash-ai-input {
-        @apply flex-1 px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent text-sm;
+        @apply flex-1 px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#824DEB] focus:border-transparent text-sm;
     }
     
     .woodash-ai-send {
-        @apply w-8 h-8 bg-[#00CC61] text-white rounded-xl flex items-center justify-center hover:bg-[#00b357] transition-colors duration-200 cursor-pointer;
+        @apply w-8 h-8 bg-[#824DEB] text-white rounded-xl flex items-center justify-center hover:bg-[#814deb] transition-colors duration-200 cursor-pointer;
     }
     
     .woodash-ai-suggestions {
@@ -233,7 +233,7 @@
     }
     
     .woodash-ai-suggestion {
-        @apply text-xs text-[#00CC61] bg-[#00CC61] bg-opacity-10 px-3 py-2 rounded-lg cursor-pointer hover:bg-opacity-20 transition-all duration-200;
+        @apply text-xs text-[#824DEB] bg-[#824DEB] bg-opacity-10 px-3 py-2 rounded-lg cursor-pointer hover:bg-opacity-20 transition-all duration-200;
     }
     
     .woodash-ai-typing {
@@ -242,10 +242,10 @@
     
     @keyframes woodash-ai-pulse {
         0%, 100% {
-            box-shadow: 0 0 20px rgba(0, 204, 97, 0.3);
+            box-shadow: 0 0 20px rgba(130, 77, 235, 0.3);
         }
         50% {
-            box-shadow: 0 0 30px rgba(0, 204, 97, 0.5);
+            box-shadow: 0 0 30px rgba(130, 77, 235, 0.5);
         }
     }
     
@@ -278,11 +278,11 @@
     }
     
     .woodash-ai-quick-action {
-        @apply flex flex-col items-center gap-2 p-3 bg-white rounded-lg border border-gray-200 hover:border-[#00CC61] transition-all duration-200 cursor-pointer hover:transform hover:scale-105;
+        @apply flex flex-col items-center gap-2 p-3 bg-white rounded-lg border border-gray-200 hover:border-[#824DEB] transition-all duration-200 cursor-pointer hover:transform hover:scale-105;
     }
     
     .woodash-ai-quick-action-icon {
-        @apply w-8 h-8 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] text-white flex items-center justify-center;
+        @apply w-8 h-8 rounded-lg bg-gradient-to-br from-[#824DEB] to-[#814deb] text-white flex items-center justify-center;
     }
     
     .woodash-ai-quick-action-label {
@@ -290,15 +290,15 @@
     }
     
     .woodash-bg-pattern {
-        background-color: #f8fafc;
+        background-color: #F5F5FF;
         background-image: 
-            radial-gradient(at 40% 20%, hsla(156, 100%, 74%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 80% 0%, hsla(189, 100%, 56%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 0% 50%, hsla(355, 100%, 93%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 80% 50%, hsla(340, 100%, 76%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 0% 100%, hsla(269, 100%, 77%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 80% 100%, hsla(242, 100%, 70%, 0.15) 0px, transparent 50%),
-            radial-gradient(at 0% 0%, hsla(343, 100%, 76%, 0.15) 0px, transparent 50%);
+            radial-gradient(at 40% 20%, hsla(250, 76%, 74%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 80% 0%, hsla(264, 100%, 56%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 0% 50%, hsla(270, 100%, 93%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 80% 50%, hsla(260, 100%, 76%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 0% 100%, hsla(252, 100%, 77%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 80% 100%, hsla(255, 100%, 70%, 0.15) 0px, transparent 50%),
+            radial-gradient(at 0% 0%, hsla(248, 100%, 76%, 0.15) 0px, transparent 50%);
         position: relative;
         overflow: hidden;
     }
@@ -310,35 +310,35 @@
     .woodash-orb-1 {
         width: 400px;
         height: 400px;
-        background: radial-gradient(circle at center, rgba(0, 204, 97, 0.2), transparent 70%);
+        background: radial-gradient(circle at center, rgba(130, 77, 235, 0.2), transparent 70%);
         top: -150px;
         left: -150px;
     }
     .woodash-orb-2 {
         width: 500px;
         height: 500px;
-        background: radial-gradient(circle at center, rgba(0, 179, 87, 0.15), transparent 70%);
+        background: radial-gradient(circle at center, rgba(130, 77, 235, 0.15), transparent 70%);
         bottom: -200px;
         right: -200px;
     }
     .woodash-orb-3 {
         width: 350px;
         height: 350px;
-        background: radial-gradient(circle at center, rgba(0, 204, 97, 0.1), transparent 70%);
+        background: radial-gradient(circle at center, rgba(130, 77, 235, 0.1), transparent 70%);
         top: 40%;
         left: 60%;
         transform: translate(-50%, -50%);
     }
     .woodash-line {
         position: absolute;
-        background: linear-gradient(90deg, transparent, rgba(0, 204, 97, 0.1), transparent);
+        background: linear-gradient(90deg, transparent, rgba(130, 77, 235, 0.1), transparent);
         height: 2px;
         width: 100%;
         transition: all 0.3s ease;
     }
     .woodash-line:hover {
         height: 3px;
-        background: linear-gradient(90deg, transparent, rgba(0, 204, 97, 0.2), transparent);
+        background: linear-gradient(90deg, transparent, rgba(130, 77, 235, 0.2), transparent);
     }
     .woodash-shimmer {
         position: absolute;
@@ -363,7 +363,7 @@
         bottom: 0;
         background: 
             radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-            rgba(0, 204, 97, 0.08) 0%, 
+            rgba(130, 77, 235, 0.08) 0%, 
             transparent 50%);
         opacity: 0;
         transition: all 0.3s ease;
@@ -375,7 +375,7 @@
         position: absolute;
         width: 4px;
         height: 4px;
-        background: rgba(0, 204, 97, 0.3);
+        background: rgba(130, 77, 235, 0.3);
         border-radius: 50%;
         pointer-events: none;
         transition: all 0.3s ease;
@@ -492,10 +492,10 @@
     }
     @keyframes woodash-subtle-glow {
         0%, 100% {
-            box-shadow: 0 0 8px rgba(0, 204, 97, 0.3);
+            box-shadow: 0 0 8px rgba(130, 77, 235, 0.3);
         }
         50% {
-            box-shadow: 0 0 15px rgba(0, 204, 97, 0.5);
+            box-shadow: 0 0 15px rgba(130, 77, 235, 0.5);
         }
     }
     .woodash-slide {
@@ -508,7 +508,7 @@
         transform: translateX(0);
     }
     .woodash-slide-dot.active {
-        background-color: #00CC61;
+        background-color: #814ce4;
     }
     .woodash-slide-control {
         opacity: 0;
@@ -601,7 +601,7 @@
     }
     
     .woodash-search-input {
-        @apply pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent transition-all duration-300;
+        @apply pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#814ce4] focus:border-transparent transition-all duration-300;
         @apply pr-8;
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(8px);
@@ -633,13 +633,13 @@
     }
     
     .woodash-search-input:focus + .woodash-search-icon {
-        @apply text-[#00CC61];
+        @apply text-[#814ce4];
         transform: translateY(-50%) scale(1); /* Prevent icon scaling on input focus */
     }
     
     /* Style for the search button */
     .woodash-search-button {
-        @apply flex items-center justify-center bg-transparent text-gray-600 hover:text-[#00CC61] transition-colors duration-200;
+        @apply flex items-center justify-center bg-transparent text-gray-600 hover:text-[#814ce4] transition-colors duration-200;
         border: none; /* Remove default button border */
         padding: 0 1em; /* Adjust padding */
         cursor: pointer;
@@ -680,7 +680,7 @@
     }
     
     .woodash-search-item:hover {
-        background: rgba(0, 204, 97, 0.05);
+        background: rgba(130, 77, 235, 0.05);
     }
     
     .woodash-search-item-icon {
@@ -713,7 +713,7 @@
     }
     
     .woodash-search-loading-spinner {
-        @apply w-6 h-6 border-2 border-gray-200 border-t-[#00CC61] rounded-full animate-spin mx-auto;
+        @apply w-6 h-6 border-2 border-gray-200 border-t-[#814ce4] rounded-full animate-spin mx-auto;
     }
     
     .woodash-search-category {
@@ -750,11 +750,11 @@
     }
     
     .woodash-live-indicator {
-        @apply w-2 h-2 bg-green-500 rounded-full animate-pulse;
+        @apply w-2 h-2 bg-purple-500 rounded-full animate-pulse;
     }
     
     .woodash-quick-action {
-        @apply flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-[#00CC61] transition-all duration-200 cursor-pointer;
+        @apply flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-[#814ce4] transition-all duration-200 cursor-pointer;
     }
     
     .woodash-quick-action:hover {
@@ -762,7 +762,7 @@
     }
     
     .woodash-metric-trend-up {
-        @apply text-green-600;
+        @apply text-purple-600;
     }
     
     .woodash-metric-trend-down {
@@ -843,11 +843,11 @@
     }
     
     .woodash-form-input {
-        @apply block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent transition-all duration-200;
+        @apply block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#814ce4] focus:border-transparent transition-all duration-200;
     }
     
     .woodash-form-input:focus {
-        box-shadow: 0 0 0 3px rgba(0, 204, 97, 0.1);
+        box-shadow: 0 0 0 3px rgba(130, 77, 235, 0.1);
     }
     
     @keyframes fadeIn {
@@ -911,7 +911,7 @@
         <!-- Sidebar -->
         <aside class="woodash-sidebar w-64 bg-white/90 border-r border-gray-100 p-6 woodash-glass-effect">
             <div class="flex items-center gap-3 mb-8 woodash-fade-in">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center woodash-glow">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#814ce4] to-[#2d0873] flex items-center justify-center woodash-glow">
                     <i class="fa-solid fa-chart-line text-white text-xl"></i>
                 </div>
                 <h2 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h2>
@@ -953,10 +953,10 @@
             </nav>
             <div class="absolute bottom-6 left-6 right-6">
                 <div class="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-hover-card woodash-fade-in">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center font-semibold text-white woodash-glow">JD</div>
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-[#814ce4] to-[#2d0873] flex items-center justify-center font-semibold text-white woodash-glow">JD</div>
                 <div>
                         <div class="font-medium text-gray-900">John Doe</div>
-                        <a href="#" class="text-sm text-[#00CC61] hover:underline woodash-logout-btn">Logout</a>
+                        <a href="#" class="text-sm text-[#814ce4] hover:underline woodash-logout-btn">Logout</a>
                     </div>
                 </div>
             </div>
@@ -989,7 +989,7 @@
                                     <span>Export as PDF</span>
                                 </div>
                                 <div class="woodash-dropdown-item" data-export="excel">
-                                    <i class="fa-solid fa-file-excel text-green-500"></i>
+                                    <i class="fa-solid fa-file-excel text-purple-500"></i>
                                     <span>Export as Excel</span>
                                 </div>
                                 <div class="woodash-dropdown-item" data-export="csv">
@@ -1015,7 +1015,7 @@
                                     <span>Refresh Data</span>
                                 </div>
                                 <div class="woodash-dropdown-item" id="fullscreen-toggle">
-                                    <i class="fa-solid fa-expand text-green-500"></i>
+                                    <i class="fa-solid fa-expand text-purple-500"></i>
                                     <span>Fullscreen</span>
                                 </div>
                             </div>
@@ -1054,7 +1054,7 @@
                                     <span>Low stock alert</span>
                                 </div>
                                 <div class="woodash-dropdown-item woodash-fade-in" style="animation-delay: 0.3s">
-                                    <i class="fa-solid fa-circle-exclamation text-green-500"></i>
+                                    <i class="fa-solid fa-circle-exclamation text-purple-500"></i>
                                     <span>New customer registered</span>
                                 </div>
                             </div>
@@ -1124,16 +1124,16 @@
 
                     <!-- Slide Navigation -->
                     <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#00CC61] transition-colors duration-200" data-slide="0"></button>
-                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#00CC61] transition-colors duration-200" data-slide="1"></button>
-                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#00CC61] transition-colors duration-200" data-slide="2"></button>
+                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#814ce4] transition-colors duration-200" data-slide="0"></button>
+                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#814ce4] transition-colors duration-200" data-slide="1"></button>
+                        <button class="woodash-slide-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-[#814ce4] transition-colors duration-200" data-slide="2"></button>
                     </div>
 
                     <!-- Slide Controls -->
-                    <button class="woodash-slide-control woodash-slide-prev absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center text-gray-600 hover:text-[#00CC61] transition-all duration-200">
+                    <button class="woodash-slide-control woodash-slide-prev absolute left-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center text-gray-600 hover:text-[#814ce4] transition-all duration-200">
                         <i class="fa-solid fa-chevron-left"></i>
                     </button>
-                    <button class="woodash-slide-control woodash-slide-next absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center text-gray-600 hover:text-[#00CC61] transition-all duration-200">
+                    <button class="woodash-slide-control woodash-slide-next absolute right-4 top-1/2 transform -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white shadow-lg flex items-center justify-center text-gray-600 hover:text-[#814ce4] transition-all duration-200">
                         <i class="fa-solid fa-chevron-right"></i>
                     </button>
                 </div>
@@ -1155,7 +1155,7 @@
                 <!-- Extended Stat Cards -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8 items-stretch">
                     <!-- Total Sales Card -->
-                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -1163,14 +1163,14 @@
                                 </h3>
                                 <div class="woodash-metric-value" id="total-sales">$0</div>
                                 <div class="flex items-center gap-1 mt-1">
-                                    <span class="text-sm text-green-600 flex items-center gap-1">
+                                    <span class="text-sm text-purple-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>12.5%</span>
                                     </span>
                                     <span class="text-xs text-gray-500">vs last month</span>
                                 </div>
                             </div>
-                            <div class="woodash-metric-icon woodash-metric-green">
+                            <div class="woodash-metric-icon woodash-metric-purple">
                                 <i class="fa-solid fa-dollar-sign"></i>
                             </div>
                         </div>
@@ -1180,7 +1180,7 @@
                     </div>
 
                     <!-- Total Orders Card -->
-                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -1189,7 +1189,7 @@
                                 </h3>
                                 <div class="woodash-metric-value" id="total-orders">0</div>
                                 <div class="flex items-center gap-1 mt-1">
-                                     <span class="text-sm text-green-600 flex items-center gap-1">
+                                     <span class="text-sm text-purple-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>8.2%</span>
                                     </span>
@@ -1206,7 +1206,7 @@
                     </div>
 
                     <!-- Average Order Value Card -->
-                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -1232,7 +1232,7 @@
                     </div>
 
                     <!-- New Customers Card -->
-                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
@@ -1241,7 +1241,7 @@
                                 </h3>
                                 <div class="woodash-metric-value" id="new-customers">0</div>
                                 <div class="flex items-center gap-1 mt-1">
-                                    <span class="text-sm text-green-600 flex items-center gap-1">
+                                    <span class="text-sm text-purple-600 flex items-center gap-1">
                                         <i class="fa-solid fa-arrow-up text-xs"></i>
                                         <span>15.3%</span>
                                     </span>
@@ -1258,12 +1258,12 @@
                     </div>
 
                     <!-- Total Products Card -->
-                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
                                     <span>Total Products</span>
-                                    <span class="woodash-badge woodash-badge-success text-xs">+5</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs" >+5</span>
                                 </h3>
                                 <div class="woodash-metric-value" id="total-products">245</div>
                                 <div class="flex items-center gap-1 mt-1">
@@ -1285,7 +1285,7 @@
                 </div>
 
                 <!-- Sales Overview -->
-                <div class="woodash-chart-container mb-8 woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
+                <div class="woodash-chart-container mb-12 woodash-hover-card woodash-glow h-[550px]">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
                             <h2 class="text-lg font-bold woodash-gradient-text">Sales Overview</h2>
@@ -1304,7 +1304,8 @@
                 <!-- Top Products & Customers -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <!-- Top Products -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow" style="animation-delay: 0.5s">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow" style="animation-delay: 0.5s, 
+                    ">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Top Products</h2>
@@ -1377,7 +1378,7 @@
                     
                     <div class="space-y-3">
                         <div class="woodash-ai-insight-item">
-                            <div class="woodash-ai-insight-icon bg-gradient-to-br from-green-500 to-green-600">
+                            <div class="woodash-ai-insight-icon bg-gradient-to-br from-purple-500 to-purple-600">
                                 <i class="fa-solid fa-chart-line text-sm"></i>
                             </div>
                             <div class="woodash-ai-insight-content">
@@ -1411,7 +1412,7 @@
                 <!-- Revenue Analytics & Goal Tracking -->
                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                     <!-- Revenue by Category -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350x]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Revenue by Category</h2>
@@ -1427,7 +1428,7 @@
                     </div>
 
                     <!-- Goal Progress -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350x]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Monthly Goal</h2>
@@ -1461,24 +1462,24 @@
                     </div>
 
                     <!-- Real-time Metrics -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350x]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Live Metrics</h2>
                                 <p class="text-gray-500 text-sm">Real-time store data</p>
                             </div>
                             <div class="flex items-center gap-2">
-                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse"></div>
                                 <span class="text-xs text-gray-500">Live</span>
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                            <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
                                 <div class="flex items-center gap-3">
-                                    <i class="fa-solid fa-users text-green-600"></i>
+                                    <i class="fa-solid fa-users text-purple-600"></i>
                                     <span class="text-sm font-medium">Online Visitors</span>
                                 </div>
-                                <span class="text-lg font-bold text-green-600" id="live-visitors">24</span>
+                                <span class="text-lg font-bold text-purple-600" id="live-visitors">24</span>
                             </div>
                             <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                                 <div class="flex items-center gap-3">
@@ -1500,7 +1501,7 @@
 
                 <!-- Weather & Time Widget -->
                 <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-1">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-1 h-[200px]">
                         <div class="text-center">
                             <div class="flex items-center justify-center mb-4">
                                 <i class="fa-solid fa-sun text-4xl text-yellow-500"></i>
@@ -1512,7 +1513,7 @@
                     </div>
 
                     <!-- Quick Actions -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-3">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-3 h-[200px]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Quick Actions</h2>
@@ -1541,7 +1542,7 @@
                 </div>
 
                 <!-- Inventory Alerts & Tasks -->
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 h-[350px]">
                     <!-- Inventory Alerts -->
                     <div class="woodash-chart-container woodash-hover-card woodash-glow">
                         <div class="flex justify-between items-center mb-6">
@@ -1588,7 +1589,7 @@
                     </div>
 
                     <!-- Task Manager -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350px]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Today's Tasks</h2>
@@ -1601,17 +1602,17 @@
                         </div>
                         <div class="space-y-3" id="task-list">
                             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                                <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]">
                                 <span class="flex-1 text-sm">Update product descriptions</span>
                                 <span class="text-xs text-gray-500">High</span>
                             </div>
                             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]" checked>
+                                <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]" checked>
                                 <span class="flex-1 text-sm line-through text-gray-500">Process pending orders</span>
                                 <span class="text-xs text-gray-500">Medium</span>
                             </div>
                             <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
-                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                                <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]">
                                 <span class="flex-1 text-sm">Reply to customer emails</span>
                                 <span class="text-xs text-gray-500">Low</span>
                             </div>
@@ -1628,7 +1629,7 @@
                 <!-- Additional Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Recent Activity -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Recent Activity</h2>
@@ -1640,7 +1641,7 @@
                         </div>
                         <div class="space-y-4 woodash-scrollbar" style="max-height: 400px;">
                             <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
-                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 woodash-float">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 woodash-float">
                                     <i class="fa-solid fa-shopping-cart"></i>
                                 </div>
                                 <div class="flex-1">
@@ -1691,7 +1692,7 @@
                     </div>
 
                     <!-- Store Performance -->
-                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Store Performance</h2>
@@ -1705,7 +1706,7 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <p class="text-sm font-medium text-gray-700">Conversion Rate</p>
-                                    <span class="text-sm font-medium text-green-600">+2.4%</span>
+                                    <span class="text-sm font-medium text-purple-600">+2.4%</span>
                                 </div>
                                 <div class="woodash-progress">
                                     <div class="woodash-progress-bar woodash-shimmer" style="width: 65%"></div>
@@ -1715,7 +1716,7 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <p class="text-sm font-medium text-gray-700">Customer Satisfaction</p>
-                                    <span class="text-sm font-medium text-green-600">4.8/5</span>
+                                    <span class="text-sm font-medium text-purple-600">4.8/5</span>
                                 </div>
                                 <div class="woodash-progress">
                                     <div class="woodash-progress-bar bg-yellow-500 woodash-shimmer" style="width: 96%"></div>
@@ -1735,7 +1736,7 @@
                             <div>
                                 <div class="flex items-center justify-between mb-2">
                                     <p class="text-sm font-medium text-gray-700">Inventory Turnover</p>
-                                    <span class="text-sm font-medium text-green-600">4.5x</span>
+                                    <span class="text-sm font-medium text-purple-600">4.5x</span>
                                 </div>
                                 <div class="woodash-progress">
                                     <div class="woodash-progress-bar bg-blue-500 woodash-shimmer" style="width: 75%"></div>
@@ -1763,7 +1764,7 @@
 
                     <!-- Analytics Page -->
                     <div id="analytics-page" class="woodash-page-content hidden">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8 h-[550px]">
                             <!-- Advanced Analytics Chart -->
                             <div class="woodash-chart-container woodash-hover-card woodash-glow lg:col-span-2">
                                 <div class="flex justify-between items-center mb-6">
@@ -1809,7 +1810,7 @@
                                         <span class="font-medium">Visitors</span>
                                         <span class="text-xl font-bold">12,456</span>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                                    <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
                                         <span class="font-medium">Product Views</span>
                                         <span class="text-xl font-bold">8,234</span>
                                     </div>
@@ -1835,7 +1836,7 @@
                     <div id="products-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                             <!-- Product Stats -->
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Total Products</h3>
@@ -1846,7 +1847,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Low Stock</h3>
@@ -1857,13 +1858,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Categories</h3>
                                         <div class="woodash-metric-value">12</div>
                                     </div>
-                                    <div class="woodash-metric-icon woodash-metric-green">
+                                    <div class="woodash-metric-icon woodash-metric-purple">
                                         <i class="fa-solid fa-tags"></i>
                                     </div>
                                 </div>
@@ -1945,7 +1946,7 @@
                     <div id="orders-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
                             <!-- Order Stats -->
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Total Orders</h3>
@@ -1956,7 +1957,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Pending</h3>
@@ -1967,7 +1968,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Processing</h3>
@@ -1978,13 +1979,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Completed</h3>
-                                        <div class="woodash-metric-value text-green-600">1,166</div>
+                                        <div class="woodash-metric-value text-purple-600">1,166</div>
                                     </div>
-                                    <div class="woodash-metric-icon woodash-metric-green">
+                                    <div class="woodash-metric-icon woodash-metric-purple">
                                         <i class="fa-solid fa-check"></i>
                                     </div>
                                 </div>
@@ -2033,7 +2034,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2046,7 +2047,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2061,7 +2062,7 @@
                     <div id="customers-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
                             <!-- Customer Stats -->
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Total Customers</h3>
@@ -2072,18 +2073,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">New This Month</h3>
-                                        <div class="woodash-metric-value text-green-600">42</div>
+                                        <div class="woodash-metric-value text-purple-600">42</div>
                                     </div>
-                                    <div class="woodash-metric-icon woodash-metric-green">
+                                    <div class="woodash-metric-icon woodash-metric-purple">
                                         <i class="fa-solid fa-user-plus"></i>
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">VIP Customers</h3>
@@ -2094,7 +2095,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Retention Rate</h3>
@@ -2148,7 +2149,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2167,7 +2168,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2182,7 +2183,7 @@
                     <div id="inventory-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
                             <!-- Inventory Stats -->
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Total SKUs</h3>
@@ -2193,7 +2194,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Low Stock</h3>
@@ -2204,7 +2205,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Out of Stock</h3>
@@ -2215,7 +2216,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
                                 <div class="flex items-center justify-between">
                                     <div>
                                         <h3 class="woodash-metric-title">Overstock</h3>
@@ -2277,7 +2278,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-plus"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2297,7 +2298,7 @@
                                             <td>
                                                 <div class="flex gap-2">
                                                     <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-plus"></i></button>
-                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-purple-600 hover:text-purple-800"><i class="fa-solid fa-edit"></i></button>
                                                 </div>
                                             </td>
                                         </tr>
@@ -2312,7 +2313,7 @@
                     <div id="reports-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
                             <!-- Quick Report Cards -->
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer h-[220px]">
                                 <div class="text-center">
                                     <i class="fa-solid fa-chart-line text-4xl text-blue-600 mb-4"></i>
                                     <h3 class="text-lg font-bold mb-2">Sales Report</h3>
@@ -2320,15 +2321,15 @@
                                     <button class="woodash-btn woodash-btn-primary">Generate Report</button>
                                 </div>
                             </div>
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer h-[220px]">
                                 <div class="text-center">
-                                    <i class="fa-solid fa-users text-4xl text-green-600 mb-4"></i>
+                                    <i class="fa-solid fa-users text-4xl text-purple-600 mb-4"></i>
                                     <h3 class="text-lg font-bold mb-2">Customer Report</h3>
                                     <p class="text-gray-500 text-sm mb-4">Customer behavior analysis</p>
                                     <button class="woodash-btn woodash-btn-primary">Generate Report</button>
                                 </div>
                             </div>
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer h-[220px]">
                                 <div class="text-center">
                                     <i class="fa-solid fa-box text-4xl text-purple-600 mb-4"></i>
                                     <h3 class="text-lg font-bold mb-2">Inventory Report</h3>
@@ -2374,8 +2375,8 @@
                                 </div>
                                 <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
                                     <div class="flex items-center gap-4">
-                                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                            <i class="fa-solid fa-file-excel text-green-600"></i>
+                                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-excel text-purple-600"></i>
                                         </div>
                                         <div>
                                             <h4 class="font-medium">Customer Analytics</h4>
@@ -2402,7 +2403,7 @@
                     <div id="settings-page" class="woodash-page-content hidden">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                             <!-- General Settings -->
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow h-[380px]">
                                 <div class="flex justify-between items-center mb-6">
                                     <div>
                                         <h2 class="text-lg font-bold woodash-gradient-text">General Settings</h2>
@@ -2431,14 +2432,14 @@
                                         </select>
                                     </div>
                                     <div class="flex items-center gap-3 pt-2">
-                                        <input type="checkbox" id="notifications" class="w-4 h-4 text-[#00CC61] rounded">
+                                        <input type="checkbox" id="notifications" class="w-4 h-4 text-[#814ce4] rounded">
                                         <label for="notifications" class="text-sm text-gray-700">Enable notifications</label>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Dashboard Settings -->
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow h-[380px]">
                                 <div class="flex justify-between items-center mb-6">
                                     <div>
                                         <h2 class="text-lg font-bold woodash-gradient-text">Dashboard Settings</h2>
@@ -2464,18 +2465,18 @@
                                         </select>
                                     </div>
                                     <div class="flex items-center gap-3 pt-2">
-                                        <input type="checkbox" id="animations" class="w-4 h-4 text-[#00CC61] rounded" checked>
+                                        <input type="checkbox" id="animations" class="w-4 h-4 text-[#814ce4] rounded" checked>
                                         <label for="animations" class="text-sm text-gray-700">Enable animations</label>
                                     </div>
                                     <div class="flex items-center gap-3">
-                                        <input type="checkbox" id="slideshow" class="w-4 h-4 text-[#00CC61] rounded" checked>
+                                        <input type="checkbox" id="slideshow" class="w-4 h-4 text-[#814ce4] rounded" checked>
                                         <label for="slideshow" class="text-sm text-gray-700">Show slideshow</label>
                                     </div>
                                 </div>
                             </div>
 
                             <!-- Account Settings -->
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow h-[380px]">
                                 <div class="flex justify-between items-center mb-6">
                                     <div>
                                         <h2 class="text-lg font-bold woodash-gradient-text">Account Settings</h2>
@@ -2503,7 +2504,7 @@
                             </div>
 
                             <!-- Export Settings -->
-                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow h-[380px]">
                                 <div class="flex justify-between items-center mb-6">
                                     <div>
                                         <h2 class="text-lg font-bold woodash-gradient-text">Export Settings</h2>
@@ -2528,7 +2529,7 @@
                                         </select>
                                     </div>
                                     <div class="flex items-center gap-3 pt-2">
-                                        <input type="checkbox" id="include-images" class="w-4 h-4 text-[#00CC61] rounded">
+                                        <input type="checkbox" id="include-images" class="w-4 h-4 text-[#814ce4] rounded">
                                         <label for="include-images" class="text-sm text-gray-700">Include product images</label>
                                     </div>
                                 </div>
@@ -2558,21 +2559,21 @@
             <div>
                 <label for="task-title" class="block text-sm font-medium text-gray-700 mb-2">Task Title</label>
                 <input type="text" id="task-title" name="task-title" 
-                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent" 
+                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#814ce4] focus:border-transparent" 
                        placeholder="Enter task title..." required>
             </div>
             
             <div>
                 <label for="task-description" class="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
                 <textarea id="task-description" name="task-description" rows="3"
-                          class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent" 
+                          class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#814ce4] focus:border-transparent" 
                           placeholder="Enter task description..."></textarea>
             </div>
             
             <div>
                 <label for="task-priority" class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
                 <select id="task-priority" name="task-priority" 
-                        class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
+                        class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#814ce4] focus:border-transparent">
                     <option value="low">Low</option>
                     <option value="medium" selected>Medium</option>
                     <option value="high">High</option>
@@ -2582,12 +2583,12 @@
             <div>
                 <label for="task-due-date" class="block text-sm font-medium text-gray-700 mb-2">Due Date (Optional)</label>
                 <input type="date" id="task-due-date" name="task-due-date" 
-                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
+                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#814ce4] focus:border-transparent">
             </div>
             
             <div class="flex items-center gap-3">
                 <input type="checkbox" id="task-urgent" name="task-urgent" 
-                       class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                       class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]">
                 <label for="task-urgent" class="text-sm text-gray-700">Mark as urgent</label>
             </div>
         </form>
@@ -2668,23 +2669,23 @@
             <!-- Company Info -->
             <div class="space-y-4">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] flex items-center justify-center">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#814ce4] to-[#2d0873] flex items-center justify-center">
                         <i class="fa-solid fa-chart-line text-white text-xl"></i>
                     </div>
                     <h3 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h3>
                 </div>
                 <p class="text-gray-600 text-sm">Your all-in-one dashboard for managing your WooCommerce store. Track sales, monitor performance, and grow your business.</p>
                 <div class="flex gap-4">
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
+                    <a href="#" class="text-gray-400 hover:text-[#814ce4] transition-colors duration-200">
                         <i class="fab fa-facebook-f"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
+                    <a href="#" class="text-gray-400 hover:text-[#814ce4] transition-colors duration-200">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
+                    <a href="#" class="text-gray-400 hover:text-[#814ce4] transition-colors duration-200">
                         <i class="fab fa-linkedin-in"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-[#00CC61] transition-colors duration-200">
+                    <a href="#" class="text-gray-400 hover:text-[#814ce4] transition-colors duration-200">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
@@ -2694,11 +2695,11 @@
             <div>
                 <h4 class="font-semibold text-gray-900 mb-4">Quick Links</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Dashboard</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Products</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Orders</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Customers</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Reports</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Dashboard</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Products</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Orders</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Customers</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Reports</a></li>
                 </ul>
             </div>
 
@@ -2706,11 +2707,11 @@
             <div>
                 <h4 class="font-semibold text-gray-900 mb-4">Support</h4>
                 <ul class="space-y-2">
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Documentation</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Help Center</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">API Reference</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Community</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-[#00CC61] transition-colors duration-200">Contact Us</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Documentation</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Help Center</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">API Reference</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Community</a></li>
+                    <li><a href="#" class="text-gray-600 hover:text-[#814ce4] transition-colors duration-200">Contact Us</a></li>
                 </ul>
             </div>
 
@@ -2720,7 +2721,7 @@
                 <p class="text-gray-600 text-sm mb-4">Subscribe to our newsletter for the latest updates and features.</p>
                 <form class="space-y-3">
                     <div class="flex gap-2">
-                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
+                        <input type="email" placeholder="Enter your email" class="flex-1 px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#814ce4] focus:border-transparent">
                         <button type="submit" class="woodash-btn woodash-btn-primary">
                             <i class="fa-solid fa-paper-plane"></i>
                         </button>
@@ -2733,9 +2734,9 @@
         <div class="border-t border-gray-100 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p class="text-gray-600 text-sm">© 2024 WooDash Pro. All rights reserved.</p>
             <div class="flex gap-6">
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Privacy Policy</a>
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Terms of Service</a>
-                <a href="#" class="text-gray-600 hover:text-[#00CC61] text-sm transition-colors duration-200">Cookie Policy</a>
+                <a href="#" class="text-gray-600 hover:text-[#814ce4] text-sm transition-colors duration-200">Privacy Policy</a>
+                <a href="#" class="text-gray-600 hover:text-[#814ce4] text-sm transition-colors duration-200">Terms of Service</a>
+                <a href="#" class="text-gray-600 hover:text-[#814ce4] text-sm transition-colors duration-200">Cookie Policy</a>
             </div>
         </div>
     </div>
@@ -2838,7 +2839,7 @@ document.addEventListener('DOMContentLoaded', function() {
         taskElement.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg woodash-fade-in';
         
         const priorityColors = {
-            'low': 'text-green-600',
+            'low': 'text-purple-600',
             'medium': 'text-yellow-600', 
             'high': 'text-red-600'
         };
@@ -2849,7 +2850,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const descriptionText = taskData.description ? `<div class="text-xs text-gray-500 mt-1">${taskData.description}</div>` : '';
 
         taskElement.innerHTML = `
-            <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+            <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]">
             <div class="flex-1">
                 <div class="flex items-center">
                     <span class="text-sm">${taskData.title}</span>
@@ -2916,7 +2917,7 @@ document.addEventListener('DOMContentLoaded', function() {
         notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg text-white transform transition-all duration-300 translate-x-full`;
         
         const bgColors = {
-            'success': 'bg-green-500',
+            'success': 'bg-purple-500',
             'error': 'bg-red-500',
             'info': 'bg-blue-500',
             'warning': 'bg-yellow-500'
@@ -3281,7 +3282,7 @@ function addNewTask(text, priority) {
     taskDiv.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg';
     
     taskDiv.innerHTML = `
-        <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+        <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]">
         <span class="flex-1 text-sm">${text}</span>
         <span class="text-xs text-gray-500">${priority}</span>
     `;
@@ -3534,7 +3535,7 @@ function initRevenueCategoryChart() {
             datasets: [{
                 data: [35, 25, 15, 15, 10],
                 backgroundColor: [
-                    '#00CC61',
+                    '#814ce4',
                     '#00B357',
                     '#4ADE80',
                     '#22C55E',
@@ -3593,7 +3594,7 @@ function initGoalProgressChart() {
         data: {
             datasets: [{
                 data: [progress, 100 - progress],
-                backgroundColor: ['#00CC61', '#E5E7EB'],
+                backgroundColor: ['#814ce4', '#E5E7EB'],
                 borderWidth: 0,
                 cutout: '85%'
             }]
@@ -3627,10 +3628,10 @@ function initSalesChart() {
             datasets: [{
                 label: 'Sales',
                 data: [12, 19, 3, 5, 2, 3],
-                borderColor: '#00CC61',
+                borderColor: '#814ce4',
                 tension: 0.4,
                 fill: true,
-                backgroundColor: 'rgba(0, 204, 97, 0.1)'
+                backgroundColor: 'rgba(130, 77, 235, 0.1)'
             }]
         },
         options: {
@@ -3665,16 +3666,16 @@ async function initMiniChart(chartId) {
     // res can be null/undefined or unexpected; use fallback when needed
 
     // Determine base color per metric
-    const baseColor = chartId === 'mini-trend-orders' ? '#00B357'
-                     : chartId === 'mini-trend-aov' ? '#00CC61'
-                     : chartId === 'mini-trend-customers' ? '#00B357'
-                     : chartId === 'mini-trend-profit' ? '#00CC61'
-                     : '#00CC61';
+    const baseColor = chartId === 'mini-trend-orders' ? '#814ce4'
+                     : chartId === 'mini-trend-aov' ? '#814ce4'
+                     : chartId === 'mini-trend-customers' ? '#814ce4'
+                     : chartId === 'mini-trend-profit' ? '#814ce4'
+                     : '#814ce4';
 
     // Subtle vertical gradient fill
     const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
-    gradient.addColorStop(0, 'rgba(0, 204, 97, 0.18)');
-    gradient.addColorStop(1, 'rgba(0, 204, 97, 0)');
+    gradient.addColorStop(0, 'rgba(130, 77, 235, 0.18)');
+    gradient.addColorStop(1, 'rgba(130, 77, 235, 0)');
 
     // Normalize data structure
     const series = Array.isArray(res?.data) ? res.data : (Array.isArray(res) ? res : []);
@@ -3738,8 +3739,8 @@ function initTopProductsChart() {
             datasets: [{
                 label: 'Sales',
                 data: data.data,
-                backgroundColor: '#00CC61',
-                borderColor: '#00CC61',
+                backgroundColor: '#814ce4',
+                borderColor: '#814ce4',
                 borderWidth: 1
             }]
         },
@@ -3782,8 +3783,8 @@ function initTopCustomersChart() {
             datasets: [{
                 label: 'Total Spent',
                 data: data.data,
-                backgroundColor: '#00CC61',
-                borderColor: '#00CC61',
+                backgroundColor: '#814ce4',
+                borderColor: '#814ce4',
                 borderWidth: 1
             }]
         },
@@ -3905,7 +3906,7 @@ function loadSavedState() {
             taskDiv.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg';
             
             taskDiv.innerHTML = `
-                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]" ${task.completed ? 'checked' : ''}>
+                <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded focus:ring-[#814ce4]" ${task.completed ? 'checked' : ''}>
                 <span class="flex-1 text-sm ${task.completed ? 'line-through text-gray-500' : ''}">${task.text}</span>
                 <span class="text-xs text-gray-500">${task.priority}</span>
             `;
@@ -4443,15 +4444,15 @@ class WoodashPageManager {
                     datasets: [{
                         label: 'Revenue',
                         data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 32000, 40000, 38000, 45000],
-                        borderColor: '#00CC61',
-                        backgroundColor: 'rgba(0, 204, 97, 0.1)',
+                        borderColor: '#814ce4',
+                        backgroundColor: 'rgba(130, 77, 235, 0.1)',
                         tension: 0.4,
                         fill: true
                     }, {
                         label: 'Orders',
                         data: [120, 190, 150, 250, 220, 300, 280, 350, 320, 400, 380, 450],
-                        borderColor: '#00B357',
-                        backgroundColor: 'rgba(0, 179, 87, 0.1)',
+                        borderColor: '#2d0873',
+                        backgroundColor: 'rgba(130, 77, 235, 0.1)',
                         tension: 0.4,
                         fill: true
                     }]
@@ -4488,7 +4489,7 @@ class WoodashPageManager {
                     labels: ['Online Store', 'Mobile App', 'Marketplace', 'Wholesale', 'Other'],
                     datasets: [{
                         data: [45, 25, 15, 10, 5],
-                        backgroundColor: ['#00CC61', '#00B357', '#4ADE80', '#22C55E', '#16A34A'],
+                        backgroundColor: ['#814ce4', '#00B357', '#4ADE80', '#22C55E', '#16A34A'],
                         borderWidth: 0
                     }]
                 },

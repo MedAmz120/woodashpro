@@ -51,10 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
     // Chart.js setup
     let salesChart = new Chart(document.getElementById('sales-chart').getContext('2d'), {
         type: 'line',
-        data: { labels: [], datasets: [{ label: 'Sales', data: [], borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }] },
+        data: { labels: [], datasets: [{ label: 'Sales', data: [], borderColor: '#814ce4', backgroundColor: 'rgba(129,76,228,0.1)' }] },
         options: {
             elements: {
-                line: { borderColor: '#38A169', backgroundColor: 'rgba(56,161,105,0.1)' }
+                line: { borderColor: '#814ce4', backgroundColor: 'rgba(129,76,228,0.1)' }
             },
             responsive: true,
             plugins: { legend: { display: false } }
