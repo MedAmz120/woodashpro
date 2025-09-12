@@ -2315,7 +2315,7 @@
                             <!-- Quick Report Cards -->
                             <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer h-[220px]">
                                 <div class="text-center">
-                                    <i class="fa-solid fa-chart-line text-4xl text-blue-600 mb-4"></i>
+                                    <i class="fa-solid fa-chart-line text-4xl text-purple-600 mb-4"></i>
                                     <h3 class="text-lg font-bold mb-2">Sales Report</h3>
                                     <p class="text-gray-500 text-sm mb-4">Comprehensive sales analysis</p>
                                     <button class="woodash-btn woodash-btn-primary">Generate Report</button>
