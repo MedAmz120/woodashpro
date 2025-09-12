@@ -1,0 +1,237 @@
+# WooDash Pro Language Template
+# This file contains all translatable strings for the WooDash Pro plugin
+
+msgid ""
+msgstr ""
+"Project-Id-Version: WooDash Pro 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-01-01 00:00+0000\n"
+"PO-Revision-Date: 2024-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: WordPress\n"
+
+#: woodashpro.php:45
+msgid "WooDash Pro requires WooCommerce to be installed and activated."
+msgstr ""
+
+#: woodashpro.php:54
+msgid "WooDash Pro requires PHP version 7.4 or higher."
+msgstr ""
+
+#: woodashpro.php:63
+msgid "WooDash Pro requires WordPress version 5.0 or higher."
+msgstr ""
+
+#: includes/class-woodash-admin.php:45
+msgid "WooDash Pro"
+msgstr ""
+
+#: includes/class-woodash-admin.php:46
+msgid "Analytics Dashboard"
+msgstr ""
+
+#: includes/class-woodash-admin.php:57
+msgid "Activate WooDash Pro"
+msgstr ""
+
+#: includes/class-woodash-admin.php:58
+msgid "Activate"
+msgstr ""
+
+#: includes/class-woodash-admin.php:155
+msgid "Dashboard"
+msgstr ""
+
+#: includes/class-woodash-admin.php:156
+msgid "Analytics"
+msgstr ""
+
+#: includes/class-woodash-admin.php:157
+msgid "Products"
+msgstr ""
+
+#: includes/class-woodash-admin.php:158
+msgid "Orders"
+msgstr ""
+
+#: includes/class-woodash-admin.php:159
+msgid "Customers"
+msgstr ""
+
+#: includes/class-woodash-admin.php:160
+msgid "Inventory"
+msgstr ""
+
+#: includes/class-woodash-admin.php:161
+msgid "Reports"
+msgstr ""
+
+#: includes/class-woodash-admin.php:162
+msgid "Settings"
+msgstr ""
+
+#: includes/class-woodash-admin.php:172
+msgid "Total Sales"
+msgstr ""
+
+#: includes/class-woodash-admin.php:173
+msgid "Total Orders"
+msgstr ""
+
+#: includes/class-woodash-admin.php:174
+msgid "Average Order Value"
+msgstr ""
+
+#: includes/class-woodash-admin.php:175
+msgid "Total Customers"
+msgstr ""
+
+#: includes/class-woodash-admin.php:213
+msgid "Connect to WooDash Pro Platform"
+msgstr ""
+
+#: includes/class-woodash-admin.php:214
+msgid "Activate your WooDash Pro account to access advanced analytics and features."
+msgstr ""
+
+#: includes/class-woodash-admin.php:218
+msgid "Store Name"
+msgstr ""
+
+#: includes/class-woodash-admin.php:219
+msgid "Enter your store name"
+msgstr ""
+
+#: includes/class-woodash-admin.php:223
+msgid "Email Address"
+msgstr ""
+
+#: includes/class-woodash-admin.php:224
+msgid "Enter your email address"
+msgstr ""
+
+#: includes/class-woodash-admin.php:228
+msgid "License Key"
+msgstr ""
+
+#: includes/class-woodash-admin.php:229
+msgid "Enter your license key"
+msgstr ""
+
+#: includes/class-woodash-admin.php:232
+msgid "Connect Now"
+msgstr ""
+
+#: includes/class-woodash-api.php:95
+msgid "Permission denied"
+msgstr ""
+
+#: includes/class-woodash-api.php:104
+msgid "WooCommerce not found"
+msgstr ""
+
+#: includes/class-woodash-api.php:150
+msgid "Invalid date range"
+msgstr ""
+
+#: includes/class-woodash-api.php:200
+msgid "Export completed successfully"
+msgstr ""
+
+#: includes/class-woodash-api.php:230
+msgid "Invalid email address"
+msgstr ""
+
+#: includes/class-woodash-api.php:235
+msgid "Subscription successful"
+msgstr ""
+
+#: includes/class-woodash-api.php:250
+msgid "Order not found"
+msgstr ""
+
+#: includes/class-woodash-api.php:275
+msgid "Connection successful"
+msgstr ""
+
+#: includes/class-woodash-api.php:280
+msgid "Invalid connection details"
+msgstr ""
+
+#: includes/helpers.php:205
+msgid "WooCommerce is required for WooDash Pro to function."
+msgstr ""
+
+#: includes/helpers.php:206
+msgid "You do not have permission to access this feature."
+msgstr ""
+
+#: includes/helpers.php:207
+msgid "Failed to connect to WooDash Pro platform."
+msgstr ""
+
+#: includes/helpers.php:208
+msgid "Invalid data provided."
+msgstr ""
+
+#: includes/helpers.php:209
+msgid "An active subscription is required to use this feature."
+msgstr ""
+
+#: includes/helpers.php:212
+msgid "An unknown error occurred."
+msgstr ""
+
+#: templates/dashboard.php:25
+msgid "Welcome to WooDash Pro"
+msgstr ""
+
+#: templates/dashboard.php:26
+msgid "Your comprehensive WooCommerce analytics dashboard"
+msgstr ""
+
+#: templates/dashboard.php:45
+msgid "Quick Overview"
+msgstr ""
+
+#: templates/dashboard.php:75
+msgid "Recent Activity"
+msgstr ""
+
+#: templates/dashboard.php:82
+msgid "Sales Performance"
+msgstr ""
+
+#: templates/dashboard.php:89
+msgid "Top Products"
+msgstr ""
+
+#: templates/dashboard.php:96
+msgid "Customer Insights"
+msgstr ""
+
+#: templates/dashboard.php:103
+msgid "Inventory Status"
+msgstr ""
+
+#: templates/dashboard.php:110
+msgid "Revenue Reports"
+msgstr ""
+
+#: templates/dashboard.php:117
+msgid "Plugin Configuration"
+msgstr ""
+
+#: templates/dashboard.php:122
+msgid "Refresh Data"
+msgstr ""
+
+#: templates/dashboard.php:123
+msgid "Export Data"
+msgstr ""
