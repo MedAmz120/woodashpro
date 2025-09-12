@@ -82,7 +82,7 @@
         from { transform: translateY(20px); opacity: 0; }
         to { transform: translateY(0); opacity: 1; }
     }
-    .woodash-animate-in {
+     {
         animation: slideIn 0.3s ease-out forwards;
     }
     .woodash-badge {
@@ -142,6 +142,153 @@
         background-color: #E2E8F0;
         border-radius: 3px;
     }
+    
+    /* AI Assistant Styles */
+    .woodash-ai-container {
+        @apply fixed bottom-6 right-6 z-50;
+    }
+    
+    .woodash-ai-toggle {
+        @apply w-14 h-14 bg-gradient-to-br from-[#00CC61] to-[#00b357] rounded-full flex items-center justify-center text-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer;
+        animation: woodash-ai-pulse 2s infinite;
+    }
+    
+    .woodash-ai-toggle:hover {
+        @apply transform scale-110;
+    }
+    
+    .woodash-ai-chat {
+        @apply absolute bottom-16 right-0 w-80 h-96 bg-white rounded-2xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden transform scale-0 opacity-0 transition-all duration-300;
+        transform-origin: bottom right;
+    }
+    
+    .woodash-ai-chat.active {
+        @apply scale-100 opacity-100;
+    }
+    
+    .woodash-ai-header {
+        @apply bg-gradient-to-r from-[#00CC61] to-[#00b357] p-4 text-white flex items-center justify-between;
+    }
+    
+    .woodash-ai-status {
+        @apply flex items-center gap-2;
+    }
+    
+    .woodash-ai-status-dot {
+        @apply w-2 h-2 bg-green-300 rounded-full animate-pulse;
+    }
+    
+    .woodash-ai-messages {
+        @apply flex-1 p-4 overflow-y-auto space-y-3;
+        scrollbar-width: thin;
+        scrollbar-color: #E2E8F0 #F8FAFC;
+    }
+    
+    .woodash-ai-message {
+        @apply flex gap-3 max-w-full;
+    }
+    
+    .woodash-ai-message.user {
+        @apply flex-row-reverse;
+    }
+    
+    .woodash-ai-message-avatar {
+        @apply w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0;
+    }
+    
+    .woodash-ai-message.ai .woodash-ai-message-avatar {
+        @apply bg-gradient-to-br from-[#00CC61] to-[#00b357] text-white;
+    }
+    
+    .woodash-ai-message.user .woodash-ai-message-avatar {
+        @apply bg-gray-100 text-gray-600;
+    }
+    
+    .woodash-ai-message-content {
+        @apply max-w-xs p-3 rounded-2xl text-sm;
+    }
+    
+    .woodash-ai-message.ai .woodash-ai-message-content {
+        @apply bg-gray-100 text-gray-800;
+    }
+    
+    .woodash-ai-message.user .woodash-ai-message-content {
+        @apply bg-[#00CC61] text-white;
+    }
+    
+    .woodash-ai-input-container {
+        @apply p-4 border-t border-gray-100 flex gap-2;
+    }
+    
+    .woodash-ai-input {
+        @apply flex-1 px-3 py-2 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent text-sm;
+    }
+    
+    .woodash-ai-send {
+        @apply w-8 h-8 bg-[#00CC61] text-white rounded-xl flex items-center justify-center hover:bg-[#00b357] transition-colors duration-200 cursor-pointer;
+    }
+    
+    .woodash-ai-suggestions {
+        @apply p-4 border-t border-gray-100 space-y-2;
+    }
+    
+    .woodash-ai-suggestion {
+        @apply text-xs text-[#00CC61] bg-[#00CC61] bg-opacity-10 px-3 py-2 rounded-lg cursor-pointer hover:bg-opacity-20 transition-all duration-200;
+    }
+    
+    .woodash-ai-typing {
+        @apply flex items-center gap-1 text-gray-500 text-xs p-3;
+    }
+    
+    @keyframes woodash-ai-pulse {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(0, 204, 97, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 30px rgba(0, 204, 97, 0.5);
+        }
+    }
+    
+    .woodash-ai-insights {
+        @apply bg-gradient-to-br from-blue-50 to-indigo-50 border border-blue-200 rounded-xl p-4 mb-6;
+    }
+    
+    .woodash-ai-insight-item {
+        @apply flex items-start gap-3 p-3 bg-white rounded-lg mb-3 last:mb-0 shadow-sm hover:shadow-md transition-shadow duration-200;
+    }
+    
+    .woodash-ai-insight-icon {
+        @apply w-8 h-8 rounded-lg flex items-center justify-center text-white flex-shrink-0;
+    }
+    
+    .woodash-ai-insight-content {
+        @apply flex-1;
+    }
+    
+    .woodash-ai-insight-title {
+        @apply font-medium text-gray-900 text-sm mb-1;
+    }
+    
+    .woodash-ai-insight-description {
+        @apply text-gray-600 text-xs;
+    }
+    
+    .woodash-ai-quick-actions {
+        @apply grid grid-cols-2 gap-3 p-4 bg-gray-50 rounded-xl;
+    }
+    
+    .woodash-ai-quick-action {
+        @apply flex flex-col items-center gap-2 p-3 bg-white rounded-lg border border-gray-200 hover:border-[#00CC61] transition-all duration-200 cursor-pointer hover:transform hover:scale-105;
+    }
+    
+    .woodash-ai-quick-action-icon {
+        @apply w-8 h-8 rounded-lg bg-gradient-to-br from-[#00CC61] to-[#00b357] text-white flex items-center justify-center;
+    }
+    
+    .woodash-ai-quick-action-label {
+        @apply text-xs font-medium text-gray-700 text-center;
+    }
+    
     .woodash-bg-pattern {
         background-color: #f8fafc;
         background-image: 
@@ -155,51 +302,6 @@
         position: relative;
         overflow: hidden;
     }
-    .woodash-bg-animation {
-        position: relative;
-        overflow: hidden;
-    }
-    .woodash-bg-animation::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            linear-gradient(45deg, rgba(0, 204, 97, 0.05) 0%, rgba(0, 179, 87, 0.05) 100%),
-            linear-gradient(135deg, rgba(0, 204, 97, 0.03) 0%, rgba(0, 179, 87, 0.03) 100%);
-        animation: woodash-bg-shift 20s ease-in-out infinite alternate;
-        z-index: 0;
-    }
-    .woodash-bg-animation::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: 
-            radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
-            rgba(0, 204, 97, 0.05) 0%, 
-            transparent 50%);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        pointer-events: none;
-        z-index: 1;
-    }
-    .woodash-bg-animation:hover::after {
-        opacity: 1;
-    }
-    .woodash-orb {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(40px);
-        opacity: 0.5;
-        animation: woodash-orb-float 15s ease-in-out infinite;
-        transition: all 0.5s ease;
-        cursor: pointer;
-    }
     .woodash-orb:hover {
         filter: blur(30px);
         opacity: 0.7;
@@ -211,7 +313,6 @@
         background: radial-gradient(circle at center, rgba(0, 204, 97, 0.2), transparent 70%);
         top: -150px;
         left: -150px;
-        animation-delay: 0s;
     }
     .woodash-orb-2 {
         width: 500px;
@@ -219,7 +320,6 @@
         background: radial-gradient(circle at center, rgba(0, 179, 87, 0.15), transparent 70%);
         bottom: -200px;
         right: -200px;
-        animation-delay: -5s;
     }
     .woodash-orb-3 {
         width: 350px;
@@ -228,24 +328,18 @@
         top: 40%;
         left: 60%;
         transform: translate(-50%, -50%);
-        animation-delay: -10s;
     }
     .woodash-line {
         position: absolute;
         background: linear-gradient(90deg, transparent, rgba(0, 204, 97, 0.1), transparent);
         height: 2px;
         width: 100%;
-        animation: woodash-line-move 8s linear infinite;
         transition: all 0.3s ease;
     }
     .woodash-line:hover {
         height: 3px;
         background: linear-gradient(90deg, transparent, rgba(0, 204, 97, 0.2), transparent);
     }
-    .woodash-line-1 { top: 15%; animation-delay: 0s; }
-    .woodash-line-2 { top: 35%; animation-delay: -2s; }
-    .woodash-line-3 { top: 55%; animation-delay: -4s; }
-    .woodash-line-4 { top: 75%; animation-delay: -6s; }
     .woodash-shimmer {
         position: absolute;
         top: 0;
@@ -258,12 +352,8 @@
             rgba(255, 255, 255, 0.15) 50%,
             transparent 100%
         );
-        animation: woodash-shimmer-move 3s linear infinite;
         z-index: 2;
         transition: opacity 0.3s ease;
-    }
-    .woodash-bg-animation:hover .woodash-shimmer {
-        opacity: 0.8;
     }
     .woodash-spotlight {
         position: absolute;
@@ -373,7 +463,6 @@
             rgba(255, 255, 255, 0.2),
             transparent
         );
-        animation: woodash-shimmer 2s infinite;
     }
     @keyframes woodash-shimmer {
         0% {
@@ -383,9 +472,6 @@
             transform: translateX(100%);
         }
     }
-    .woodash-float {
-        animation: none;
-    }
     @keyframes woodash-float {
         0%, 100% {
             transform: translateY(0);
@@ -393,9 +479,6 @@
         50% {
             transform: translateY(-10px);
         }
-    }
-    .woodash-pulse {
-        animation: woodash-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
     @keyframes woodash-pulse {
         0%, 100% {
@@ -406,27 +489,6 @@
             opacity: 0.7;
             transform: scale(1.02);
         }
-    }
-    .woodash-spin {
-        animation: woodash-spin 1s linear infinite;
-    }
-    .woodash-bounce {
-        animation: none;
-    }
-    .woodash-fade-in {
-        animation: woodash-fade-in 0.5s ease-out;
-    }
-    .woodash-slide-up {
-        animation: woodash-slide-up 0.5s ease-out;
-    }
-    .woodash-rotate {
-        animation: woodash-rotate 1s linear infinite;
-    }
-    .woodash-scale {
-        animation: woodash-scale 1s ease-in-out infinite;
-    }
-    .woodash-glow {
-        animation: none;
     }
     @keyframes woodash-subtle-glow {
         0%, 100% {
@@ -595,7 +657,6 @@
     
     .woodash-search-results.active {
         @apply scale-100 opacity-100;
-        animation: woodash-search-slide 0.3s ease-out;
     }
     
     @keyframes woodash-search-slide {
@@ -662,6 +723,187 @@
     .woodash-search-shortcut {
         @apply ml-2 px-2 py-0.5 text-xs font-medium text-gray-400 bg-gray-100 rounded;
     }
+    
+    /* New feature styles */
+    .woodash-weather-widget {
+        @apply bg-gradient-to-br from-blue-50 to-blue-100 border border-blue-200;
+    }
+    
+    .woodash-task-item {
+        @apply flex items-center gap-3 p-3 bg-gray-50 rounded-lg transition-all duration-200;
+    }
+    
+    .woodash-task-item:hover {
+        @apply bg-gray-100;
+    }
+    
+    .woodash-alert-critical {
+        @apply bg-red-50 border-l-4 border-red-500;
+    }
+    
+    .woodash-alert-warning {
+        @apply bg-yellow-50 border-l-4 border-yellow-500;
+    }
+    
+    .woodash-alert-info {
+        @apply bg-blue-50 border-l-4 border-blue-500;
+    }
+    
+    .woodash-live-indicator {
+        @apply w-2 h-2 bg-green-500 rounded-full animate-pulse;
+    }
+    
+    .woodash-quick-action {
+        @apply flex flex-col items-center gap-2 p-4 bg-white rounded-lg border border-gray-200 hover:border-[#00CC61] transition-all duration-200 cursor-pointer;
+    }
+    
+    .woodash-quick-action:hover {
+        @apply transform scale-105 shadow-md;
+    }
+    
+    .woodash-metric-trend-up {
+        @apply text-green-600;
+    }
+    
+    .woodash-metric-trend-down {
+        @apply text-red-600;
+    }
+    
+    .woodash-metric-trend-neutral {
+        @apply text-gray-500;
+    }
+    
+    /* Enhanced animations */
+    @keyframes woodash-fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes woodash-number-counter {
+        from {
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    /* Responsive improvements */
+    @media (max-width: 640px) {
+        .woodash-metric-card {
+            @apply min-h-[140px];
+        }
+        
+        .woodash-metric-value {
+            @apply text-2xl;
+        }
+        
+        .woodash-quick-action {
+            @apply p-3;
+        }
+    }
+
+    /* Modal Styles */
+    .woodash-modal {
+        @apply fixed inset-0 z-50 flex items-center justify-center p-4;
+    }
+    
+    .woodash-modal.hidden {
+        @apply invisible opacity-0;
+    }
+    
+    .woodash-modal-overlay {
+        @apply absolute inset-0 bg-black bg-opacity-50 backdrop-blur-sm;
+        animation: fadeIn 0.3s ease-out;
+    }
+    
+    .woodash-modal-content {
+        @apply relative bg-white rounded-xl shadow-2xl max-w-md w-full transform transition-all duration-300;
+        animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    .woodash-modal-header {
+        @apply flex items-center justify-between p-6 border-b border-gray-100;
+    }
+    
+    .woodash-modal-close {
+        @apply p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-gray-500 hover:text-gray-700;
+    }
+    
+    .woodash-modal-footer {
+        @apply flex items-center justify-end gap-3 p-6 border-t border-gray-100 bg-gray-50 rounded-b-xl;
+    }
+    
+    .woodash-form-input {
+        @apply block w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#00CC61] focus:border-transparent transition-all duration-200;
+    }
+    
+    .woodash-form-input:focus {
+        box-shadow: 0 0 0 3px rgba(0, 204, 97, 0.1);
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes modalSlideIn {
+        from { 
+            opacity: 0; 
+            transform: translateY(-20px) scale(0.95); 
+        }
+        to { 
+            opacity: 1; 
+            transform: translateY(0) scale(1); 
+        }
+    }
+    
+    .woodash-modal:not(.hidden) .woodash-modal-content {
+        animation: modalSlideIn 0.3s ease-out;
+    }
+    
+    /* Page Transition Styles */
+    .woodash-page-content {
+        opacity: 0;
+        transform: translateX(20px);
+        transition: all 0.3s ease-in-out;
+        display: none;
+    }
+    
+    .woodash-page-content.active {
+        opacity: 1;
+        transform: translateX(0);
+        display: block;
+        animation: woodash-fade-in-up 0.5s ease-out;
+    }
+    
+    .woodash-page-content.hidden {
+        display: none;
+    }
+    
+    /* Page fade animation */
+    @keyframes woodash-page-fade-in {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .woodash-page-content.active > * {
+        animation: woodash-page-fade-in 0.6s ease-out;
+    }
     </style>
     
 <div id="woodash-dashboard" class="woodash-fullscreen woodash-bg-pattern woodash-bg-animation">
@@ -675,32 +917,36 @@
                 <h2 class="text-xl font-bold woodash-gradient-text">WooDash Pro</h2>
             </div>
             <nav class="space-y-1">
-                <a href="#" class="woodash-nav-link active woodash-hover-card woodash-slide-up" style="animation-delay: 0.1s">
+                <a href="#" class="woodash-nav-link active woodash-hover-card woodash-slide-up" style="animation-delay: 0.1s" data-page="dashboard">
                     <i class="fa-solid fa-gauge w-5"></i>
                     <span>Dashboard</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.2s">
-                    <i class="fa-solid fa-box w-5"></i>
-                    <span>Products</span>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.2s" data-page="analytics">
+                    <i class="fa-solid fa-chart-line w-5"></i>
+                    <span>Analytics</span>
                     <span class="woodash-badge woodash-badge-success ml-auto woodash-pulse">New</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.3s">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.3s" data-page="products">
+                    <i class="fa-solid fa-box w-5"></i>
+                    <span>Products</span>
+                </a>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.4s" data-page="orders">
+                    <i class="fa-solid fa-shopping-cart w-5"></i>
+                    <span>Orders</span>
+                </a>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.5s" data-page="customers">
                     <i class="fa-solid fa-users w-5"></i>
                     <span>Customers</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.4s">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s" data-page="inventory">
                     <i class="fa-solid fa-boxes-stacked w-5"></i>
-                    <span>Stock</span>
+                    <span>Inventory</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.5s">
-                    <i class="fa-solid fa-star w-5"></i>
-                    <span>Reviews</span>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.7s" data-page="reports">
+                    <i class="fa-solid fa-file-chart-line w-5"></i>
+                    <span>Reports</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s">
-                    <i class="fa-solid fa-ticket w-5"></i>
-                    <span>Coupons</span>
-                </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.7s">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.8s" data-page="settings">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span>Settings</span>
                 </a>
@@ -722,14 +968,59 @@
                 <!-- Header -->
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 woodash-fade-in">
                     <div>
-                        <h1 class="text-2xl font-bold woodash-gradient-text">Dashboard</h1>
-                        <p class="text-gray-500">Welcome back, John! Here's what's happening with your store.</p>
+                        <h1 class="text-2xl font-bold woodash-gradient-text" id="page-title">Dashboard</h1>
+                        <p class="text-gray-500" id="page-description">Welcome back, John! Here's what's happening with your store.</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button id="toggle-slideshow" class="woodash-btn woodash-btn-secondary woodash-hover-card">
                             <i class="fa-solid fa-eye"></i>
                             <span>Toggle Slideshow</span>
                         </button>
+                        
+                        <!-- Export Button -->
+                        <div class="relative">
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card" id="export-btn">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Export</span>
+                            </button>
+                            <div class="woodash-dropdown hidden" id="export-dropdown">
+                                <div class="woodash-dropdown-item" data-export="pdf">
+                                    <i class="fa-solid fa-file-pdf text-red-500"></i>
+                                    <span>Export as PDF</span>
+                                </div>
+                                <div class="woodash-dropdown-item" data-export="excel">
+                                    <i class="fa-solid fa-file-excel text-green-500"></i>
+                                    <span>Export as Excel</span>
+                                </div>
+                                <div class="woodash-dropdown-item" data-export="csv">
+                                    <i class="fa-solid fa-file-csv text-blue-500"></i>
+                                    <span>Export as CSV</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Settings Button -->
+                        <div class="relative">
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card" id="settings-btn">
+                                <i class="fa-solid fa-cog"></i>
+                                <span>Settings</span>
+                            </button>
+                            <div class="woodash-dropdown hidden" id="settings-dropdown">
+                                <div class="woodash-dropdown-item" id="theme-toggle">
+                                    <i class="fa-solid fa-palette text-purple-500"></i>
+                                    <span>Toggle Theme</span>
+                                </div>
+                                <div class="woodash-dropdown-item" id="refresh-data">
+                                    <i class="fa-solid fa-refresh text-blue-500"></i>
+                                    <span>Refresh Data</span>
+                                </div>
+                                <div class="woodash-dropdown-item" id="fullscreen-toggle">
+                                    <i class="fa-solid fa-expand text-green-500"></i>
+                                    <span>Fullscreen</span>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="woodash-search-container">
                             <input type="text"  style="border:none;"
                                    placeholder="Search orders, products, customers..." 
@@ -770,6 +1061,11 @@
                         </div>
                     </div>
                 </header>
+
+                <!-- Page Content Container -->
+                <div id="page-content">
+                    <!-- Dashboard Page -->
+                    <div id="dashboard-page" class="woodash-page-content active">
 
                 <!-- Slideshow Section -->
                 <div id="slideshow-section" class="mb-8 relative overflow-hidden rounded-xl woodash-glass-effect">
@@ -856,10 +1152,10 @@
                     </div>
                 </div>
 
-                <!-- Stat Cards -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8 items-stretch">
+                <!-- Extended Stat Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8 items-stretch">
                     <!-- Total Sales Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.1s">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -883,9 +1179,8 @@
                         </div>
                     </div>
 
-
                     <!-- Total Orders Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.2s">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -911,7 +1206,7 @@
                     </div>
 
                     <!-- Average Order Value Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.3s">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title">
@@ -937,7 +1232,7 @@
                     </div>
 
                     <!-- New Customers Card -->
-                    <div class="woodash-metric-card woodash-animate-in woodash-hover-card woodash-glow h-full" style="animation-delay: 0.4s">
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
                         <div class="flex items-center justify-between">
                             <div>
                                 <h3 class="woodash-metric-title flex items-center gap-2">
@@ -961,10 +1256,36 @@
                             <canvas id="mini-trend-customers" height="40"></canvas>
                         </div>
                     </div>
+
+                    <!-- Total Products Card -->
+                    <div class="woodash-metric-card woodash-hover-card woodash-glow h-full">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="woodash-metric-title">
+                                    <span>Total Products</span>
+                                    <span class="woodash-badge woodash-badge-success text-xs">+5</span>
+                                </h3>
+                                <div class="woodash-metric-value" id="total-products">245</div>
+                                <div class="flex items-center gap-1 mt-1">
+                                    <span class="text-sm text-blue-600 flex items-center gap-1">
+                                        <i class="fa-solid fa-box text-xs"></i>
+                                        <span>18 low stock</span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-icon woodash-metric-blue">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                            </div>
+                        </div>
+                        <div class="mt-4 relative">
+                            <canvas id="mini-trend-products" height="40"></canvas>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- Sales Overview -->
-                <div class="woodash-chart-container mb-8 woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
+                <div class="woodash-chart-container mb-8 woodash-hover-card woodash-glow" style="animation-delay: 0.4s">
                     <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                         <div>
                             <h2 class="text-lg font-bold woodash-gradient-text">Sales Overview</h2>
@@ -980,57 +1301,10 @@
                         <canvas id="sales-chart"></canvas>
                     </div>
                 </div>
-                <!-- Quick Stats -->
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-                    <div class="woodash-card p-4 woodash-hover-card woodash-fade-in" style="animation-delay: 0.1s">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500">Today's Orders</p>
-                                <p class="text-xl font-bold text-gray-900">12</p>
-                            </div>
-                            <div class="woodash-progress w-16">
-                                <div class="woodash-progress-bar woodash-shimmer" style="width: 75%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="woodash-card p-4 woodash-hover-card woodash-fade-in" style="animation-delay: 0.2s">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500">Pending Orders</p>
-                                <p class="text-xl font-bold text-gray-900">5</p>
-                            </div>
-                            <div class="woodash-progress w-16">
-                                <div class="woodash-progress-bar bg-yellow-500 woodash-shimmer" style="width: 45%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="woodash-card p-4 woodash-hover-card woodash-fade-in" style="animation-delay: 0.3s">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500">Low Stock Items</p>
-                                <p class="text-xl font-bold text-gray-900">3</p>
-                            </div>
-                            <div class="woodash-progress w-16">
-                                <div class="woodash-progress-bar bg-red-500 woodash-shimmer" style="width: 30%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="woodash-card p-4 woodash-hover-card woodash-fade-in" style="animation-delay: 0.4s">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-sm text-gray-500">New Customers</p>
-                                <p class="text-xl font-bold text-gray-900">8</p>
-                            </div>
-                            <div class="woodash-progress w-16">
-                                <div class="woodash-progress-bar bg-blue-500 woodash-shimmer" style="width: 60%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <!-- Top Products & Customers -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                     <!-- Top Products -->
-                    <div class="woodash-chart-container woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.5s">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow" style="animation-delay: 0.5s">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Top Products</h2>
@@ -1059,7 +1333,7 @@
                     </div>
 
                     <!-- Top Customers -->
-                    <div class="woodash-chart-container woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.6s">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow" style="animation-delay: 0.6s">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Top Customers</h2>
@@ -1088,10 +1362,273 @@
                     </div>
                 </div>
 
+            <!-- AI Insights Section -->
+                <div class="woodash-ai-insights woodash-fade-in-up mb-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                            <i class="fa-solid fa-brain text-blue-600"></i>
+                            AI Insights & Recommendations
+                        </h3>
+                        <button class="woodash-btn woodash-btn-secondary text-xs" onclick="refreshAIInsights()">
+                            <i class="fa-solid fa-refresh mr-1"></i>
+                            Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="woodash-ai-insight-item">
+                            <div class="woodash-ai-insight-icon bg-gradient-to-br from-green-500 to-green-600">
+                                <i class="fa-solid fa-chart-line text-sm"></i>
+                            </div>
+                            <div class="woodash-ai-insight-content">
+                                <div class="woodash-ai-insight-title">Sales Performance Boost</div>
+                                <div class="woodash-ai-insight-description">Your sales are up 12.5% this month. Consider running a flash sale on your top-performing electronics category to maximize momentum.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="woodash-ai-insight-item">
+                            <div class="woodash-ai-insight-icon bg-gradient-to-br from-orange-500 to-orange-600">
+                                <i class="fa-solid fa-exclamation-triangle text-sm"></i>
+                            </div>
+                            <div class="woodash-ai-insight-content">
+                                <div class="woodash-ai-insight-title">Inventory Alert</div>
+                                <div class="woodash-ai-insight-description">3 products are running low on stock. Reorder "Wireless Headphones" and "Smart Watch" to avoid stockouts.</div>
+                            </div>
+                        </div>
+                        
+                        <div class="woodash-ai-insight-item">
+                            <div class="woodash-ai-insight-icon bg-gradient-to-br from-blue-500 to-blue-600">
+                                <i class="fa-solid fa-users text-sm"></i>
+                            </div>
+                            <div class="woodash-ai-insight-content">
+                                <div class="woodash-ai-insight-title">Customer Behavior</div>
+                                <div class="woodash-ai-insight-description">Mobile users show 23% higher conversion. Optimize your mobile checkout flow for better results.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Revenue Analytics & Goal Tracking -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Revenue by Category -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Revenue by Category</h2>
+                                <p class="text-gray-500 text-sm">Category performance breakdown</p>
+                            </div>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </button>
+                        </div>
+                        <div class="h-[200px]">
+                            <canvas id="revenue-category-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Goal Progress -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Monthly Goal</h2>
+                                <p class="text-gray-500 text-sm">Progress towards target</p>
+                            </div>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                                <i class="fa-solid fa-target"></i>
+                            </button>
+                        </div>
+                        <div class="text-center">
+                            <div class="relative w-32 h-32 mx-auto mb-4">
+                                <canvas id="goal-progress-chart" width="128" height="128"></canvas>
+                                <div class="absolute inset-0 flex items-center justify-center">
+                                    <div class="text-center">
+                                        <div class="text-2xl font-bold woodash-gradient-text">72%</div>
+                                        <div class="text-xs text-gray-500">Complete</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-2">
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Current</span>
+                                    <span class="font-medium">$72,450</span>
+                                </div>
+                                <div class="flex justify-between text-sm">
+                                    <span class="text-gray-600">Target</span>
+                                    <span class="font-medium">$100,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real-time Metrics -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Live Metrics</h2>
+                                <p class="text-gray-500 text-sm">Real-time store data</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                                <span class="text-xs text-gray-500">Live</span>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex justify-between items-center p-3 bg-green-50 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-users text-green-600"></i>
+                                    <span class="text-sm font-medium">Online Visitors</span>
+                                </div>
+                                <span class="text-lg font-bold text-green-600" id="live-visitors">24</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-shopping-cart text-blue-600"></i>
+                                    <span class="text-sm font-medium">Cart Additions</span>
+                                </div>
+                                <span class="text-lg font-bold text-blue-600" id="cart-additions">8</span>
+                            </div>
+                            <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-eye text-purple-600"></i>
+                                    <span class="text-sm font-medium">Page Views</span>
+                                </div>
+                                <span class="text-lg font-bold text-purple-600" id="page-views">156</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weather & Time Widget -->
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-1">
+                        <div class="text-center">
+                            <div class="flex items-center justify-center mb-4">
+                                <i class="fa-solid fa-sun text-4xl text-yellow-500"></i>
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900 mb-1">22°C</div>
+                            <div class="text-sm text-gray-500 mb-2">Sunny</div>
+                            <div class="text-xs text-gray-400">New York</div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Actions -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow col-span-3">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Quick Actions</h2>
+                                <p class="text-gray-500 text-sm">Frequently used tasks</p>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                                <i class="fa-solid fa-plus text-xl"></i>
+                                <span class="text-sm">Add Product</span>
+                            </button>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                                <i class="fa-solid fa-file-invoice text-xl"></i>
+                                <span class="text-sm">Create Order</span>
+                            </button>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                                <i class="fa-solid fa-user-plus text-xl"></i>
+                                <span class="text-sm">Add Customer</span>
+                            </button>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                                <i class="fa-solid fa-percentage text-xl"></i>
+                                <span class="text-sm">Create Coupon</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Alerts & Tasks -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                    <!-- Inventory Alerts -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Inventory Alerts</h2>
+                                <p class="text-gray-500 text-sm">Items requiring attention</p>
+                            </div>
+                            <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                                <i class="fa-solid fa-warehouse"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-exclamation-triangle text-red-500"></i>
+                                    <div>
+                                        <p class="font-medium text-red-800">Wireless Headphones</p>
+                                        <p class="text-sm text-red-600">Only 2 left in stock</p>
+                                    </div>
+                                </div>
+                                <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">Restock</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-exclamation-triangle text-yellow-500"></i>
+                                    <div>
+                                        <p class="font-medium text-yellow-800">Gaming Mouse</p>
+                                        <p class="text-sm text-yellow-600">5 left in stock</p>
+                                    </div>
+                                </div>
+                                <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">Restock</button>
+                            </div>
+                            <div class="flex items-center justify-between p-3 bg-orange-50 border-l-4 border-orange-500 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fa-solid fa-box text-orange-500"></i>
+                                    <div>
+                                        <p class="font-medium text-orange-800">USB Cable</p>
+                                        <p class="text-sm text-orange-600">Expected delivery: 2 days</p>
+                                    </div>
+                                </div>
+                                <button class="woodash-btn woodash-btn-secondary text-xs px-3 py-1">Track</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Task Manager -->
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                        <div class="flex justify-between items-center mb-6">
+                            <div>
+                                <h2 class="text-lg font-bold woodash-gradient-text">Today's Tasks</h2>
+                                <p class="text-gray-500 text-sm">Things to complete today</p>
+                            </div>
+                            <button class="woodash-btn woodash-btn-primary text-xs" id="add-task-btn">
+                                <i class="fa-solid fa-plus"></i>
+                                Add Task
+                            </button>
+                        </div>
+                        <div class="space-y-3" id="task-list">
+                            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                                <span class="flex-1 text-sm">Update product descriptions</span>
+                                <span class="text-xs text-gray-500">High</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]" checked>
+                                <span class="flex-1 text-sm line-through text-gray-500">Process pending orders</span>
+                                <span class="text-xs text-gray-500">Medium</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                                <span class="flex-1 text-sm">Reply to customer emails</span>
+                                <span class="text-xs text-gray-500">Low</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center">
+                            <p class="text-sm text-gray-500">1 of 3 tasks completed</p>
+                            <div class="woodash-progress mt-2">
+                                <div class="woodash-progress-bar" style="width: 33.33%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Additional Cards -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <!-- Recent Activity -->
-                    <div class="woodash-chart-container woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.7s">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Recent Activity</h2>
@@ -1102,7 +1639,7 @@
                             </button>
                         </div>
                         <div class="space-y-4 woodash-scrollbar" style="max-height: 400px;">
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in" style="animation-delay: 0.1s">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 woodash-float">
                                     <i class="fa-solid fa-shopping-cart"></i>
                                 </div>
@@ -1114,7 +1651,7 @@
                                     <p class="text-sm text-gray-500">John Doe placed an order worth $299.99</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in" style="animation-delay: 0.2s">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 woodash-float">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
@@ -1126,7 +1663,7 @@
                                     <p class="text-sm text-gray-500">Alice Smith registered a new account</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in" style="animation-delay: 0.3s">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 woodash-float">
                                     <i class="fa-solid fa-box"></i>
                                 </div>
@@ -1138,7 +1675,7 @@
                                     <p class="text-sm text-gray-500">Product "Wireless Headphones" is running low on stock</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in" style="animation-delay: 0.4s">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 woodash-float">
                                     <i class="fa-solid fa-star"></i>
                                 </div>
@@ -1154,7 +1691,7 @@
                     </div>
 
                     <!-- Store Performance -->
-                    <div class="woodash-chart-container woodash-animate-in woodash-hover-card woodash-glow" style="animation-delay: 0.8s">
+                    <div class="woodash-chart-container woodash-hover-card woodash-glow">
                         <div class="flex justify-between items-center mb-6">
                             <div>
                                 <h2 class="text-lg font-bold woodash-gradient-text">Store Performance</h2>
@@ -1211,7 +1748,7 @@
 
 
                 <!-- Thank You Message -->
-                <div class="mt-8 woodash-animate-in" style="padding-bottom: 2em;">
+                <div class="mt-8" style="padding-bottom: 2em;">
                     <div class="woodash-card p-6 text-center">
                         <h2 class="text-xl font-bold woodash-gradient-text mb-4">Welcome to WooDash Pro!</h2>
                         <div class="prose prose-sm max-w-none text-gray-600">
@@ -1221,8 +1758,906 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+                    <!-- End Dashboard Page -->
+
+                    <!-- Analytics Page -->
+                    <div id="analytics-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+                            <!-- Advanced Analytics Chart -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow lg:col-span-2">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Advanced Analytics</h2>
+                                        <p class="text-gray-500 text-sm">Detailed performance metrics and trends</p>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="woodash-btn woodash-btn-primary" data-range="today">Today</button>
+                                        <button class="woodash-btn woodash-btn-secondary" data-range="week">Week</button>
+                                        <button class="woodash-btn woodash-btn-secondary" data-range="month">Month</button>
+                                        <button class="woodash-btn woodash-btn-secondary" data-range="year">Year</button>
+                                    </div>
+                                </div>
+                                <div class="h-[400px]">
+                                    <canvas id="advanced-analytics-chart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Revenue Breakdown -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Revenue Breakdown</h2>
+                                        <p class="text-gray-500 text-sm">Revenue by source</p>
+                                    </div>
+                                </div>
+                                <div class="h-[300px]">
+                                    <canvas id="revenue-breakdown-chart"></canvas>
+                                </div>
+                            </div>
+
+                            <!-- Conversion Funnel -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Conversion Funnel</h2>
+                                        <p class="text-gray-500 text-sm">Customer journey analysis</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                                        <span class="font-medium">Visitors</span>
+                                        <span class="text-xl font-bold">12,456</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                                        <span class="font-medium">Product Views</span>
+                                        <span class="text-xl font-bold">8,234</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
+                                        <span class="font-medium">Add to Cart</span>
+                                        <span class="text-xl font-bold">2,156</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                                        <span class="font-medium">Checkout</span>
+                                        <span class="text-xl font-bold">1,234</span>
+                                    </div>
+                                    <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg">
+                                        <span class="font-medium">Purchase</span>
+                                        <span class="text-xl font-bold">856</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Analytics Page -->
+
+                    <!-- Products Page -->
+                    <div id="products-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Product Stats -->
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Total Products</h3>
+                                        <div class="woodash-metric-value">245</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-box"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Low Stock</h3>
+                                        <div class="woodash-metric-value text-orange-600">18</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-orange">
+                                        <i class="fa-solid fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Categories</h3>
+                                        <div class="woodash-metric-value">12</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-green">
+                                        <i class="fa-solid fa-tags"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Management -->
+                        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 class="text-lg font-bold woodash-gradient-text">Product Management</h2>
+                                    <p class="text-gray-500 text-sm">Manage your products and inventory</p>
+                                </div>
+                                <button class="woodash-btn woodash-btn-primary">
+                                    <i class="fa-solid fa-plus mr-2"></i>
+                                    Add Product
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="woodash-table w-full">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>SKU</th>
+                                            <th>Category</th>
+                                            <th>Stock</th>
+                                            <th>Price</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                                                    <span class="font-medium">Wireless Headphones</span>
+                                                </div>
+                                            </td>
+                                            <td>WH-001</td>
+                                            <td>Electronics</td>
+                                            <td><span class="woodash-badge woodash-badge-danger">2</span></td>
+                                            <td>$89.99</td>
+                                            <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                                                    <span class="font-medium">Smart Watch</span>
+                                                </div>
+                                            </td>
+                                            <td>SW-002</td>
+                                            <td>Electronics</td>
+                                            <td><span class="woodash-badge woodash-badge-success">45</span></td>
+                                            <td>$199.99</td>
+                                            <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-edit"></i></button>
+                                                    <button class="text-red-600 hover:text-red-800"><i class="fa-solid fa-trash"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Products Page -->
+
+                    <!-- Orders Page -->
+                    <div id="orders-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Order Stats -->
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Total Orders</h3>
+                                        <div class="woodash-metric-value">1,234</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-shopping-cart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Pending</h3>
+                                        <div class="woodash-metric-value text-yellow-600">23</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-orange">
+                                        <i class="fa-solid fa-clock"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Processing</h3>
+                                        <div class="woodash-metric-value text-blue-600">45</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-cog"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Completed</h3>
+                                        <div class="woodash-metric-value text-green-600">1,166</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-green">
+                                        <i class="fa-solid fa-check"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Orders Management -->
+                        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 class="text-lg font-bold woodash-gradient-text">Recent Orders</h2>
+                                    <p class="text-gray-500 text-sm">Manage and track your orders</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <select class="woodash-btn woodash-btn-secondary">
+                                        <option>All Orders</option>
+                                        <option>Pending</option>
+                                        <option>Processing</option>
+                                        <option>Completed</option>
+                                    </select>
+                                    <button class="woodash-btn woodash-btn-primary">
+                                        <i class="fa-solid fa-plus mr-2"></i>
+                                        New Order
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="woodash-table w-full">
+                                    <thead>
+                                        <tr>
+                                            <th>Order #</th>
+                                            <th>Customer</th>
+                                            <th>Date</th>
+                                            <th>Total</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#12345</td>
+                                            <td>John Doe</td>
+                                            <td>2024-01-15</td>
+                                            <td>$299.99</td>
+                                            <td><span class="woodash-badge woodash-badge-warning">Processing</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#12344</td>
+                                            <td>Jane Smith</td>
+                                            <td>2024-01-14</td>
+                                            <td>$150.50</td>
+                                            <td><span class="woodash-badge woodash-badge-success">Completed</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Orders Page -->
+
+                    <!-- Customers Page -->
+                    <div id="customers-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Customer Stats -->
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Total Customers</h3>
+                                        <div class="woodash-metric-value">2,547</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-users"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">New This Month</h3>
+                                        <div class="woodash-metric-value text-green-600">42</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-green">
+                                        <i class="fa-solid fa-user-plus"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">VIP Customers</h3>
+                                        <div class="woodash-metric-value text-purple-600">156</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-purple">
+                                        <i class="fa-solid fa-crown"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Retention Rate</h3>
+                                        <div class="woodash-metric-value text-blue-600">78%</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-heart"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Customer Management -->
+                        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 class="text-lg font-bold woodash-gradient-text">Customer Management</h2>
+                                    <p class="text-gray-500 text-sm">View and manage your customers</p>
+                                </div>
+                                <button class="woodash-btn woodash-btn-primary">
+                                    <i class="fa-solid fa-user-plus mr-2"></i>
+                                    Add Customer
+                                </button>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="woodash-table w-full">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer</th>
+                                            <th>Email</th>
+                                            <th>Orders</th>
+                                            <th>Total Spent</th>
+                                            <th>Last Order</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">JD</div>
+                                                    <span class="font-medium">John Doe</span>
+                                                </div>
+                                            </td>
+                                            <td>john@example.com</td>
+                                            <td>12</td>
+                                            <td>$1,299.99</td>
+                                            <td>2024-01-15</td>
+                                            <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-pink-500 rounded-full flex items-center justify-center text-white font-semibold">JS</div>
+                                                    <span class="font-medium">Jane Smith</span>
+                                                </div>
+                                            </td>
+                                            <td>jane@example.com</td>
+                                            <td>8</td>
+                                            <td>$890.50</td>
+                                            <td>2024-01-10</td>
+                                            <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-eye"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Customers Page -->
+
+                    <!-- Inventory Page -->
+                    <div id="inventory-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                            <!-- Inventory Stats -->
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Total SKUs</h3>
+                                        <div class="woodash-metric-value">1,456</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-blue">
+                                        <i class="fa-solid fa-boxes-stacked"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Low Stock</h3>
+                                        <div class="woodash-metric-value text-red-600">18</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-red">
+                                        <i class="fa-solid fa-exclamation-triangle"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Out of Stock</h3>
+                                        <div class="woodash-metric-value text-red-600">5</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-red">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="woodash-metric-card woodash-hover-card woodash-glow">
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <h3 class="woodash-metric-title">Overstock</h3>
+                                        <div class="woodash-metric-value text-orange-600">23</div>
+                                    </div>
+                                    <div class="woodash-metric-icon woodash-metric-orange">
+                                        <i class="fa-solid fa-warehouse"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Inventory Management -->
+                        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 class="text-lg font-bold woodash-gradient-text">Inventory Management</h2>
+                                    <p class="text-gray-500 text-sm">Monitor and manage your inventory levels</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button class="woodash-btn woodash-btn-secondary">
+                                        <i class="fa-solid fa-download mr-2"></i>
+                                        Export
+                                    </button>
+                                    <button class="woodash-btn woodash-btn-primary">
+                                        <i class="fa-solid fa-plus mr-2"></i>
+                                        Stock Adjustment
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto">
+                                <table class="woodash-table w-full">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>SKU</th>
+                                            <th>Current Stock</th>
+                                            <th>Reserved</th>
+                                            <th>Available</th>
+                                            <th>Reorder Level</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                                                    <span class="font-medium">Wireless Headphones</span>
+                                                </div>
+                                            </td>
+                                            <td>WH-001</td>
+                                            <td>2</td>
+                                            <td>1</td>
+                                            <td>1</td>
+                                            <td>10</td>
+                                            <td><span class="woodash-badge woodash-badge-danger">Low Stock</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-plus"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="flex items-center gap-3">
+                                                    <div class="w-10 h-10 bg-gray-200 rounded-lg"></div>
+                                                    <span class="font-medium">Smart Watch</span>
+                                                </div>
+                                            </td>
+                                            <td>SW-002</td>
+                                            <td>45</td>
+                                            <td>8</td>
+                                            <td>37</td>
+                                            <td>5</td>
+                                            <td><span class="woodash-badge woodash-badge-success">In Stock</span></td>
+                                            <td>
+                                                <div class="flex gap-2">
+                                                    <button class="text-blue-600 hover:text-blue-800"><i class="fa-solid fa-plus"></i></button>
+                                                    <button class="text-green-600 hover:text-green-800"><i class="fa-solid fa-edit"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Inventory Page -->
+
+                    <!-- Reports Page -->
+                    <div id="reports-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                            <!-- Quick Report Cards -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-chart-line text-4xl text-blue-600 mb-4"></i>
+                                    <h3 class="text-lg font-bold mb-2">Sales Report</h3>
+                                    <p class="text-gray-500 text-sm mb-4">Comprehensive sales analysis</p>
+                                    <button class="woodash-btn woodash-btn-primary">Generate Report</button>
+                                </div>
+                            </div>
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-users text-4xl text-green-600 mb-4"></i>
+                                    <h3 class="text-lg font-bold mb-2">Customer Report</h3>
+                                    <p class="text-gray-500 text-sm mb-4">Customer behavior analysis</p>
+                                    <button class="woodash-btn woodash-btn-primary">Generate Report</button>
+                                </div>
+                            </div>
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow cursor-pointer">
+                                <div class="text-center">
+                                    <i class="fa-solid fa-box text-4xl text-purple-600 mb-4"></i>
+                                    <h3 class="text-lg font-bold mb-2">Inventory Report</h3>
+                                    <p class="text-gray-500 text-sm mb-4">Stock and inventory analysis</p>
+                                    <button class="woodash-btn woodash-btn-primary">Generate Report</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Reports -->
+                        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                            <div class="flex justify-between items-center mb-6">
+                                <div>
+                                    <h2 class="text-lg font-bold woodash-gradient-text">Recent Reports</h2>
+                                    <p class="text-gray-500 text-sm">Your generated reports and analytics</p>
+                                </div>
+                                <button class="woodash-btn woodash-btn-primary">
+                                    <i class="fa-solid fa-plus mr-2"></i>
+                                    New Report
+                                </button>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-pdf text-blue-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">Monthly Sales Report</h4>
+                                            <p class="text-sm text-gray-500">Generated on Jan 15, 2024</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="woodash-btn woodash-btn-secondary text-sm">
+                                            <i class="fa-solid fa-download mr-1"></i>
+                                            Download
+                                        </button>
+                                        <button class="woodash-btn woodash-btn-secondary text-sm">
+                                            <i class="fa-solid fa-eye mr-1"></i>
+                                            View
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                                    <div class="flex items-center gap-4">
+                                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                                            <i class="fa-solid fa-file-excel text-green-600"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="font-medium">Customer Analytics</h4>
+                                            <p class="text-sm text-gray-500">Generated on Jan 10, 2024</p>
+                                        </div>
+                                    </div>
+                                    <div class="flex gap-2">
+                                        <button class="woodash-btn woodash-btn-secondary text-sm">
+                                            <i class="fa-solid fa-download mr-1"></i>
+                                            Download
+                                        </button>
+                                        <button class="woodash-btn woodash-btn-secondary text-sm">
+                                            <i class="fa-solid fa-eye mr-1"></i>
+                                            View
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Reports Page -->
+
+                    <!-- Settings Page -->
+                    <div id="settings-page" class="woodash-page-content hidden">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <!-- General Settings -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">General Settings</h2>
+                                        <p class="text-gray-500 text-sm">Configure your dashboard preferences</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Store Name</label>
+                                        <input type="text" value="My Awesome Store" class="woodash-form-input w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Currency</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>USD ($)</option>
+                                            <option>EUR (€)</option>
+                                            <option>GBP (£)</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Timezone</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>UTC-5 (Eastern Time)</option>
+                                            <option>UTC-8 (Pacific Time)</option>
+                                            <option>UTC+0 (GMT)</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center gap-3 pt-2">
+                                        <input type="checkbox" id="notifications" class="w-4 h-4 text-[#00CC61] rounded">
+                                        <label for="notifications" class="text-sm text-gray-700">Enable notifications</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dashboard Settings -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Dashboard Settings</h2>
+                                        <p class="text-gray-500 text-sm">Customize your dashboard appearance</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>Light</option>
+                                            <option>Dark</option>
+                                            <option>Auto</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Data Refresh Rate</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>Real-time</option>
+                                            <option>Every 5 minutes</option>
+                                            <option>Every 15 minutes</option>
+                                            <option>Manual</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center gap-3 pt-2">
+                                        <input type="checkbox" id="animations" class="w-4 h-4 text-[#00CC61] rounded" checked>
+                                        <label for="animations" class="text-sm text-gray-700">Enable animations</label>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <input type="checkbox" id="slideshow" class="w-4 h-4 text-[#00CC61] rounded" checked>
+                                        <label for="slideshow" class="text-sm text-gray-700">Show slideshow</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Account Settings -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Account Settings</h2>
+                                        <p class="text-gray-500 text-sm">Manage your account information</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                        <input type="text" value="John Doe" class="woodash-form-input w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                        <input type="email" value="john@example.com" class="woodash-form-input w-full">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                        <input type="password" placeholder="Enter new password" class="woodash-form-input w-full">
+                                    </div>
+                                    <button class="woodash-btn woodash-btn-primary">
+                                        <i class="fa-solid fa-save mr-2"></i>
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Export Settings -->
+                            <div class="woodash-chart-container woodash-hover-card woodash-glow">
+                                <div class="flex justify-between items-center mb-6">
+                                    <div>
+                                        <h2 class="text-lg font-bold woodash-gradient-text">Export Settings</h2>
+                                        <p class="text-gray-500 text-sm">Configure data export preferences</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Default Export Format</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>CSV</option>
+                                            <option>Excel</option>
+                                            <option>PDF</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
+                                        <select class="woodash-form-input w-full">
+                                            <option>Last 30 days</option>
+                                            <option>Last 90 days</option>
+                                            <option>Custom range</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center gap-3 pt-2">
+                                        <input type="checkbox" id="include-images" class="w-4 h-4 text-[#00CC61] rounded">
+                                        <label for="include-images" class="text-sm text-gray-700">Include product images</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Settings Page -->
+                </div>
+                <!-- End Page Content Container -->
             </div>
         </main>
+    </div>
+</div>
+
+<!-- Add Task Modal -->
+<div id="add-task-modal" class="woodash-modal hidden">
+    <div class="woodash-modal-overlay" id="modal-overlay"></div>
+    <div class="woodash-modal-content">
+        <div class="woodash-modal-header">
+            <h3 class="text-lg font-bold woodash-gradient-text">Add New Task</h3>
+            <button class="woodash-modal-close" id="close-modal-btn">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        
+        <form id="add-task-form" class="space-y-4 p-6">
+            <div>
+                <label for="task-title" class="block text-sm font-medium text-gray-700 mb-2">Task Title</label>
+                <input type="text" id="task-title" name="task-title" 
+                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent" 
+                       placeholder="Enter task title..." required>
+            </div>
+            
+            <div>
+                <label for="task-description" class="block text-sm font-medium text-gray-700 mb-2">Description (Optional)</label>
+                <textarea id="task-description" name="task-description" rows="3"
+                          class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent" 
+                          placeholder="Enter task description..."></textarea>
+            </div>
+            
+            <div>
+                <label for="task-priority" class="block text-sm font-medium text-gray-700 mb-2">Priority</label>
+                <select id="task-priority" name="task-priority" 
+                        class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
+                    <option value="low">Low</option>
+                    <option value="medium" selected>Medium</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+            
+            <div>
+                <label for="task-due-date" class="block text-sm font-medium text-gray-700 mb-2">Due Date (Optional)</label>
+                <input type="date" id="task-due-date" name="task-due-date" 
+                       class="woodash-form-input w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00CC61] focus:border-transparent">
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <input type="checkbox" id="task-urgent" name="task-urgent" 
+                       class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+                <label for="task-urgent" class="text-sm text-gray-700">Mark as urgent</label>
+            </div>
+        </form>
+        
+        <div class="woodash-modal-footer">
+            <button type="button" class="woodash-btn woodash-btn-secondary" id="cancel-task-btn">
+                <i class="fa-solid fa-times mr-2"></i>
+                Cancel
+            </button>
+            <button type="submit" form="add-task-form" class="woodash-btn woodash-btn-primary" id="save-task-btn">
+                <i class="fa-solid fa-check mr-2"></i>
+                Add Task
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- AI Assistant Chat Widget -->
+<div class="woodash-ai-container">
+    <!-- AI Chat Interface -->
+    <div class="woodash-ai-chat" id="woodash-ai-chat">
+        <div class="woodash-ai-header">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+                    <i class="fa-solid fa-robot text-sm"></i>
+                </div>
+                <div>
+                    <h4 class="font-medium text-sm">AI Assistant</h4>
+                    <div class="woodash-ai-status">
+                        <div class="woodash-ai-status-dot"></div>
+                        <span class="text-xs opacity-90">Online</span>
+                    </div>
+                </div>
+            </div>
+            <button onclick="toggleAIChat()" class="text-white hover:text-gray-200 transition-colors">
+                <i class="fa-solid fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="woodash-ai-messages" id="ai-messages">
+            <div class="woodash-ai-message ai">
+                <div class="woodash-ai-message-avatar">
+                    <i class="fa-solid fa-robot text-xs"></i>
+                </div>
+                <div class="woodash-ai-message-content">
+                    Hi! I'm your AI assistant. I can help you analyze your store data, provide insights, and answer questions about your business. How can I help you today?
+                </div>
+            </div>
+        </div>
+        
+        <div class="woodash-ai-suggestions">
+            <div class="text-xs text-gray-600 mb-2">Quick suggestions:</div>
+            <div class="flex flex-wrap gap-2">
+                <span class="woodash-ai-suggestion" onclick="sendQuickMessage('Analyze my sales trends')">Analyze sales trends</span>
+                <span class="woodash-ai-suggestion" onclick="sendQuickMessage('Show top products')">Top products</span>
+                <span class="woodash-ai-suggestion" onclick="sendQuickMessage('Customer insights')">Customer insights</span>
+            </div>
+        </div>
+        
+        <div class="woodash-ai-input-container">
+            <input type="text" placeholder="Ask me anything..." class="woodash-ai-input" id="ai-input" onkeypress="handleAIInputKeypress(event)">
+            <div class="woodash-ai-send" onclick="sendAIMessage()">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Toggle Button -->
+    <div class="woodash-ai-toggle" id="ai-toggle" onclick="toggleAIChat()">
+        <i class="fa-solid fa-robot text-xl"></i>
     </div>
 </div>
 
@@ -1328,6 +2763,189 @@ function measure(name, startMark, endMark) {
 }
 
 mark('init');
+
+// Task Modal Functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const addTaskModal = document.getElementById('add-task-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const closeModalBtn = document.getElementById('close-modal-btn');
+    const cancelTaskBtn = document.getElementById('cancel-task-btn');
+    const addTaskForm = document.getElementById('add-task-form');
+    const taskList = document.getElementById('task-list');
+
+    // Open modal
+    addTaskBtn.addEventListener('click', function() {
+        addTaskModal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        
+        // Focus on first input
+        setTimeout(() => {
+            document.getElementById('task-title').focus();
+        }, 100);
+    });
+
+    // Close modal functions
+    function closeModal() {
+        addTaskModal.classList.add('hidden');
+        document.body.style.overflow = ''; // Restore scrolling
+        addTaskForm.reset(); // Clear form
+    }
+
+    // Close modal events
+    closeModalBtn.addEventListener('click', closeModal);
+    cancelTaskBtn.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && !addTaskModal.classList.contains('hidden')) {
+            closeModal();
+        }
+    });
+
+    // Handle form submission
+    addTaskForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(addTaskForm);
+        const taskData = {
+            title: formData.get('task-title').trim(),
+            description: formData.get('task-description').trim(),
+            priority: formData.get('task-priority'),
+            dueDate: formData.get('task-due-date'),
+            urgent: formData.get('task-urgent') === 'on'
+        };
+
+        // Validate required fields
+        if (!taskData.title) {
+            alert('Please enter a task title.');
+            return;
+        }
+
+        // Add task to the list
+        addTaskToList(taskData);
+        
+        // Close modal
+        closeModal();
+        
+        // Show success message
+        showNotification('Task added successfully!', 'success');
+    });
+
+    function addTaskToList(taskData) {
+        const taskElement = document.createElement('div');
+        taskElement.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg woodash-fade-in';
+        
+        const priorityColors = {
+            'low': 'text-green-600',
+            'medium': 'text-yellow-600', 
+            'high': 'text-red-600'
+        };
+
+        const priorityColor = priorityColors[taskData.priority] || 'text-gray-600';
+        const urgentBadge = taskData.urgent ? '<span class="px-2 py-1 text-xs bg-red-100 text-red-600 rounded-full ml-2">Urgent</span>' : '';
+        const dueDateText = taskData.dueDate ? `<div class="text-xs text-gray-400 mt-1">Due: ${new Date(taskData.dueDate).toLocaleDateString()}</div>` : '';
+        const descriptionText = taskData.description ? `<div class="text-xs text-gray-500 mt-1">${taskData.description}</div>` : '';
+
+        taskElement.innerHTML = `
+            <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+            <div class="flex-1">
+                <div class="flex items-center">
+                    <span class="text-sm">${taskData.title}</span>
+                    ${urgentBadge}
+                </div>
+                ${descriptionText}
+                ${dueDateText}
+            </div>
+            <span class="text-xs ${priorityColor} capitalize">${taskData.priority}</span>
+            <button class="text-red-500 hover:text-red-700 transition-colors" onclick="removeTask(this)" title="Delete task">
+                <i class="fa-solid fa-trash text-xs"></i>
+            </button>
+        `;
+
+        // Add event listener for checkbox
+        const checkbox = taskElement.querySelector('input[type="checkbox"]');
+        checkbox.addEventListener('change', function() {
+            const taskText = taskElement.querySelector('span');
+            if (this.checked) {
+                taskText.classList.add('line-through', 'text-gray-500');
+                taskElement.classList.add('opacity-75');
+            } else {
+                taskText.classList.remove('line-through', 'text-gray-500');
+                taskElement.classList.remove('opacity-75');
+            }
+            updateTaskProgress();
+        });
+
+        taskList.appendChild(taskElement);
+        updateTaskProgress();
+    }
+
+    // Function to remove task
+    window.removeTask = function(button) {
+        if (confirm('Are you sure you want to delete this task?')) {
+            button.closest('.flex').remove();
+            updateTaskProgress();
+            showNotification('Task deleted', 'info');
+        }
+    };
+
+    function updateTaskProgress() {
+        const allTasks = taskList.querySelectorAll('.flex');
+        const completedTasks = taskList.querySelectorAll('input[type="checkbox"]:checked');
+        const total = allTasks.length;
+        const completed = completedTasks.length;
+        
+        if (total > 0) {
+            const percentage = (completed / total) * 100;
+            const progressBar = document.querySelector('.woodash-progress-bar');
+            const progressText = document.querySelector('.woodash-progress').previousElementSibling;
+            
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+            }
+            if (progressText) {
+                progressText.textContent = `${completed} of ${total} tasks completed`;
+            }
+        }
+    }
+
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg text-white transform transition-all duration-300 translate-x-full`;
+        
+        const bgColors = {
+            'success': 'bg-green-500',
+            'error': 'bg-red-500',
+            'info': 'bg-blue-500',
+            'warning': 'bg-yellow-500'
+        };
+        
+        notification.classList.add(bgColors[type] || bgColors.info);
+        notification.innerHTML = `
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-check-circle"></i>
+                <span>${message}</span>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.classList.remove('translate-x-full');
+        }, 100);
+        
+        // Animate out and remove
+        setTimeout(() => {
+            notification.classList.add('translate-x-full');
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 300);
+        }, 3000);
+    }
+});
 
 // Optimize asset loading
 function loadAssets() {
@@ -1442,10 +3060,6 @@ function createOptimizedChart(ctx, config) {
         ...config,
         options: {
             ...config.options,
-            animation: {
-                duration: 800,
-                easing: 'easeOutQuart'
-            },
             responsiveAnimationDuration: 0,
             maintainAspectRatio: false,
             plugins: {
@@ -1615,6 +3229,137 @@ if (document.readyState === 'loading') {
     initializeDashboard();
 }
 
+// Real-time metrics simulation
+function simulateRealTimeMetrics() {
+    const visitors = document.getElementById('live-visitors');
+    const cartAdditions = document.getElementById('cart-additions');
+    const pageViews = document.getElementById('page-views');
+
+    setInterval(() => {
+        if (visitors) {
+            const currentVisitors = parseInt(visitors.textContent);
+            const change = Math.floor(Math.random() * 5) - 2; // -2 to +2
+            visitors.textContent = Math.max(0, currentVisitors + change);
+        }
+        
+        if (cartAdditions) {
+            const current = parseInt(cartAdditions.textContent);
+            if (Math.random() < 0.3) { // 30% chance to increase
+                cartAdditions.textContent = current + 1;
+            }
+        }
+        
+        if (pageViews) {
+            const current = parseInt(pageViews.textContent);
+            const increment = Math.floor(Math.random() * 3) + 1;
+            pageViews.textContent = current + increment;
+        }
+    }, 5000); // Update every 5 seconds
+}
+
+// Task management functionality
+function initTaskManager() {
+    const addTaskBtn = document.getElementById('add-task-btn');
+    const taskList = document.getElementById('task-list');
+    
+    addTaskBtn?.addEventListener('click', () => {
+        const taskText = prompt('Enter a new task:');
+        if (taskText) {
+            addNewTask(taskText, 'Medium');
+        }
+    });
+    
+    // Add event listeners to existing checkboxes
+    document.querySelectorAll('#task-list input[type="checkbox"]').forEach(checkbox => {
+        checkbox.addEventListener('change', updateTaskProgress);
+    });
+}
+
+function addNewTask(text, priority) {
+    const taskList = document.getElementById('task-list');
+    const taskDiv = document.createElement('div');
+    taskDiv.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg';
+    
+    taskDiv.innerHTML = `
+        <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]">
+        <span class="flex-1 text-sm">${text}</span>
+        <span class="text-xs text-gray-500">${priority}</span>
+    `;
+    
+    taskList.appendChild(taskDiv);
+    
+    // Add event listener to new checkbox
+    taskDiv.querySelector('input').addEventListener('change', updateTaskProgress);
+    updateTaskProgress();
+}
+
+function updateTaskProgress() {
+    const checkboxes = document.querySelectorAll('#task-list input[type="checkbox"]');
+    const completed = document.querySelectorAll('#task-list input[type="checkbox"]:checked').length;
+    const total = checkboxes.length;
+    
+    // Update text spans based on checkbox state
+    checkboxes.forEach(checkbox => {
+        const span = checkbox.nextElementSibling;
+        if (checkbox.checked) {
+            span.classList.add('line-through', 'text-gray-500');
+        } else {
+            span.classList.remove('line-through', 'text-gray-500');
+        }
+    });
+    
+    // Update progress
+    const progressText = document.querySelector('#task-list').parentElement.querySelector('p');
+    const progressBar = document.querySelector('#task-list').parentElement.querySelector('.woodash-progress-bar');
+    
+    if (progressText) {
+        progressText.textContent = `${completed} of ${total} tasks completed`;
+    }
+    
+    if (progressBar) {
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressBar.style.width = `${percentage}%`;
+    }
+}
+
+// Weather widget functionality
+function initWeatherWidget() {
+    // Simulate weather data
+    const weatherIcons = ['fa-sun', 'fa-cloud', 'fa-cloud-rain', 'fa-snowflake'];
+    const weatherConditions = ['Sunny', 'Cloudy', 'Rainy', 'Snowy'];
+    const temperatures = [18, 22, 15, 5];
+    
+    const weatherIcon = document.querySelector('.fa-sun');
+    const tempElement = weatherIcon?.parentElement.nextElementSibling;
+    const conditionElement = tempElement?.nextElementSibling;
+    
+    // Update weather every hour (simulated)
+    setInterval(() => {
+        if (Math.random() < 0.1) { // 10% chance to change weather
+            const randomIndex = Math.floor(Math.random() * weatherIcons.length);
+            
+            if (weatherIcon) {
+                weatherIcon.className = `fa-solid ${weatherIcons[randomIndex]} text-4xl text-yellow-500`;
+            }
+            
+            if (tempElement) {
+                tempElement.textContent = `${temperatures[randomIndex]}°C`;
+            }
+            
+            if (conditionElement) {
+                conditionElement.textContent = weatherConditions[randomIndex];
+            }
+        }
+    }, 60000); // Check every minute
+}
+
+// Initialize new features
+document.addEventListener('DOMContentLoaded', function() {
+    simulateRealTimeMetrics();
+    initTaskManager();
+    initWeatherWidget();
+});
+
 // Performance optimized version
 document.addEventListener('DOMContentLoaded', function() {
     // Debounce function for performance
@@ -1688,6 +3433,36 @@ document.addEventListener('DOMContentLoaded', function() {
         notificationsDropdown.classList.toggle('hidden');
     });
 
+    // Export functionality
+    const exportBtn = document.getElementById('export-btn');
+    const exportDropdown = document.getElementById('export-dropdown');
+    
+    exportBtn?.addEventListener('click', () => {
+        exportDropdown.classList.toggle('hidden');
+    });
+    
+    // Handle export options
+    document.querySelectorAll('[data-export]').forEach(item => {
+        item.addEventListener('click', () => {
+            const format = item.getAttribute('data-export');
+            exportData(format);
+            exportDropdown.classList.add('hidden');
+        });
+    });
+
+    // Settings functionality
+    const settingsBtn = document.getElementById('settings-btn');
+    const settingsDropdown = document.getElementById('settings-dropdown');
+    
+    settingsBtn?.addEventListener('click', () => {
+        settingsDropdown.classList.toggle('hidden');
+    });
+    
+    // Handle settings options
+    document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+    document.getElementById('refresh-data')?.addEventListener('click', refreshDashboardData);
+    document.getElementById('fullscreen-toggle')?.addEventListener('click', toggleFullscreen);
+
     // Optimize card hover effects using CSS transforms
     const cards = document.querySelectorAll('.woodash-card, .woodash-metric-card, .woodash-chart-container');
     cards.forEach(card => {
@@ -1731,6 +3506,10 @@ function initCharts() {
                     initSalesChart();
                 } else if (chartId.startsWith('mini-trend-')) {
                     initMiniChart(chartId);
+                } else if (chartId === 'revenue-category-chart') {
+                    initRevenueCategoryChart();
+                } else if (chartId === 'goal-progress-chart') {
+                    initGoalProgressChart();
                 }
                 observer.unobserve(entry.target);
             }
@@ -1738,9 +3517,102 @@ function initCharts() {
     }, { threshold: 0.1 });
 
     // Observe chart elements
-    document.querySelectorAll('#sales-chart, [id^="mini-trend-"]').forEach(chart => {
+    document.querySelectorAll('#sales-chart, [id^="mini-trend-"], #revenue-category-chart, #goal-progress-chart').forEach(chart => {
         observer.observe(chart);
     });
+}
+
+// Initialize revenue category chart
+function initRevenueCategoryChart() {
+    const ctx = document.getElementById('revenue-category-chart')?.getContext('2d');
+    if (!ctx) return;
+
+    const chartConfig = {
+        type: 'doughnut',
+        data: {
+            labels: ['Electronics', 'Clothing', 'Books', 'Home & Garden', 'Sports'],
+            datasets: [{
+                data: [35, 25, 15, 15, 10],
+                backgroundColor: [
+                    '#00CC61',
+                    '#00B357',
+                    '#4ADE80',
+                    '#22C55E',
+                    '#16A34A'
+                ],
+                borderWidth: 0,
+                cutout: '60%'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                    labels: {
+                        padding: 15,
+                        usePointStyle: true,
+                        font: {
+                            size: 12,
+                            family: "ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial"
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    padding: 12,
+                    titleFont: { size: 14 },
+                    bodyFont: { size: 13 },
+                    callbacks: {
+                        label: function(context) {
+                            return context.label + ': ' + context.parsed + '%';
+                        }
+                    }
+                }
+            },
+            animation: {
+                animateRotate: true,
+                duration: 1000
+            }
+        }
+    };
+
+    createOptimizedChart(ctx, chartConfig);
+}
+
+// Initialize goal progress chart
+function initGoalProgressChart() {
+    const ctx = document.getElementById('goal-progress-chart')?.getContext('2d');
+    if (!ctx) return;
+
+    const progress = 72; // 72% completion
+    
+    const chartConfig = {
+        type: 'doughnut',
+        data: {
+            datasets: [{
+                data: [progress, 100 - progress],
+                backgroundColor: ['#00CC61', '#E5E7EB'],
+                borderWidth: 0,
+                cutout: '85%'
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false },
+                tooltip: { enabled: false }
+            },
+            animation: {
+                animateRotate: true,
+                duration: 1500
+            }
+        }
+    };
+
+    createOptimizedChart(ctx, chartConfig);
 }
 
 // Separate chart initialization functions
@@ -1946,7 +3818,8 @@ function woodashGenerateFallbackSeries(chartId, length = 12) {
         'mini-trend-orders': 40,
         'mini-trend-aov': 65,
         'mini-trend-customers': 20,
-        'mini-trend-profit': 80
+        'mini-trend-profit': 80,
+        'mini-trend-products': 245
     };
     const base = seeds[chartId] ?? 50;
     const series = [];
@@ -1959,4 +3832,764 @@ function woodashGenerateFallbackSeries(chartId, length = 12) {
     }
     return series;
 }
+
+// Add notification system
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `woodash-notification woodash-notification-${type}`;
+    notification.innerHTML = `
+        <div class="flex items-center gap-3">
+            <i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Ctrl/Cmd + / for search focus
+    if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        document.getElementById('woodash-search')?.focus();
+    }
+    
+    // Escape to close dropdowns
+    if (e.key === 'Escape') {
+        document.querySelectorAll('.woodash-dropdown:not(.hidden)').forEach(dropdown => {
+            dropdown.classList.add('hidden');
+        });
+    }
+});
+
+// Auto-save functionality for tasks
+function autoSaveState() {
+    const tasks = [];
+    document.querySelectorAll('#task-list > div').forEach(taskDiv => {
+        const checkbox = taskDiv.querySelector('input[type="checkbox"]');
+        const text = taskDiv.querySelector('span').textContent;
+        const priority = taskDiv.querySelector('.text-xs').textContent;
+        
+        tasks.push({
+            text: text,
+            priority: priority,
+            completed: checkbox.checked
+        });
+    });
+    
+    localStorage.setItem('woodash_tasks', JSON.stringify(tasks));
+}
+
+// Load saved state
+function loadSavedState() {
+    const savedTasks = localStorage.getItem('woodash_tasks');
+    if (savedTasks) {
+        const tasks = JSON.parse(savedTasks);
+        const taskList = document.getElementById('task-list');
+        
+        // Clear existing tasks
+        taskList.innerHTML = '';
+        
+        // Recreate tasks
+        tasks.forEach(task => {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'flex items-center gap-3 p-3 bg-gray-50 rounded-lg';
+            
+            taskDiv.innerHTML = `
+                <input type="checkbox" class="w-4 h-4 text-[#00CC61] rounded focus:ring-[#00CC61]" ${task.completed ? 'checked' : ''}>
+                <span class="flex-1 text-sm ${task.completed ? 'line-through text-gray-500' : ''}">${task.text}</span>
+                <span class="text-xs text-gray-500">${task.priority}</span>
+            `;
+            
+            taskList.appendChild(taskDiv);
+            taskDiv.querySelector('input').addEventListener('change', () => {
+                updateTaskProgress();
+                autoSaveState();
+            });
+        });
+        
+        updateTaskProgress();
+    }
+}
+
+// Initialize saved state on load
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(loadSavedState, 100);
+});
+
+// Export functionality
+function exportData(format) {
+    showNotification(`Exporting data as ${format.toUpperCase()}...`, 'success');
+    
+    // Simulate export process
+    setTimeout(() => {
+        if (format === 'csv') {
+            exportAsCSV();
+        } else if (format === 'pdf') {
+            exportAsPDF();
+        } else if (format === 'excel') {
+            exportAsExcel();
+        }
+    }, 1000);
+}
+
+function exportAsCSV() {
+    const data = [
+        ['Metric', 'Value', 'Change'],
+        ['Total Sales', '$72,450', '+12.5%'],
+        ['Total Orders', '156', '+8.2%'],
+        ['Average Order Value', '$464.42', '-3.1%'],
+        ['New Customers', '42', '+15.3%'],
+        ['Total Products', '245', '+5'],
+    ];
+    
+    const csvContent = data.map(row => row.join(',')).join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `dashboard-export-${new Date().toISOString().split('T')[0]}.csv`;
+    a.click();
+    window.URL.revokeObjectURL(url);
+    
+    showNotification('CSV export completed!', 'success');
+}
+
+function exportAsPDF() {
+    showNotification('PDF export feature coming soon!', 'info');
+}
+
+function exportAsExcel() {
+    showNotification('Excel export feature coming soon!', 'info');
+}
+
+// Theme toggle functionality
+function toggleTheme() {
+    const dashboard = document.getElementById('woodash-dashboard');
+    const isDark = dashboard.classList.contains('dark-theme');
+    
+    if (isDark) {
+        dashboard.classList.remove('dark-theme');
+        localStorage.setItem('woodash_theme', 'light');
+        showNotification('Switched to light theme', 'success');
+    } else {
+        dashboard.classList.add('dark-theme');
+        localStorage.setItem('woodash_theme', 'dark');
+        showNotification('Switched to dark theme', 'success');
+    }
+}
+
+// Refresh data functionality
+function refreshDashboardData() {
+    showNotification('Refreshing dashboard data...', 'success');
+    
+    // Simulate data refresh
+    setTimeout(() => {
+        // Update metric values with animation
+        animateNumbers();
+        showNotification('Dashboard data refreshed!', 'success');
+    }, 2000);
+}
+
+// Fullscreen toggle
+function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().then(() => {
+            showNotification('Entered fullscreen mode', 'success');
+        });
+    } else {
+        document.exitFullscreen().then(() => {
+            showNotification('Exited fullscreen mode', 'success');
+        });
+    }
+}
+
+// Number animation function
+function animateNumbers() {
+    const numberElements = document.querySelectorAll('.woodash-metric-value');
+    
+    numberElements.forEach(element => {
+        element.classList.add('woodash-number-animate');
+        
+        // Simulate number update
+        const currentValue = element.textContent;
+        if (currentValue.includes('$')) {
+            const baseValue = parseFloat(currentValue.replace(/[$,]/g, ''));
+            const change = (Math.random() - 0.5) * baseValue * 0.1; // ±10% change
+            const newValue = Math.max(0, baseValue + change);
+            element.textContent = '$' + newValue.toLocaleString(undefined, {maximumFractionDigits: 0});
+        } else if (currentValue.includes('%')) {
+            const baseValue = parseFloat(currentValue.replace('%', ''));
+            const change = (Math.random() - 0.5) * 2; // ±1% change
+            const newValue = Math.max(0, baseValue + change);
+            element.textContent = newValue.toFixed(1) + '%';
+        } else if (!isNaN(parseInt(currentValue))) {
+            const baseValue = parseInt(currentValue);
+            const change = Math.floor((Math.random() - 0.5) * baseValue * 0.1); // ±10% change
+            const newValue = Math.max(0, baseValue + change);
+            element.textContent = newValue.toString();
+        }
+        
+        setTimeout(() => {
+            element.classList.remove('woodash-number-animate');
+        }, 800);
+    });
+}
+
+// Load theme preference
+document.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('woodash_theme');
+    if (savedTheme === 'dark') {
+        document.getElementById('woodash-dashboard').classList.add('dark-theme');
+    }
+});
+
+// AI Assistant Functionality
+let aiChatOpen = false;
+let isTyping = false;
+
+function toggleAIChat() {
+    const chatWidget = document.getElementById('woodash-ai-chat');
+    const toggleButton = document.getElementById('ai-toggle');
+    
+    aiChatOpen = !aiChatOpen;
+    
+    if (aiChatOpen) {
+        chatWidget.classList.add('active');
+        toggleButton.style.transform = 'scale(0.9)';
+        // Focus on input when chat opens
+        setTimeout(() => {
+            document.getElementById('ai-input').focus();
+        }, 300);
+    } else {
+        chatWidget.classList.remove('active');
+        toggleButton.style.transform = 'scale(1)';
+    }
+}
+
+function sendAIMessage() {
+    const input = document.getElementById('ai-input');
+    const message = input.value.trim();
+    
+    if (message) {
+        addMessage(message, 'user');
+        input.value = '';
+        
+        // Show typing indicator
+        showTypingIndicator();
+        
+        // Simulate AI response after delay
+        setTimeout(() => {
+            hideTypingIndicator();
+            const response = generateAIResponse(message);
+            addMessage(response, 'ai');
+        }, 1500 + Math.random() * 1000);
+    }
+}
+
+function sendQuickMessage(message) {
+    addMessage(message, 'user');
+    
+    // Show typing indicator
+    showTypingIndicator();
+    
+    // Simulate AI response
+    setTimeout(() => {
+        hideTypingIndicator();
+        const response = generateAIResponse(message);
+        addMessage(response, 'ai');
+    }, 1000 + Math.random() * 500);
+}
+
+function addMessage(content, sender) {
+    const messagesContainer = document.getElementById('ai-messages');
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `woodash-ai-message ${sender}`;
+    
+    const avatar = document.createElement('div');
+    avatar.className = 'woodash-ai-message-avatar';
+    avatar.innerHTML = sender === 'ai' ? '<i class="fa-solid fa-robot text-xs"></i>' : '<i class="fa-solid fa-user text-xs"></i>';
+    
+    const messageContent = document.createElement('div');
+    messageContent.className = 'woodash-ai-message-content';
+    messageContent.textContent = content;
+    
+    messageDiv.appendChild(avatar);
+    messageDiv.appendChild(messageContent);
+    
+    messagesContainer.appendChild(messageDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    
+    // Add animation
+    messageDiv.style.opacity = '0';
+    messageDiv.style.transform = 'translateY(10px)';
+    requestAnimationFrame(() => {
+        messageDiv.style.transition = 'all 0.3s ease';
+        messageDiv.style.opacity = '1';
+        messageDiv.style.transform = 'translateY(0)';
+    });
+}
+
+function showTypingIndicator() {
+    if (isTyping) return;
+    isTyping = true;
+    
+    const messagesContainer = document.getElementById('ai-messages');
+    const typingDiv = document.createElement('div');
+    typingDiv.className = 'woodash-ai-typing';
+    typingDiv.id = 'typing-indicator';
+    typingDiv.innerHTML = `
+        <span>AI is typing</span>
+        <div class="flex gap-1 ml-2">
+            <div class="woodash-ai-typing-dot"></div>
+            <div class="woodash-ai-typing-dot"></div>
+            <div class="woodash-ai-typing-dot"></div>
+        </div>
+    `;
+    
+    messagesContainer.appendChild(typingDiv);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    isTyping = false;
+    const typingIndicator = document.getElementById('typing-indicator');
+    if (typingIndicator) {
+        typingIndicator.remove();
+    }
+}
+
+function generateAIResponse(userMessage) {
+    const message = userMessage.toLowerCase();
+    
+    // Simple response generation based on keywords
+    if (message.includes('sales') || message.includes('revenue')) {
+        return "Your sales are performing well! Based on current trends, I recommend focusing on your electronics category which shows 23% growth. Would you like me to create a detailed sales analysis?";
+    } else if (message.includes('customers') || message.includes('customer')) {
+        return "You have 42 new customers this month. I've noticed that mobile users have higher conversion rates. Consider optimizing your mobile experience for better results.";
+    } else if (message.includes('products') || message.includes('inventory')) {
+        return "Your top-selling products are Wireless Headphones and Smart Watches. However, 3 items are running low on stock. Shall I help you create a reorder list?";
+    } else if (message.includes('trends') || message.includes('analyze')) {
+        return "I've analyzed your data and found some interesting patterns. Your peak sales hours are 2-4 PM and 7-9 PM. Weekend sales are 18% higher than weekdays. Would you like more detailed insights?";
+    } else if (message.includes('help') || message.includes('what can you do')) {
+        return "I can help you with: 📊 Sales analysis, 👥 Customer insights, 📦 Inventory management, 💰 Pricing optimization, 📈 Trend forecasting, and 📋 Report generation. What would you like to explore?";
+    } else if (message.includes('pricing') || message.includes('price')) {
+        return "Based on market analysis, I suggest slight price adjustments: Increase Smart Watch prices by 5% (demand is high), and consider bundle deals for slower-moving items. This could boost revenue by 8-12%.";
+    } else {
+        const responses = [
+            "That's an interesting question! Based on your store data, I can provide specific insights. Could you be more specific about what you'd like to know?",
+            "I'm analyzing your request. Your dashboard shows some great opportunities for optimization. What aspect would you like me to focus on?",
+            "Great question! I have access to all your store metrics. Let me know if you'd like insights about sales, customers, products, or forecasting.",
+            "I'm here to help optimize your business! Your current performance is strong. Would you like me to identify areas for improvement?",
+            "Based on your store's performance, I can provide actionable recommendations. What's your main goal right now - increasing sales, improving customer retention, or optimizing inventory?"
+        ];
+        return responses[Math.floor(Math.random() * responses.length)];
+    }
+}
+
+function handleAIInputKeypress(event) {
+    if (event.key === 'Enter') {
+        sendAIMessage();
+    }
+}
+
+// AI Quick Actions
+function triggerAIAction(action) {
+    showNotification('AI action triggered: ' + action.replace('-', ' '), 'success');
+    
+    switch(action) {
+        case 'optimize-prices':
+            setTimeout(() => {
+                showNotification('Price optimization complete! 3 products updated.', 'success');
+                if (aiChatOpen) {
+                    addMessage("I've analyzed your pricing and made recommendations for 3 products. Smart Watch prices can be increased by 5%, while Bluetooth Speaker bundles could boost sales by 15%.", 'ai');
+                }
+            }, 2000);
+            break;
+            
+        case 'generate-report':
+            setTimeout(() => {
+                showNotification('AI report generated successfully!', 'success');
+                if (aiChatOpen) {
+                    addMessage("I've generated a comprehensive performance report. Key highlights: 12.5% sales growth, 42 new customers, and inventory alerts for 3 products. Would you like me to email this to you?", 'ai');
+                }
+            }, 1500);
+            break;
+            
+        case 'predict-demand':
+            setTimeout(() => {
+                showNotification('Demand prediction completed!', 'success');
+                if (aiChatOpen) {
+                    addMessage("Based on historical data and current trends, I predict: Electronics will see 18% increase next month, especially Smart Watches. Stock up on Wireless Headphones before the holiday season.", 'ai');
+                }
+            }, 2500);
+            break;
+            
+        case 'customer-segments':
+            setTimeout(() => {
+                showNotification('Customer segmentation analysis complete!', 'success');
+                if (aiChatOpen) {
+                    addMessage("I've identified 4 customer segments: Premium Buyers (23%), Budget Conscious (34%), Tech Enthusiasts (28%), and Casual Shoppers (15%). Each group shows different buying patterns. Want details?", 'ai');
+                }
+            }, 2000);
+            break;
+    }
+}
+
+// Refresh AI insights
+function refreshAIInsights() {
+    showNotification('Refreshing AI insights...', 'success');
+    
+    // Simulate insight refresh with animation
+    const insights = document.querySelectorAll('.woodash-ai-insight-item');
+    insights.forEach((insight, index) => {
+        setTimeout(() => {
+            insight.style.transform = 'scale(0.95)';
+            insight.style.opacity = '0.7';
+            
+            setTimeout(() => {
+                insight.style.transform = 'scale(1)';
+                insight.style.opacity = '1';
+            }, 200);
+        }, index * 100);
+    });
+    
+    setTimeout(() => {
+        showNotification('AI insights updated!', 'success');
+    }, 1000);
+}
+
+// Initialize AI system
+document.addEventListener('DOMContentLoaded', function() {
+    // Add welcome message after delay
+    setTimeout(() => {
+        if (!aiChatOpen) {
+            // Show a subtle notification that AI is available
+            const aiToggle = document.getElementById('ai-toggle');
+            aiToggle.style.animation = 'woodash-ai-pulse 2s infinite';
+            
+            setTimeout(() => {
+                aiToggle.style.animation = '';
+            }, 6000);
+        }
+    }, 3000);
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+    if (!e.target.closest('#export-btn') && !e.target.closest('#export-dropdown')) {
+        document.getElementById('export-dropdown')?.classList.add('hidden');
+    }
+    if (!e.target.closest('#settings-btn') && !e.target.closest('#settings-dropdown')) {
+        document.getElementById('settings-dropdown')?.classList.add('hidden');
+    }
+    if (!e.target.closest('#notifications-btn') && !e.target.closest('#notifications-dropdown')) {
+        document.getElementById('notifications-dropdown')?.classList.add('hidden');
+    }
+});
+
+// Page Navigation System
+class WoodashPageManager {
+    constructor() {
+        this.currentPage = 'dashboard';
+        this.pages = ['dashboard', 'analytics', 'products', 'orders', 'customers', 'inventory', 'reports', 'settings'];
+        this.pageData = {
+            'dashboard': {
+                title: 'Dashboard',
+                description: 'Welcome back, John! Here\'s what\'s happening with your store.'
+            },
+            'analytics': {
+                title: 'Analytics',
+                description: 'Detailed performance metrics and business insights.'
+            },
+            'products': {
+                title: 'Products',
+                description: 'Manage your product catalog and inventory.'
+            },
+            'orders': {
+                title: 'Orders',
+                description: 'Track and manage customer orders.'
+            },
+            'customers': {
+                title: 'Customers',
+                description: 'View and manage your customer relationships.'
+            },
+            'inventory': {
+                title: 'Inventory',
+                description: 'Monitor and control your stock levels.'
+            },
+            'reports': {
+                title: 'Reports',
+                description: 'Generate comprehensive business reports.'
+            },
+            'settings': {
+                title: 'Settings',
+                description: 'Configure your dashboard and account preferences.'
+            }
+        };
+        this.init();
+    }
+
+    init() {
+        // Add click handlers to navigation links
+        document.querySelectorAll('.woodash-nav-link[data-page]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = link.getAttribute('data-page');
+                this.navigateToPage(page);
+            });
+        });
+
+        // Set initial active page
+        this.navigateToPage('dashboard');
+    }
+
+    navigateToPage(pageName) {
+        if (!this.pages.includes(pageName)) {
+            console.warn(`Page "${pageName}" not found`);
+            return;
+        }
+
+        // Update current page
+        this.currentPage = pageName;
+
+        // Update navigation active state
+        document.querySelectorAll('.woodash-nav-link').forEach(link => {
+            link.classList.remove('active');
+        });
+        document.querySelector(`[data-page="${pageName}"]`)?.classList.add('active');
+
+        // Update page title and description
+        const pageData = this.pageData[pageName];
+        if (pageData) {
+            document.getElementById('page-title').textContent = pageData.title;
+            document.getElementById('page-description').textContent = pageData.description;
+        }
+
+        // Hide all pages
+        document.querySelectorAll('.woodash-page-content').forEach(page => {
+            page.classList.remove('active');
+            page.classList.add('hidden');
+        });
+
+        // Show current page with animation
+        setTimeout(() => {
+            const targetPage = document.getElementById(`${pageName}-page`);
+            if (targetPage) {
+                targetPage.classList.remove('hidden');
+                targetPage.classList.add('active');
+                
+                // Initialize page-specific functionality
+                this.initPageFeatures(pageName);
+            }
+        }, 100);
+
+        // Update URL without refresh (optional)
+        if (history.pushState) {
+            const url = new URL(window.location);
+            url.searchParams.set('page', pageName);
+            history.pushState({page: pageName}, '', url);
+        }
+
+        // Show notification
+        showNotification(`Switched to ${pageData.title}`, 'success');
+    }
+
+    initPageFeatures(pageName) {
+        // Initialize page-specific features
+        switch(pageName) {
+            case 'analytics':
+                this.initAnalyticsCharts();
+                break;
+            case 'products':
+                this.initProductsFeatures();
+                break;
+            case 'orders':
+                this.initOrdersFeatures();
+                break;
+            case 'customers':
+                this.initCustomersFeatures();
+                break;
+            case 'inventory':
+                this.initInventoryFeatures();
+                break;
+            case 'reports':
+                this.initReportsFeatures();
+                break;
+            case 'settings':
+                this.initSettingsFeatures();
+                break;
+        }
+    }
+
+    initAnalyticsCharts() {
+        // Initialize analytics charts
+        const advancedCtx = document.getElementById('advanced-analytics-chart');
+        if (advancedCtx && !advancedCtx.chart) {
+            const ctx = advancedCtx.getContext('2d');
+            advancedCtx.chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'Revenue',
+                        data: [12000, 19000, 15000, 25000, 22000, 30000, 28000, 35000, 32000, 40000, 38000, 45000],
+                        borderColor: '#00CC61',
+                        backgroundColor: 'rgba(0, 204, 97, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }, {
+                        label: 'Orders',
+                        data: [120, 190, 150, 250, 220, 300, 280, 350, 320, 400, 380, 450],
+                        borderColor: '#00B357',
+                        backgroundColor: 'rgba(0, 179, 87, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            padding: 12
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(0, 0, 0, 0.1)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Revenue breakdown chart
+        const revenueCtx = document.getElementById('revenue-breakdown-chart');
+        if (revenueCtx && !revenueCtx.chart) {
+            const ctx = revenueCtx.getContext('2d');
+            revenueCtx.chart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Online Store', 'Mobile App', 'Marketplace', 'Wholesale', 'Other'],
+                    datasets: [{
+                        data: [45, 25, 15, 10, 5],
+                        backgroundColor: ['#00CC61', '#00B357', '#4ADE80', '#22C55E', '#16A34A'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { padding: 20 }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
+    initProductsFeatures() {
+        // Add product management features
+        console.log('Initializing products features...');
+    }
+
+    initOrdersFeatures() {
+        // Add order management features
+        console.log('Initializing orders features...');
+    }
+
+    initCustomersFeatures() {
+        // Add customer management features
+        console.log('Initializing customers features...');
+    }
+
+    initInventoryFeatures() {
+        // Add inventory management features
+        console.log('Initializing inventory features...');
+    }
+
+    initReportsFeatures() {
+        // Add reports features
+        const reportButtons = document.querySelectorAll('#reports-page .woodash-btn-primary');
+        reportButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const reportType = button.closest('.woodash-chart-container').querySelector('h3').textContent;
+                showNotification(`Generating ${reportType}...`, 'success');
+                
+                setTimeout(() => {
+                    showNotification(`${reportType} generated successfully!`, 'success');
+                }, 2000);
+            });
+        });
+    }
+
+    initSettingsFeatures() {
+        // Add settings features
+        const saveButton = document.querySelector('#settings-page .woodash-btn-primary');
+        if (saveButton) {
+            saveButton.addEventListener('click', () => {
+                showNotification('Settings saved successfully!', 'success');
+            });
+        }
+    }
+}
+
+// Initialize page manager
+let pageManager;
+document.addEventListener('DOMContentLoaded', function() {
+    pageManager = new WoodashPageManager();
+    
+    // Handle browser back/forward
+    window.addEventListener('popstate', function(e) {
+        if (e.state && e.state.page) {
+            pageManager.navigateToPage(e.state.page);
+        }
+    });
+    
+    // Handle URL parameters on load
+    const urlParams = new URLSearchParams(window.location.search);
+    const page = urlParams.get('page');
+    if (page && pageManager.pages.includes(page)) {
+        pageManager.navigateToPage(page);
+    }
+});
+
+// Add keyboard shortcuts for page navigation
+document.addEventListener('keydown', function(e) {
+    if (e.altKey) {
+        const keyMap = {
+            '1': 'dashboard',
+            '2': 'analytics', 
+            '3': 'products',
+            '4': 'orders',
+            '5': 'customers',
+            '6': 'inventory',
+            '7': 'reports',
+            '8': 'settings'
+        };
+        
+        if (keyMap[e.key]) {
+            e.preventDefault();
+            pageManager.navigateToPage(keyMap[e.key]);
+        }
+    }
+});
 </script>
