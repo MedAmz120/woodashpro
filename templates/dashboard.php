@@ -909,7 +909,7 @@
 <div id="woodash-dashboard" class="woodash-fullscreen woodash-bg-pattern woodash-bg-animation">
     <div class="flex woodash-content">
         <!-- Sidebar -->
-        <aside class="woodash-sidebar w-64 bg-white/90 border-r border-gray-100 p-6 woodash-glass-effect">
+  <aside class="woodash-sidebar w-64 bg-white/90 border-r border-gray-100 p-6 woodash-glass-effect">
             <div class="flex items-center gap-3 mb-8 woodash-fade-in">
                 <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-[#814ce4] to-[#2d0873] flex items-center justify-center woodash-glow">
                     <i class="fa-solid fa-chart-line text-white text-xl"></i>
@@ -938,15 +938,23 @@
                     <i class="fa-solid fa-users w-5"></i>
                     <span>Customers</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s" data-page="inventory">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s" data-page="coupons">
+                    <i class="fa-solid fa-ticket w-5"></i>
+                    <span>Coupon</span>
+                </a>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.7s" data-page="inventory">
                     <i class="fa-solid fa-boxes-stacked w-5"></i>
                     <span>Inventory</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.7s" data-page="reports">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.6s" data-page="reviews">
+                    <i class="fa-solid fa-star w-5"></i>
+                    <span>Reviews</span>
+                </a>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.8s" data-page="reports">
                     <i class="fa-solid fa-file-chart-line w-5"></i>
                     <span>Reports</span>
                 </a>
-                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.8s" data-page="settings">
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.9s" data-page="settings">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span>Settings</span>
                 </a>
@@ -961,6 +969,7 @@
                 </div>
             </div>
         </aside>
+
 
         <!-- Main Content -->
         <main class="woodash-main flex-1 p-6 md:p-8">
@@ -2308,6 +2317,482 @@
                         </div>
                     </div>
                     <!-- End Inventory Page -->
+                    <!-- Coupons Page -->
+<div id="coupons-page" class="woodash-page-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Coupon Stats -->
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Total Coupons</h3>
+                    <div class="woodash-metric-value">47</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-blue">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Active Coupons</h3>
+                    <div class="woodash-metric-value text-green-600">32</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-green">
+                    <i class="fa-solid fa-check-circle"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Used This Month</h3>
+                    <div class="woodash-metric-value text-purple-600">156</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-purple">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Total Savings</h3>
+                    <div class="woodash-metric-value text-orange-600">$2,847</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-orange">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupon Performance Overview -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Coupon Usage Chart -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Coupon Usage Trends</h2>
+                    <p class="text-gray-500 text-sm">Monthly coupon redemption statistics</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                    <i class="fa-solid fa-chart-bar"></i>
+                </button>
+            </div>
+            <div class="h-[250px]">
+                <canvas id="coupon-usage-chart" ></canvas>
+            </div>
+        </div>
+
+        <!-- Top Performing Coupons -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[350px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Top Performing Coupons</h2>
+                    <p class="text-gray-500 text-sm">Most used coupons this month</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                    <i class="fa-solid fa-trophy"></i>
+                </button>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border-l-4 border-purple-500">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
+                        <div>
+                            <p class="font-medium text-gray-900">SAVE20</p>
+                            <p class="text-sm text-gray-600">20% off orders over $100</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-purple-600">89 uses</p>
+                        <p class="text-sm text-gray-500">$1,245 saved</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-500">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
+                        <div>
+                            <p class="font-medium text-gray-900">WELCOME10</p>
+                            <p class="text-sm text-gray-600">$10 off first order</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-blue-600">67 uses</p>
+                        <p class="text-sm text-gray-500">$670 saved</p>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-l-4 border-orange-500">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
+                        <div>
+                            <p class="font-medium text-gray-900">FREESHIP</p>
+                            <p class="text-sm text-gray-600">Free shipping on all orders</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-orange-600">45 uses</p>
+                        <p class="text-sm text-gray-500">$450 saved</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupon Management -->
+    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <div>
+                <h2 class="text-lg font-bold woodash-gradient-text">Coupon Management</h2>
+                <p class="text-gray-500 text-sm">Create, edit, and manage your discount coupons</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <select class="woodash-btn woodash-btn-secondary text-sm">
+                    <option>All Coupons</option>
+                    <option>Active</option>
+                    <option>Expired</option>
+                    <option>Scheduled</option>
+                </select>
+                <button class="woodash-btn woodash-btn-secondary text-sm">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Export
+                </button>
+                <button class="woodash-btn woodash-btn-primary" id="create-coupon-btn">
+                    <i class="fa-solid fa-plus mr-2"></i>
+                    Create Coupon
+                </button>
+            </div>
+        </div>
+        
+        <!-- Quick Actions -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg">
+            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                <i class="fa-solid fa-percentage text-xl text-purple-600"></i>
+                <span class="text-sm">Percentage Discount</span>
+            </button>
+            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                <i class="fa-solid fa-dollar-sign text-xl text-green-600"></i>
+                <span class="text-sm">Fixed Amount</span>
+            </button>
+            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                <i class="fa-solid fa-truck text-xl text-blue-600"></i>
+                <span class="text-sm">Free Shipping</span>
+            </button>
+            <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
+                <i class="fa-solid fa-gift text-xl text-orange-600"></i>
+                <span class="text-sm">BOGO Deal</span>
+            </button>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="woodash-table w-full">
+                <thead>
+                    <tr>
+                        <th>Coupon Code</th>
+                        <th>Type</th>
+                        <th>Discount</th>
+                        <th>Usage</th>
+                        <th>Valid Until</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-ticket text-purple-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-medium">SAVE20</span>
+                                    <p class="text-xs text-gray-500">20% off orders over $100</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="woodash-badge woodash-badge-purple">Percentage</span></td>
+                        <td>20%</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">89/100</span>
+                                <div class="woodash-progress w-16">
+                                    <div class="woodash-progress-bar" style="width: 89%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>2024-02-28</td>
+                        <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Edit"><i class="fa-solid fa-edit"></i></button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Duplicate"><i class="fa-solid fa-copy"></i></button>
+                                <button class="text-orange-600 hover:text-orange-800" title="Pause"><i class="fa-solid fa-pause"></i></button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-dollar-sign text-green-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-medium">WELCOME10</span>
+                                    <p class="text-xs text-gray-500">$10 off first order</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="woodash-badge woodash-badge-green">Fixed Amount</span></td>
+                        <td>$10</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">67/∞</span>
+                                <div class="woodash-progress w-16">
+                                    <div class="woodash-progress-bar bg-green-500" style="width: 100%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>2024-12-31</td>
+                        <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Edit"><i class="fa-solid fa-edit"></i></button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Duplicate"><i class="fa-solid fa-copy"></i></button>
+                                <button class="text-orange-600 hover:text-orange-800" title="Pause"><i class="fa-solid fa-pause"></i></button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-truck text-blue-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-medium">FREESHIP</span>
+                                    <p class="text-xs text-gray-500">Free shipping on all orders</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="woodash-badge woodash-badge-blue">Free Shipping</span></td>
+                        <td>100%</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">45/50</span>
+                                <div class="woodash-progress w-16">
+                                    <div class="woodash-progress-bar bg-blue-500" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>2024-03-15</td>
+                        <td><span class="woodash-badge woodash-badge-success">Active</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Edit"><i class="fa-solid fa-edit"></i></button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Duplicate"><i class="fa-solid fa-copy"></i></button>
+                                <button class="text-orange-600 hover:text-orange-800" title="Pause"><i class="fa-solid fa-pause"></i></button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-gift text-orange-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-medium">BOGO50</span>
+                                    <p class="text-xs text-gray-500">Buy one get one 50% off</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="woodash-badge woodash-badge-orange">BOGO</span></td>
+                        <td>50%</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">23/25</span>
+                                <div class="woodash-progress w-16">
+                                    <div class="woodash-progress-bar bg-orange-500" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>2024-01-31</td>
+                        <td><span class="woodash-badge woodash-badge-danger">Expired</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Edit"><i class="fa-solid fa-edit"></i></button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Duplicate"><i class="fa-solid fa-copy"></i></button>
+                                <button class="text-green-600 hover:text-green-800" title="Renew"><i class="fa-solid fa-refresh"></i></button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-calendar text-yellow-600"></i>
+                                </div>
+                                <div>
+                                    <span class="font-medium">SUMMER25</span>
+                                    <p class="text-xs text-gray-500">25% off summer collection</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="woodash-badge woodash-badge-purple">Percentage</span></td>
+                        <td>25%</td>
+                        <td>
+                            <div class="flex items-center gap-2">
+                                <span class="text-sm font-medium">0/100</span>
+                                <div class="woodash-progress w-16">
+                                    <div class="woodash-progress-bar bg-gray-300" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>2024-06-30</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Scheduled</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Edit"><i class="fa-solid fa-edit"></i></button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Duplicate"><i class="fa-solid fa-copy"></i></button>
+                                <button class="text-green-600 hover:text-green-800" title="Activate Now"><i class="fa-solid fa-play"></i></button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+            <div class="text-sm text-gray-500">
+                Showing 1 to 5 of 47 coupons
+            </div>
+            <div class="flex gap-2">
+                <button class="woodash-btn woodash-btn-secondary text-sm" disabled>
+                    <i class="fa-solid fa-chevron-left mr-1"></i>
+                    Previous
+                </button>
+                <button class="woodash-btn woodash-btn-primary text-sm">1</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">2</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">3</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">
+                    Next
+                    <i class="fa-solid fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coupon Analytics -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <!-- Coupon Conversion Rates -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[400px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Conversion Rates</h2>
+                    <p class="text-gray-500 text-sm">How coupons affect purchase decisions</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-eye text-purple-600"></i>
+                        <span class="font-medium">Coupon Views</span>
+                    </div>
+                    <span class="text-xl font-bold text-purple-600">1,234</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-mouse-pointer text-blue-600"></i>
+                        <span class="font-medium">Coupon Clicks</span>
+                    </div>
+                    <span class="text-xl font-bold text-blue-600">856</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-shopping-cart text-green-600"></i>
+                        <span class="font-medium">Coupon Uses</span>
+                    </div>
+                    <span class="text-xl font-bold text-green-600">234</span>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-percentage text-orange-600"></i>
+                        <span class="font-medium">Conversion Rate</span>
+                    </div>
+                    <span class="text-xl font-bold text-orange-600">27.3%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Coupon Activity -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[400px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Recent Activity</h2>
+                    <p class="text-gray-500 text-sm">Latest coupon usage and events</p>
+                </div>
+            </div>
+            <div class="space-y-3 woodash-scrollbar" style="max-height: 320px; overflow-y: auto;">
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="font-medium text-gray-900">SAVE20 used</p>
+                            <span class="text-sm text-gray-500">2m ago</span>
+                        </div>
+                        <p class="text-sm text-gray-500">John Doe saved $25.99 on order #1234</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
+                        <i class="fa-solid fa-plus"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="font-medium text-gray-900">New coupon created</p>
+                            <span class="text-sm text-gray-500">15m ago</span>
+                        </div>
+                        <p class="text-sm text-gray-500">FLASH30 - 30% off flash sale items</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
+                        <i class="fa-solid fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="font-medium text-gray-900">Coupon limit reached</p>
+                            <span class="text-sm text-gray-500">1h ago</span>
+                        </div>
+                        <p class="text-sm text-gray-500">FREESHIP has reached its usage limit</p>
+                    </div>
+                </div>
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600">
+                        <i class="fa-solid fa-clock"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex items-center justify-between">
+                            <p class="font-medium text-gray-900">Coupon expired</p>
+                            <span class="text-sm text-gray-500">2h ago</span>
+                        </div>
+                        <p class="text-sm text-gray-500">BOGO50 has expired and is now inactive</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Coupons Page -->
 
                     <!-- Reports Page -->
                     <div id="reports-page" class="woodash-page-content hidden">
@@ -2398,6 +2883,726 @@
                         </div>
                     </div>
                     <!-- End Reports Page -->
+
+<!-- Add this page content after the coupons page (around line 1800) -->
+<!-- Customer Reviews Page -->
+<div id="reviews-page" class="woodash-page-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Review Stats -->
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Total Reviews</h3>
+                    <div class="woodash-metric-value">1,247</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-blue">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Average Rating</h3>
+                    <div class="woodash-metric-value text-yellow-600">4.6</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-orange">
+                    <i class="fa-solid fa-star-half-stroke"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">This Month</h3>
+                    <div class="woodash-metric-value text-green-600">89</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-green">
+                    <i class="fa-solid fa-calendar-plus"></i>
+                </div>
+            </div>
+        </div>
+        <div class="woodash-metric-card woodash-hover-card woodash-glow h-[50px]">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h3 class="woodash-metric-title">Response Rate</h3>
+                    <div class="woodash-metric-value text-purple-600">92%</div>
+                </div>
+                <div class="woodash-metric-icon woodash-metric-purple">
+                    <i class="fa-solid fa-reply"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Analytics -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Rating Distribution -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Rating Distribution</h2>
+                    <p class="text-gray-500 text-sm">Breakdown of customer ratings</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                    <i class="fa-solid fa-chart-bar"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1 w-16">
+                        <span class="text-sm font-medium">5</span>
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="woodash-progress">
+                            <div class="woodash-progress-bar bg-yellow-500" style="width: 68%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600 w-12">847</span>
+                    <span class="text-sm text-gray-500 w-12">68%</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1 w-16">
+                        <span class="text-sm font-medium">4</span>
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="woodash-progress">
+                            <div class="woodash-progress-bar bg-yellow-400" style="width: 22%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600 w-12">274</span>
+                    <span class="text-sm text-gray-500 w-12">22%</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1 w-16">
+                        <span class="text-sm font-medium">3</span>
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="woodash-progress">
+                            <div class="woodash-progress-bar bg-yellow-300" style="width: 7%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600 w-12">87</span>
+                    <span class="text-sm text-gray-500 w-12">7%</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1 w-16">
+                        <span class="text-sm font-medium">2</span>
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="woodash-progress">
+                            <div class="woodash-progress-bar bg-orange-400" style="width: 2%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600 w-12">25</span>
+                    <span class="text-sm text-gray-500 w-12">2%</span>
+                </div>
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1 w-16">
+                        <span class="text-sm font-medium">1</span>
+                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="woodash-progress">
+                            <div class="woodash-progress-bar bg-red-500" style="width: 1%"></div>
+                        </div>
+                    </div>
+                    <span class="text-sm text-gray-600 w-12">14</span>
+                    <span class="text-sm text-gray-500 w-12">1%</span>
+                </div>
+            </div>
+            
+            <!-- Review Sentiment Analysis -->
+            <div class="mt-8 pt-6 border-t border-gray-200">
+                <h3 class="text-md font-semibold text-gray-900 mb-4">Sentiment Analysis</h3>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600">78%</div>
+                        <div class="text-sm text-green-700">Positive</div>
+                    </div>
+                    <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                        <div class="text-2xl font-bold text-yellow-600">18%</div>
+                        <div class="text-sm text-yellow-700">Neutral</div>
+                    </div>
+                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                        <div class="text-2xl font-bold text-red-600">4%</div>
+                        <div class="text-sm text-red-700">Negative</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Trends -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Review Trends</h2>
+                    <p class="text-gray-500 text-sm">Monthly review volume and ratings</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="woodash-btn woodash-btn-primary text-xs" data-range="6months">6M</button>
+                    <button class="woodash-btn woodash-btn-secondary text-xs" data-range="1year">1Y</button>
+                </div>
+            </div>
+            <div class="h-[300px]">
+                <canvas id="review-trends-chart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Reviewed Products -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+        <!-- Most Reviewed Products -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Most Reviewed Products</h2>
+                    <p class="text-gray-500 text-sm">Products with highest review volume</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                    <i class="fa-solid fa-trophy"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-l-4 border-yellow-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-headphones text-gray-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-900">Wireless Headphones Pro</p>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <span class="text-sm font-medium">4.8</span>
+                                </div>
+                                <span class="text-sm text-gray-500">•</span>
+                                <span class="text-sm text-gray-600">234 reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-yellow-600">234</div>
+                        <div class="text-sm text-gray-500">reviews</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-mobile-screen text-gray-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-900">Smart Watch Series X</p>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <span class="text-sm font-medium">4.6</span>
+                                </div>
+                                <span class="text-sm text-gray-500">•</span>
+                                <span class="text-sm text-gray-600">189 reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-blue-600">189</div>
+                        <div class="text-sm text-gray-500">reviews</div>
+                    </div>
+                </div>
+                
+                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
+                            <i class="fa-solid fa-laptop text-gray-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-900">Gaming Laptop Ultra</p>
+                            <div class="flex items-center gap-2">
+                                <div class="flex items-center gap-1">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <span class="text-sm font-medium">4.7</span>
+                                </div>
+                                <span class="text-sm text-gray-500">•</span>
+                                <span class="text-sm text-gray-600">156 reviews</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-lg font-bold text-green-600">156</div>
+                        <div class="text-sm text-gray-500">reviews</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Reviews -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Recent Reviews</h2>
+                    <p class="text-gray-500 text-sm">Latest customer feedback</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card text-xs">
+                    <i class="fa-solid fa-refresh"></i>
+                </button>
+            </div>
+            <div class="space-y-4 woodash-scrollbar" style="max-height: 320px; overflow-y: auto;">
+                <div class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">JD</div>
+                            <div>
+                                <p class="font-medium text-sm">John Doe</p>
+                                <div class="flex items-center gap-1">
+                                    <div class="flex">
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500">5.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-500">2 hours ago</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">"Excellent product! The sound quality is amazing and the battery life exceeds expectations. Highly recommended!"</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-500">Wireless Headphones Pro</span>
+                        <div class="flex gap-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-xs">
+                                <i class="fa-solid fa-reply"></i> Reply
+                            </button>
+                            <button class="text-green-600 hover:text-green-800 text-xs">
+                                <i class="fa-solid fa-check"></i> Approve
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">AS</div>
+                            <div>
+                                <p class="font-medium text-sm">Alice Smith</p>
+                                <div class="flex items-center gap-1">
+                                    <div class="flex">
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500">4.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-500">5 hours ago</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">"Good watch overall, but the battery could be better. The fitness tracking features are great though."</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-500">Smart Watch Series X</span>
+                        <div class="flex gap-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-xs">
+                                <i class="fa-solid fa-reply"></i> Reply
+                            </button>
+                            <button class="text-green-600 hover:text-green-800 text-xs">
+                                <i class="fa-solid fa-check"></i> Approve
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                    <div class="flex items-start justify-between mb-2">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">MB</div>
+                            <div>
+                                <p class="font-medium text-sm">Mike Brown</p>
+                                <div class="flex items-center gap-1">
+                                    <div class="flex">
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                        <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                        <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                        <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                    </div>
+                                    <span class="text-xs text-gray-500">2.0</span>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="text-xs text-gray-500">1 day ago</span>
+                    </div>
+                    <p class="text-sm text-gray-700 mb-2">"Product arrived damaged and customer service was slow to respond. Not satisfied with this purchase."</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-xs text-gray-500">Gaming Laptop Ultra</span>
+                        <div class="flex gap-2">
+                            <button class="text-blue-600 hover:text-blue-800 text-xs">
+                                <i class="fa-solid fa-reply"></i> Reply
+                            </button>
+                            <button class="text-red-600 hover:text-red-800 text-xs">
+                                <i class="fa-solid fa-exclamation-triangle"></i> Priority
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Management -->
+    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+            <div>
+                <h2 class="text-lg font-bold woodash-gradient-text">Review Management</h2>
+                <p class="text-gray-500 text-sm">Manage and respond to customer reviews</p>
+            </div>
+            <div class="flex flex-wrap gap-2">
+                <select class="woodash-btn woodash-btn-secondary text-sm">
+                    <option>All Reviews</option>
+                    <option>5 Stars</option>
+                    <option>4 Stars</option>
+                    <option>3 Stars</option>
+                    <option>2 Stars</option>
+                    <option>1 Star</option>
+                    <option>Pending</option>
+                    <option>Replied</option>
+                </select>
+                <select class="woodash-btn woodash-btn-secondary text-sm">
+                    <option>All Products</option>
+                    <option>Wireless Headphones Pro</option>
+                    <option>Smart Watch Series X</option>
+                    <option>Gaming Laptop Ultra</option>
+                </select>
+                <button class="woodash-btn woodash-btn-secondary text-sm">
+                    <i class="fa-solid fa-download mr-2"></i>
+                    Export
+                </button>
+                <button class="woodash-btn woodash-btn-primary" id="bulk-actions-btn">
+                    <i class="fa-solid fa-tasks mr-2"></i>
+                    Bulk Actions
+                </button>
+            </div>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="woodash-table w-full">
+                <thead>
+                    <tr>
+                        <th>
+                            <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded" id="select-all-reviews">
+                        </th>
+                        <th>Customer</th>
+                        <th>Product</th>
+                        <th>Rating</th>
+                        <th>Review</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded review-checkbox">
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">JD</div>
+                                <div>
+                                    <span class="font-medium">John Doe</span>
+                                    <p class="text-xs text-gray-500">john@example.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-headphones text-gray-600"></i>
+                                </div>
+                                <span class="font-medium">Wireless Headphones Pro</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-1">
+                                <div class="flex">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium ml-1">5.0</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="max-w-xs">
+                                <p class="text-sm text-gray-700 truncate">Excellent product! The sound quality is amazing and the battery life exceeds expectations...</p>
+                            </div>
+                        </td>
+                        <td>2024-01-15</td>
+                        <td><span class="woodash-badge woodash-badge-success">Approved</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="View Full Review">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Reply">
+                                    <i class="fa-solid fa-reply"></i>
+                                </button>
+                                <button class="text-orange-600 hover:text-orange-800" title="Feature">
+                                    <i class="fa-solid fa-star"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded review-checkbox">
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-pink-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">AS</div>
+                                <div>
+                                    <span class="font-medium">Alice Smith</span>
+                                    <p class="text-xs text-gray-500">alice@example.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-mobile-screen text-gray-600"></i>
+                                </div>
+                                <span class="font-medium">Smart Watch Series X</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-1">
+                                <div class="flex">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium ml-1">4.0</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="max-w-xs">
+                                <p class="text-sm text-gray-700 truncate">Good watch overall, but the battery could be better. The fitness tracking features are great...</p>
+                            </div>
+                        </td>
+                        <td>2024-01-14</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Pending</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="View Full Review">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Approve">
+                                    <i class="fa-solid fa-check"></i>
+                                </button>
+                                <button class="text-orange-600 hover:text-orange-800" title="Reply">
+                                    <i class="fa-solid fa-reply"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-800" title="Delete">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="bg-red-50">
+                        <td>
+                            <input type="checkbox" class="w-4 h-4 text-[#814ce4] rounded review-checkbox">
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">MB</div>
+                                <div>
+                                    <span class="font-medium">Mike Brown</span>
+                                    <p class="text-xs text-gray-500">mike@example.com</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 bg-gray-200 rounded-lg flex items-center justify-center">
+                                    <i class="fa-solid fa-laptop text-gray-600"></i>
+                                </div>
+                                <span class="font-medium">Gaming Laptop Ultra</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="flex items-center gap-1">
+                                <div class="flex">
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
+                                    <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                    <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                    <i class="fa-regular fa-star text-gray-300 text-xs"></i>
+                                </div>
+                                <span class="text-sm font-medium ml-1">2.0</span>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="max-w-xs">
+                                <p class="text-sm text-gray-700 truncate">Product arrived damaged and customer service was slow to respond. Not satisfied...</p>
+                            </div>
+                        </td>
+                        <td>2024-01-13</td>
+                        <td><span class="woodash-badge woodash-badge-danger">Priority</span></td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="View Full Review">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Reply">
+                                    <i class="fa-solid fa-reply"></i>
+                                </button>
+                                <button class="text-purple-600 hover:text-purple-800" title="Contact Customer">
+                                    <i class="fa-solid fa-phone"></i>
+                                </button>
+                                <button class="text-red-600 hover:text-red-800" title="Escalate">
+                                    <i class="fa-solid fa-exclamation-triangle"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex items-center justify-between mt-6 pt-4 border-t border-gray-200">
+            <div class="text-sm text-gray-500">
+                Showing 1 to 3 of 1,247 reviews
+            </div>
+            <div class="flex gap-2">
+                <button class="woodash-btn woodash-btn-secondary text-sm" disabled>
+                    <i class="fa-solid fa-chevron-left mr-1"></i>
+                    Previous
+                </button>
+                <button class="woodash-btn woodash-btn-primary text-sm">1</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">2</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">3</button>
+                <button class="woodash-btn woodash-btn-secondary text-sm">
+                    Next
+                    <i class="fa-solid fa-chevron-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Insights -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
+        <!-- Common Keywords -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Common Keywords</h2>
+                    <p class="text-gray-500 text-sm">Most mentioned words in reviews</p>
+                </div>
+            </div>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                    <span class="font-medium text-green-800">Quality</span>
+                    <div class="flex items-center gap-2">
+                        <div class="woodash-progress w-24">
+                            <div class="woodash-progress-bar bg-green-500" style="width: 85%"></div>
+                        </div>
+                        <span class="text-sm text-green-600">342 mentions</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                    <span class="font-medium text-blue-800">Fast</span>
+                    <div class="flex items-center gap-2">
+                        <div class="woodash-progress w-24">
+                            <div class="woodash-progress-bar bg-blue-500" style="width: 72%"></div>
+                        </div>
+                        <span class="text-sm text-blue-600">289 mentions</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                    <span class="font-medium text-purple-800">Excellent</span>
+                    <div class="flex items-center gap-2">
+                        <div class="woodash-progress w-24">
+                            <div class="woodash-progress-bar bg-purple-500" style="width: 68%"></div>
+                        </div>
+                        <span class="text-sm text-purple-600">267 mentions</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                    <span class="font-medium text-yellow-800">Recommend</span>
+                    <div class="flex items-center gap-2">
+                        <div class="woodash-progress w-24">
+                            <div class="woodash-progress-bar bg-yellow-500" style="width: 58%"></div>
+                        </div>
+                        <span class="text-sm text-yellow-600">234 mentions</span>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                    <span class="font-medium text-red-800">Problem</span>
+                    <div class="flex items-center gap-2">
+                        <div class="woodash-progress w-24">
+                            <div class="woodash-progress-bar bg-red-500" style="width: 12%"></div>
+                        </div>
+                        <span class="text-sm text-red-600">48 mentions</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Response Time -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow h-[450px]">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Response Performance</h2>
+                    <p class="text-gray-500 text-sm">Review response metrics</p>
+                </div>
+            </div>
+            <div class="space-y-6">
+                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg">
+                    <div class="text-3xl font-bold text-purple-600 mb-2">2.4 hrs</div>
+                    <div class="text-sm text-gray-600">Average Response Time</div>
+                    <div class="text-xs text-green-600 mt-1">
+                        <i class="fa-solid fa-arrow-down"></i> 18% faster than last month
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                        <div class="text-2xl font-bold text-green-600">92%</div>
+                        <div class="text-sm text-green-700">Response Rate</div>
+                    </div>
+                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600">4.8</div>
+                        <div class="text-sm text-blue-700">Avg. Helpfulness</div>
+                    </div>
+                </div>
+                
+                <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                    <div class="flex items-center gap-2 mb-2">
+                        <i class="fa-solid fa-lightbulb text-yellow-600"></i>
+                        <span class="font-medium text-yellow-800">Tip</span>
+                    </div>
+                    <p class="text-sm text-yellow-700">Responding to reviews within 24 hours increases customer satisfaction by 23%.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Customer Reviews Page -->
 
                     <!-- Settings Page -->
                     <div id="settings-page" class="woodash-page-content hidden">
@@ -2539,6 +3744,7 @@
                     <!-- End Settings Page -->
                 </div>
                 <!-- End Page Content Container -->
+
             </div>
         </main>
     </div>
@@ -3055,6 +4261,167 @@ async function fetchData(endpoint, forceRefresh = false) {
     }
 }
 
+// Initialize Coupon Usage Chart
+function initializeCouponUsageChart() {
+    const ctx = document.getElementById('coupon-usage-chart');
+    if (ctx) {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                datasets: [{
+                    label: 'Coupon Usage',
+                    data: [45, 67, 89, 123, 156, 134, 178],
+                    borderColor: '#814ce4',
+                    backgroundColor: 'rgba(129, 76, 228, 0.1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#814ce4',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointHoverBackgroundColor: '#814ce4',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 3
+                }, {
+                    label: 'Coupon Views',
+                    data: [120, 180, 220, 280, 340, 290, 380],
+                    borderColor: '#3b82f6',
+                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: false,
+                    pointBackgroundColor: '#3b82f6',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointRadius: 4,
+                    pointHoverRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        align: 'end',
+                        labels: {
+                            usePointStyle: true,
+                            pointStyle: 'circle',
+                            padding: 20,
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            },
+                            color: '#6b7280'
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                        titleColor: '#1f2937',
+                        bodyColor: '#6b7280',
+                        borderColor: '#e5e7eb',
+                        borderWidth: 1,
+                        cornerRadius: 8,
+                        displayColors: true,
+                        padding: 12,
+                        titleFont: {
+                            size: 14,
+                            weight: '600'
+                        },
+                        bodyFont: {
+                            size: 13
+                        },
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label + ' 2024';
+                            },
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += context.parsed.y.toLocaleString();
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        border: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#9ca3af',
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            },
+                            padding: 10
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            color: 'rgba(156, 163, 175, 0.2)',
+                            drawBorder: false
+                        },
+                        border: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#9ca3af',
+                            font: {
+                                size: 12,
+                                weight: '500'
+                            },
+                            padding: 10,
+                            callback: function(value) {
+                                return value.toLocaleString();
+                            }
+                        }
+                    }
+                },
+                elements: {
+                    line: {
+                        borderJoinStyle: 'round'
+                    }
+                }
+            }
+        });
+    }
+}
+
+// Call this function when the coupons page is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize chart when coupons page is shown
+    const couponsPage = document.getElementById('coupons-page');
+    if (couponsPage && !couponsPage.classList.contains('hidden')) {
+        initializeCouponUsageChart();
+    }
+});
+
+// Also initialize when switching to coupons page
+function showCouponsPage() {
+    // Your existing page switching logic here
+    
+    // Initialize the chart after a small delay to ensure the canvas is visible
+    setTimeout(() => {
+        initializeCouponUsageChart();
+    }, 100);
+}
+
 // Optimize chart rendering
 function createOptimizedChart(ctx, config) {
     const chart = new Chart(ctx, {
@@ -3534,13 +4901,7 @@ function initRevenueCategoryChart() {
             labels: ['Electronics', 'Clothing', 'Books', 'Home & Garden', 'Sports'],
             datasets: [{
                 data: [35, 25, 15, 15, 10],
-                backgroundColor: [
-                    '#814ce4',
-                    '#00B357',
-                    '#4ADE80',
-                    '#22C55E',
-                    '#16A34A'
-                ],
+                backgroundColor: ['#814ce4', '#7849d1ff', '#5d21cbff', '#470db4ff', '#3d05a5ff'],
                 borderWidth: 0,
                 cutout: '60%'
             }]
@@ -4302,7 +5663,7 @@ document.addEventListener('click', function(e) {
 class WoodashPageManager {
     constructor() {
         this.currentPage = 'dashboard';
-        this.pages = ['dashboard', 'analytics', 'products', 'orders', 'customers', 'inventory', 'reports', 'settings'];
+        this.pages = ['dashboard', 'analytics', 'products', 'orders', 'customers', 'coupons', 'inventory', 'reviews', 'reports', 'settings'];
         this.pageData = {
             'dashboard': {
                 title: 'Dashboard',
@@ -4324,9 +5685,17 @@ class WoodashPageManager {
                 title: 'Customers',
                 description: 'View and manage your customer relationships.'
             },
+            'coupons': {
+                title: 'Coupons',
+                description: 'View and manage your coupons relationships.'
+            },
             'inventory': {
                 title: 'Inventory',
                 description: 'Monitor and control your stock levels.'
+            },
+            'reviews': {
+                title: 'Reviews',
+                description: 'Generate comprehensive business reviews.'
             },
             'reports': {
                 title: 'Reports',
@@ -4489,7 +5858,7 @@ class WoodashPageManager {
                     labels: ['Online Store', 'Mobile App', 'Marketplace', 'Wholesale', 'Other'],
                     datasets: [{
                         data: [45, 25, 15, 10, 5],
-                        backgroundColor: ['#814ce4', '#00B357', '#4ADE80', '#22C55E', '#16A34A'],
+                        backgroundColor: ['#814ce4', '#7849d1ff', '#5d21cbff', '#470db4ff', '#3d05a5ff'],
                         borderWidth: 0
                     }]
                 },
