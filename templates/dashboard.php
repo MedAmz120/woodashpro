@@ -123,9 +123,293 @@
     }
     .woodash-hover-card {
         @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg;
+        transform-origin: center;
+    }
+    
+    /* Advanced Animations */
+    .woodash-card-entrance {
+        animation: woodashCardEntrance 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    
+    .woodash-card-entrance:nth-child(1) { animation-delay: 0.1s; }
+    .woodash-card-entrance:nth-child(2) { animation-delay: 0.2s; }
+    .woodash-card-entrance:nth-child(3) { animation-delay: 0.3s; }
+    .woodash-card-entrance:nth-child(4) { animation-delay: 0.4s; }
+    .woodash-card-entrance:nth-child(5) { animation-delay: 0.5s; }
+    .woodash-card-entrance:nth-child(6) { animation-delay: 0.6s; }
+    
+    @keyframes woodashCardEntrance {
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    .woodash-pulse-glow {
+        animation: woodashPulseGlow 2s ease-in-out infinite;
+    }
+    
+    @keyframes woodashPulseGlow {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(130, 77, 235, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(130, 77, 235, 0.6);
+        }
+    }
+    
+    .woodash-shimmer {
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        background-size: 200% 100%;
+        animation: woodashShimmer 2s infinite;
+    }
+    
+    @keyframes woodashShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+    
+    .woodash-bounce-in {
+        animation: woodashBounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    @keyframes woodashBounceIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.3);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.05);
+        }
+        70% {
+            transform: scale(0.9);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    .woodash-slide-up {
+        animation: woodashSlideUp 0.5s ease-out forwards;
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    
+    @keyframes woodashSlideUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .woodash-rotate-in {
+        animation: woodashRotateIn 0.6s ease-out forwards;
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.8);
+    }
+    
+    @keyframes woodashRotateIn {
+        to {
+            opacity: 1;
+            transform: rotate(0deg) scale(1);
+        }
+    }
+    
+    /* Micro-interactions */
+    .woodash-micro-interaction {
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .woodash-micro-interaction:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .woodash-micro-interaction:active {
+        transform: translateY(0);
+        transition: all 0.1s;
+    }
+    
+    /* Loading states */
+    .woodash-skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: woodashSkeleton 1.5s infinite;
+    }
+    
+    @keyframes woodashSkeleton {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+    
+    .dark-theme .woodash-skeleton {
+        background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+        background-size: 200% 100%;
     }
     .woodash-gradient-text {
         @apply bg-clip-text text-transparent bg-gradient-to-r from-[#824DEB] to-[#814deb];
+    }
+    
+    /* Dark Theme Styles */
+    .dark-theme {
+        @apply bg-gray-900 text-gray-100;
+    }
+    .dark-theme .woodash-main,
+    .dark-theme .woodash-slideshow,
+    .dark-theme .woodash-content,
+    .dark-theme .woodash-card,
+    .dark-theme .woodash-metric-card,
+    .dark-theme .woodash-chart-container,
+    .dark-theme .woodash-hover-card
+    {
+        @apply bg-gray-800 border-purple-700;
+    }
+    .dark-theme .darkmode-toggle4
+    {
+        @apply bg-gradient-to-r from-gray-800 to-gray-800;
+    }
+    .dark-theme .woodash-slideshow,
+    .dark-theme .woodash-sidebar {
+        @apply bg-gray-800 border-none;
+    }
+    
+    .dark-theme .woodash-card:hover,
+    .dark-theme .woodash-metric-card:hover,
+    .dark-theme .woodash-chart-container:hover,
+    .dark-theme .woodash-hover-card:hover {
+        @apply bg-gray-700 border-purple-600;
+    }
+    
+    .dark-theme .woodash-nav-link {
+        @apply text-gray-300 hover:text-white hover:bg-gray-800;
+    }
+    
+    .dark-theme .woodash-nav-link.active {
+        @apply bg-purple-900 text-purple-300;
+    }
+    
+    .dark-theme .woodash-btn-primary {
+        @apply bg-purple-600 hover:bg-purple-700 text-white;
+    }
+    
+    .dark-theme .woodash-btn-secondary {
+        @apply bg-gray-700 text-gray-200 hover:bg-gray-600;
+    }
+    
+    .dark-theme .woodash-table {
+        @apply bg-gray-800 border-purple-700;
+    }
+    
+    .dark-theme .woodash-table th {
+        @apply bg-gray-700 text-gray-200 border-gray-600;
+    }
+    
+    .dark-theme .woodash-table td {
+        @apply border-gray-600 text-gray-300;
+    }
+    
+    .dark-theme .woodash-table tr:hover {
+        @apply bg-purple-700;
+    }
+    
+    .dark-theme .woodash-dropdown {
+        @apply bg-gray-800 border-gray-700 shadow-2xl;
+    }
+    
+    .dark-theme .woodash-dropdown-item {
+        @apply text-gray-200 hover:bg-gray-700;
+    }
+    
+    .dark-theme .woodash-dropdown-item:hover {
+        @apply text-white;
+    }
+    
+    .dark-theme .woodash-modal {
+        @apply bg-gray-800 border-gray-700;
+    }
+    
+    .dark-theme .woodash-modal-overlay {
+        @apply bg-black bg-opacity-70;
+    }
+    
+    .dark-theme input,
+    .dark-theme textarea,
+    .dark-theme select {
+        @apply bg-gray-700 border-gray-600 text-gray-200;
+    }
+    
+    .dark-theme input:focus,
+    .dark-theme textarea:focus,
+    .dark-theme select:focus {
+        @apply border-purple-500 ring-purple-500;
+    }
+    
+    .dark-theme .woodash-ai-chat {
+        @apply bg-gray-800 border-gray-700;
+    }
+    
+    .dark-theme .woodash-ai-message {
+        @apply bg-gray-700 text-gray-200;
+    }
+    
+    .dark-theme .woodash-ai-message.user {
+        @apply bg-purple-600 text-white;
+    }
+    
+    .dark-theme .woodash-search-input {
+        @apply bg-gray-700 border-gray-600 text-gray-200;
+    }
+    
+    .dark-theme .woodash-search-results {
+        @apply bg-gray-800 border-gray-700;
+    }
+    
+    .dark-theme .woodash-search-result {
+        @apply text-gray-200 hover:bg-gray-700;
+    }
+    
+    .dark-theme .text-gray-500 {
+        @apply text-gray-400;
+    }
+    
+    .dark-theme .text-gray-600 {
+        @apply text-gray-300;
+    }
+    
+    .dark-theme .text-gray-700 {
+        @apply text-gray-200;
+    }
+    
+    .dark-theme .text-gray-800 {
+        @apply text-gray-100;
+    }
+    
+    .dark-theme .text-gray-900 {
+        @apply text-white;
+    }
+    
+    .dark-theme .bg-gray-50 {
+        @apply bg-gray-800;
+    }
+    
+    .dark-theme .bg-gray-100 {
+        @apply bg-gray-700;
+    }
+    
+    .dark-theme .bg-white {
+        @apply bg-gray-800;
+    }
+    
+    .dark-theme .border-gray-200 {
+        @apply border-gray-700;
+    }
+    
+    .dark-theme .border-gray-300 {
+        @apply border-gray-600;
     }
     .woodash-scrollbar {
         scrollbar-width: thin;
@@ -954,6 +1238,10 @@
                     <i class="fa-solid fa-file-chart-line w-5"></i>
                     <span>Reports</span>
                 </a>
+                <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 1.0s" data-page="integrations">
+                    <i class="fa-solid fa-bolt w-5"></i>
+                    <span>Integrations</span>
+                </a>
                 <a href="#" class="woodash-nav-link woodash-hover-card woodash-slide-up" style="animation-delay: 0.9s" data-page="settings">
                     <i class="fa-solid fa-gear w-5"></i>
                     <span>Settings</span>
@@ -977,8 +1265,8 @@
                 <!-- Header -->
                 <header class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8 woodash-fade-in">
                     <div>
-                        <h1 class="text-2xl font-bold woodash-gradient-text" id="page-title">Dashboard</h1>
-                        <p class="text-gray-500" id="page-description">Welcome back, John! Here's what's happening with your store.</p>
+                        <h1 class="text-2xl font-bold woodash-gradient-text" id="page-title" data-searchable="dashboard">Dashboard</h1>
+                        <p class="text-gray-500" id="page-description" data-searchable="dashboard">Welcome back, John! Here's what's happening with your store.</p>
                     </div>
                     <div class="flex items-center gap-3">
                         <button id="toggle-slideshow" class="woodash-btn woodash-btn-secondary woodash-hover-card">
@@ -1078,7 +1366,7 @@
 
                 <!-- Slideshow Section -->
                 <div id="slideshow-section" class="mb-8 relative overflow-hidden rounded-xl woodash-glass-effect">
-                    <div class="woodash-slideshow relative h-[300px]">
+                    <div class="woodash-slideshow relative h-[300px]" style="border:none !important">
                         <!-- Slide 1 -->
                         <div class="woodash-slide absolute inset-0 p-8 flex items-center woodash-fade-in" style="animation-delay: 0.1s">
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
@@ -1373,7 +1661,7 @@
                 </div>
 
             <!-- AI Insights Section -->
-                <div class="woodash-ai-insights woodash-fade-in-up mb-6">
+                <div class="darkmode-toggle4 woodash-ai-insights woodash-fade-in-up mb-6">
                     <div class="flex items-center justify-between mb-4">
                         <h3 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
                             <i class="fa-solid fa-brain text-blue-600"></i>
@@ -1483,21 +1771,21 @@
                             </div>
                         </div>
                         <div class="space-y-4">
-                            <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                            <div class="darkmode-toggle4 flex justify-between items-center p-3 bg-purple-50 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-users text-purple-600"></i>
                                     <span class="text-sm font-medium">Online Visitors</span>
                                 </div>
                                 <span class="text-lg font-bold text-purple-600" id="live-visitors">24</span>
                             </div>
-                            <div class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                            <div class="darkmode-toggle4 flex justify-between items-center p-3 bg-blue-50 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-shopping-cart text-blue-600"></i>
                                     <span class="text-sm font-medium">Cart Additions</span>
                                 </div>
                                 <span class="text-lg font-bold text-blue-600" id="cart-additions">8</span>
                             </div>
-                            <div class="flex justify-between items-center p-3 bg-purple-50 rounded-lg">
+                            <div class="darkmode-toggle4 flex justify-between items-center p-3 bg-purple-50 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-eye text-purple-600"></i>
                                     <span class="text-sm font-medium">Page Views</span>
@@ -1564,7 +1852,7 @@
                             </button>
                         </div>
                         <div class="space-y-3">
-                            <div class="flex items-center justify-between p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                            <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-exclamation-triangle text-red-500"></i>
                                     <div>
@@ -1574,7 +1862,7 @@
                                 </div>
                                 <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">Restock</button>
                             </div>
-                            <div class="flex items-center justify-between p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                            <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-exclamation-triangle text-yellow-500"></i>
                                     <div>
@@ -1584,7 +1872,7 @@
                                 </div>
                                 <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">Restock</button>
                             </div>
-                            <div class="flex items-center justify-between p-3 bg-orange-50 border-l-4 border-orange-500 rounded-lg">
+                            <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-orange-50 border-l-4 border-orange-500 rounded-lg">
                                 <div class="flex items-center gap-3">
                                     <i class="fa-solid fa-box text-orange-500"></i>
                                     <div>
@@ -1649,7 +1937,7 @@
                             </button>
                         </div>
                         <div class="space-y-4 woodash-scrollbar" style="max-height: 400px;">
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 woodash-float">
                                     <i class="fa-solid fa-shopping-cart"></i>
                                 </div>
@@ -1661,7 +1949,7 @@
                                     <p class="text-sm text-gray-500">John Doe placed an order worth $299.99</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 woodash-float">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
@@ -1673,7 +1961,7 @@
                                     <p class="text-sm text-gray-500">Alice Smith registered a new account</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 woodash-float">
                                     <i class="fa-solid fa-box"></i>
                                 </div>
@@ -1685,7 +1973,7 @@
                                     <p class="text-sm text-gray-500">Product "Wireless Headphones" is running low on stock</p>
                                 </div>
                             </div>
-                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200 woodash-fade-in">
+                            <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200 woodash-fade-in">
                                 <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600 woodash-float">
                                     <i class="fa-solid fa-star"></i>
                                 </div>
@@ -1815,23 +2103,23 @@
                                     </div>
                                 </div>
                                 <div class="space-y-4">
-                                    <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                                    <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-blue-50 rounded-lg">
                                         <span class="font-medium">Visitors</span>
                                         <span class="text-xl font-bold">12,456</span>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                                    <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-purple-50 rounded-lg">
                                         <span class="font-medium">Product Views</span>
                                         <span class="text-xl font-bold">8,234</span>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
+                                    <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-yellow-50 rounded-lg">
                                         <span class="font-medium">Add to Cart</span>
                                         <span class="text-xl font-bold">2,156</span>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                                    <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-purple-50 rounded-lg">
                                         <span class="font-medium">Checkout</span>
                                         <span class="text-xl font-bold">1,234</span>
                                     </div>
-                                    <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg">
+                                    <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-purple-50 rounded-lg flex items-center justify-between p-4 bg-red-50 rounded-lg">
                                         <span class="font-medium">Purchase</span>
                                         <span class="text-xl font-bold">856</span>
                                     </div>
@@ -1884,10 +2172,10 @@
                         <div class="woodash-chart-container woodash-hover-card woodash-glow">
                             <div class="flex justify-between items-center mb-6">
                                 <div>
-                                    <h2 class="text-lg font-bold woodash-gradient-text">Product Management</h2>
-                                    <p class="text-gray-500 text-sm">Manage your products and inventory</p>
+                            <h2 class="text-lg font-bold woodash-gradient-text" data-searchable="product">Product Management</h2>
+                            <p class="text-gray-500 text-sm" data-searchable="product">Manage your products and inventory</p>
                                 </div>
-                                <button class="woodash-btn woodash-btn-primary">
+                                <button id="openProductModal" class="woodash-btn woodash-btn-primary" onclick="document.getElementById('addProductModal').style.display = 'flex';">
                                     <i class="fa-solid fa-plus mr-2"></i>
                                     Add Product
                                 </button>
@@ -2397,7 +2685,7 @@
                 </button>
             </div>
             <div class="space-y-3">
-                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border-l-4 border-purple-500">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg border-l-4 border-purple-500">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold">1</div>
                         <div>
@@ -2410,7 +2698,7 @@
                         <p class="text-sm text-gray-500">$1,245 saved</p>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-500">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-500">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold">2</div>
                         <div>
@@ -2423,7 +2711,7 @@
                         <p class="text-sm text-gray-500">$670 saved</p>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-l-4 border-orange-500">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gradient-to-r from-orange-50 to-yellow-50 rounded-lg border-l-4 border-orange-500">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold">3</div>
                         <div>
@@ -2441,7 +2729,7 @@
     </div>
 
     <!-- Coupon Management -->
-    <div class="woodash-chart-container woodash-hover-card woodash-glow">
+    <div class="woodash-chart-container hover:bg-purple-600 woodash-glow">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
             <div>
                 <h2 class="text-lg font-bold woodash-gradient-text">Coupon Management</h2>
@@ -2466,7 +2754,7 @@
         </div>
         
         <!-- Quick Actions -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg">
+        <div class="darkmode-toggle4 grid grid-cols-1 md:grid-cols-4 gap-4 mb-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg">
             <button class="woodash-btn woodash-btn-secondary woodash-hover-card flex flex-col items-center gap-2 p-4">
                 <i class="fa-solid fa-percentage text-xl text-purple-600"></i>
                 <span class="text-sm">Percentage Discount</span>
@@ -2700,28 +2988,28 @@
                 </div>
             </div>
             <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-purple-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-purple-50 rounded-lg">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-eye text-purple-600"></i>
                         <span class="font-medium">Coupon Views</span>
                     </div>
                     <span class="text-xl font-bold text-purple-600">1,234</span>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-blue-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-blue-50 rounded-lg">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-mouse-pointer text-blue-600"></i>
                         <span class="font-medium">Coupon Clicks</span>
                     </div>
                     <span class="text-xl font-bold text-blue-600">856</span>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-green-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-green-50 rounded-lg">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-shopping-cart text-green-600"></i>
                         <span class="font-medium">Coupon Uses</span>
                     </div>
                     <span class="text-xl font-bold text-green-600">234</span>
                 </div>
-                <div class="flex items-center justify-between p-4 bg-orange-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-orange-50 rounded-lg">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-percentage text-orange-600"></i>
                         <span class="font-medium">Conversion Rate</span>
@@ -2740,7 +3028,7 @@
                 </div>
             </div>
             <div class="space-y-3 woodash-scrollbar" style="max-height: 320px; overflow-y: auto;">
-                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200">
                     <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600">
                         <i class="fa-solid fa-check"></i>
                     </div>
@@ -2752,7 +3040,7 @@
                         <p class="text-sm text-gray-500">John Doe saved $25.99 on order #1234</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200">
                     <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600">
                         <i class="fa-solid fa-plus"></i>
                     </div>
@@ -2764,7 +3052,7 @@
                         <p class="text-sm text-gray-500">FLASH30 - 30% off flash sale items</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200">
                     <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600">
                         <i class="fa-solid fa-exclamation-triangle"></i>
                     </div>
@@ -2776,7 +3064,7 @@
                         <p class="text-sm text-gray-500">FREESHIP has reached its usage limit</p>
                     </div>
                 </div>
-                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-purple-600 transition-colors duration-200">
                     <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600">
                         <i class="fa-solid fa-clock"></i>
                     </div>
@@ -3020,15 +3308,15 @@
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <h3 class="text-md font-semibold text-gray-900 mb-4">Sentiment Analysis</h3>
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="text-center p-3 bg-green-50 rounded-lg">
+                    <div class="darkmode-toggle4 text-center p-3 bg-green-50 rounded-lg">
                         <div class="text-2xl font-bold text-green-600">78%</div>
                         <div class="text-sm text-green-700">Positive</div>
                     </div>
-                    <div class="text-center p-3 bg-yellow-50 rounded-lg">
+                    <div class="darkmode-toggle4 text-center p-3 bg-yellow-50 rounded-lg">
                         <div class="text-2xl font-bold text-yellow-600">18%</div>
                         <div class="text-sm text-yellow-700">Neutral</div>
                     </div>
-                    <div class="text-center p-3 bg-red-50 rounded-lg">
+                    <div class="darkmode-toggle4 text-center p-3 bg-red-50 rounded-lg">
                         <div class="text-2xl font-bold text-red-600">4%</div>
                         <div class="text-sm text-red-700">Negative</div>
                     </div>
@@ -3068,7 +3356,7 @@
                 </button>
             </div>
             <div class="space-y-4">
-                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-l-4 border-yellow-500">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-l-4 border-yellow-500">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
                             <i class="fa-solid fa-headphones text-gray-600"></i>
@@ -3091,30 +3379,29 @@
                     </div>
                 </div>
                 
-                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg border-l-4 border-blue-500">
+                                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-lg border-l-4 border-yellow-500">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
-                            <i class="fa-solid fa-mobile-screen text-gray-600"></i>
+                            <i class="fa-solid fa-headphones text-gray-600"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-gray-900">Smart Watch Series X</p>
+                            <p class="font-medium text-gray-900">Wireless Headphones Pro</p>
                             <div class="flex items-center gap-2">
                                 <div class="flex items-center gap-1">
                                     <i class="fa-solid fa-star text-yellow-500 text-xs"></i>
-                                    <span class="text-sm font-medium">4.6</span>
+                                    <span class="text-sm font-medium">4.8</span>
                                 </div>
                                 <span class="text-sm text-gray-500">•</span>
-                                <span class="text-sm text-gray-600">189 reviews</span>
+                                <span class="text-sm text-gray-600">234 reviews</span>
                             </div>
                         </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-lg font-bold text-blue-600">189</div>
+                        <div class="text-lg font-bold text-yellow-600">234</div>
                         <div class="text-sm text-gray-500">reviews</div>
                     </div>
                 </div>
-                
-                <div class="flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
+                <div class="darkmode-toggle4 flex items-center justify-between p-4 bg-gradient-to-r from-green-50 to-teal-50 rounded-lg border-l-4 border-green-500">
                     <div class="flex items-center gap-4">
                         <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center">
                             <i class="fa-solid fa-laptop text-gray-600"></i>
@@ -3219,7 +3506,7 @@
                     </div>
                 </div>
                 
-                <div class="p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
+                <div class="darkmode-toggle4 p-4 bg-red-50 rounded-lg border-l-4 border-red-500">
                     <div class="flex items-start justify-between mb-2">
                         <div class="flex items-center gap-2">
                             <div class="w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white text-sm font-semibold">MB</div>
@@ -3253,6 +3540,143 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Add Product Modal -->
+    <div id="addProductModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" style="display: none;" onclick="if(event.target === this) this.style.display = 'none';">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-900">Add New Product</h3>
+                    <button id="closeProductModal" class="text-gray-400 hover:text-gray-600 transition-colors" onclick="document.getElementById('addProductModal').style.display = 'none';">
+                        <i class="fa-solid fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <form id="addProductForm" class="p-6 space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Product Name -->
+                    <div class="md:col-span-2">
+                        <label for="productName" class="block text-sm font-medium text-gray-700 mb-2">Product Name *</label>
+                        <input type="text" id="productName" name="productName" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                    
+                    <!-- SKU -->
+                    <div>
+                        <label for="productSku" class="block text-sm font-medium text-gray-700 mb-2">SKU *</label>
+                        <input type="text" id="productSku" name="productSku" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                    
+                    <!-- Category -->
+                    <div>
+                        <label for="productCategory" class="block text-sm font-medium text-gray-700 mb-2">Category *</label>
+                        <select id="productCategory" name="productCategory" required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                            <option value="">Select Category</option>
+                            <option value="electronics">Electronics</option>
+                            <option value="clothing">Clothing</option>
+                            <option value="home">Home & Garden</option>
+                            <option value="sports">Sports</option>
+                            <option value="books">Books</option>
+                            <option value="beauty">Beauty</option>
+                            <option value="toys">Toys</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Price -->
+                    <div>
+                        <label for="productPrice" class="block text-sm font-medium text-gray-700 mb-2">Price *</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                            <input type="number" id="productPrice" name="productPrice" step="0.01" min="0" required
+                                   class="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                        </div>
+                    </div>
+                    
+                    <!-- Stock Quantity -->
+                    <div>
+                        <label for="productStock" class="block text-sm font-medium text-gray-700 mb-2">Stock Quantity *</label>
+                        <input type="number" id="productStock" name="productStock" min="0" required
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                    
+                    <!-- Weight -->
+                    <div>
+                        <label for="productWeight" class="block text-sm font-medium text-gray-700 mb-2">Weight (lbs)</label>
+                        <input type="number" id="productWeight" name="productWeight" step="0.1" min="0"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                    
+                    <!-- Dimensions -->
+                    <div>
+                        <label for="productDimensions" class="block text-sm font-medium text-gray-700 mb-2">Dimensions (L×W×H)</label>
+                        <input type="text" id="productDimensions" name="productDimensions" placeholder="e.g., 10×8×5"
+                               class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                </div>
+                
+                <!-- Description -->
+                <div>
+                    <label for="productDescription" class="block text-sm font-medium text-gray-700 mb-2">Description</label>
+                    <textarea id="productDescription" name="productDescription" rows="4"
+                              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all duration-200 resize-none"
+                              placeholder="Enter product description..."></textarea>
+                </div>
+                
+                <!-- Image Upload -->
+                <div>
+                    <label for="productImage" class="block text-sm font-medium text-gray-700 mb-2">Product Image</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-purple-400 transition-colors">
+                        <input type="file" id="productImage" name="productImage" accept="image/*" class="hidden">
+                        <div id="imageUploadArea" class="cursor-pointer">
+                            <i class="fa-solid fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                            <p class="text-gray-600">Click to upload image or drag and drop</p>
+                            <p class="text-sm text-gray-400 mt-1">PNG, JPG, GIF up to 10MB</p>
+                        </div>
+                        <div id="imagePreview" class="hidden mt-4">
+                            <img id="previewImg" class="max-w-full h-32 object-cover rounded-lg mx-auto">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Status -->
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                    <div class="flex space-x-4">
+                        <label class="flex items-center">
+                            <input type="radio" name="productStatus" value="active" checked
+                                   class="text-purple-600 focus:ring-purple-500">
+                            <span class="ml-2 text-gray-700">Active</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="productStatus" value="inactive"
+                                   class="text-purple-600 focus:ring-purple-500">
+                            <span class="ml-2 text-gray-700">Inactive</span>
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="productStatus" value="draft"
+                                   class="text-purple-600 focus:ring-purple-500">
+                            <span class="ml-2 text-gray-700">Draft</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Form Actions -->
+                <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                    <button type="button" id="cancelProductForm" class="woodash-btn woodash-btn-secondary" onclick="document.getElementById('addProductModal').style.display = 'none';">
+                        Cancel
+                    </button>
+                    <button type="submit" class="woodash-btn woodash-btn-primary">
+                        <i class="fa-solid fa-plus mr-2"></i>
+                        Add Product
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -3515,7 +3939,7 @@
                 </div>
             </div>
             <div class="space-y-3">
-                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-green-50 rounded-lg">
                     <span class="font-medium text-green-800">Quality</span>
                     <div class="flex items-center gap-2">
                         <div class="woodash-progress w-24">
@@ -3524,7 +3948,7 @@
                         <span class="text-sm text-green-600">342 mentions</span>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-blue-50 rounded-lg">
                     <span class="font-medium text-blue-800">Fast</span>
                     <div class="flex items-center gap-2">
                         <div class="woodash-progress w-24">
@@ -3533,7 +3957,7 @@
                         <span class="text-sm text-blue-600">289 mentions</span>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-purple-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-purple-50 rounded-lg">
                     <span class="font-medium text-purple-800">Excellent</span>
                     <div class="flex items-center gap-2">
                         <div class="woodash-progress w-24">
@@ -3542,7 +3966,7 @@
                         <span class="text-sm text-purple-600">267 mentions</span>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
                     <span class="font-medium text-yellow-800">Recommend</span>
                     <div class="flex items-center gap-2">
                         <div class="woodash-progress w-24">
@@ -3551,7 +3975,7 @@
                         <span class="text-sm text-yellow-600">234 mentions</span>
                     </div>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-red-50 rounded-lg">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-red-50 rounded-lg">
                     <span class="font-medium text-red-800">Problem</span>
                     <div class="flex items-center gap-2">
                         <div class="woodash-progress w-24">
@@ -3572,7 +3996,7 @@
                 </div>
             </div>
             <div class="space-y-6">
-                <div class="text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg">
+                <div class="darkmode-toggle4 text-center p-6 bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg">
                     <div class="text-3xl font-bold text-purple-600 mb-2">2.4 hrs</div>
                     <div class="text-sm text-gray-600">Average Response Time</div>
                     <div class="text-xs text-green-600 mt-1">
@@ -3581,17 +4005,17 @@
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
-                    <div class="text-center p-4 bg-green-50 rounded-lg">
+                    <div class="darkmode-toggle4 text-center p-4 bg-green-50 rounded-lg">
                         <div class="text-2xl font-bold text-green-600">92%</div>
                         <div class="text-sm text-green-700">Response Rate</div>
                     </div>
-                    <div class="text-center p-4 bg-blue-50 rounded-lg">
+                    <div class="darkmode-toggle4 text-center p-4 bg-blue-50 rounded-lg">
                         <div class="text-2xl font-bold text-blue-600">4.8</div>
                         <div class="text-sm text-blue-700">Avg. Helpfulness</div>
                     </div>
                 </div>
                 
-                <div class="p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
+                <div class="darkmode-toggle4 p-4 bg-yellow-50 rounded-lg border-l-4 border-yellow-500">
                     <div class="flex items-center gap-2 mb-2">
                         <i class="fa-solid fa-lightbulb text-yellow-600"></i>
                         <span class="font-medium text-yellow-800">Tip</span>
@@ -3603,6 +4027,661 @@
     </div>
 </div>
 <!-- End Customer Reviews Page -->
+
+<!-- Improved Updates & New Features Page -->
+<div id="integrations-page" class="woodash-page-content hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+        <!-- Payment Gateways -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Payment Gateways</h2>
+                    <p class="text-gray-500 text-sm">Manage payment processors</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-paypal text-green-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-green-800">PayPal</p>
+                            <p class="text-sm text-green-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-green-600 hover:text-green-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-stripe text-blue-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-blue-800">Stripe</p>
+                            <p class="text-sm text-blue-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gray-50 border-l-4 border-gray-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-credit-card text-gray-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">Square</p>
+                            <p class="text-sm text-gray-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shipping Providers -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Shipping Providers</h2>
+                    <p class="text-gray-500 text-sm">Manage shipping integrations</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-orange-50 border-l-4 border-orange-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-truck text-orange-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-orange-800">FedEx</p>
+                            <p class="text-sm text-orange-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-orange-600 hover:text-orange-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-purple-50 border-l-4 border-purple-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-box text-purple-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-purple-800">UPS</p>
+                            <p class="text-sm text-purple-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-purple-600 hover:text-purple-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gray-50 border-l-4 border-gray-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-shipping-fast text-gray-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">DHL</p>
+                            <p class="text-sm text-gray-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Marketing Tools -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Marketing Tools</h2>
+                    <p class="text-gray-500 text-sm">Email & marketing integrations</p>
+                </div>
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card">
+                    <i class="fa-solid fa-plus"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-mailchimp text-red-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-red-800">Mailchimp</p>
+                            <p class="text-sm text-red-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-red-600 hover:text-red-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-google text-blue-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-blue-800">Google Analytics</p>
+                            <p class="text-sm text-blue-600">Connected</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                            <i class="fa-solid fa-cog"></i>
+                        </button>
+                        <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                            <i class="fa-solid fa-unlink"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-gray-50 border-l-4 border-gray-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-facebook text-gray-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-gray-800">Facebook Pixel</p>
+                            <p class="text-sm text-gray-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-purple-50 border-l-4 border-purple-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-slack text-purple-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-purple-800">Slack</p>
+                            <p class="text-sm text-purple-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-indigo-50 border-l-4 border-indigo-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-discord text-indigo-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-indigo-800">Discord</p>
+                            <p class="text-sm text-indigo-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+                <div class="darkmode-toggle4 flex items-center justify-between p-3 bg-pink-50 border-l-4 border-pink-500 rounded-lg">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-brands fa-instagram text-pink-600 text-xl"></i>
+                        <div>
+                            <p class="font-medium text-pink-800">Instagram</p>
+                            <p class="text-sm text-pink-600">Not Connected</p>
+                        </div>
+                    </div>
+                    <button class="woodash-btn woodash-btn-primary text-xs px-3 py-1">
+                        Connect
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Integration Status Overview -->
+    <div class="woodash-chart-container woodash-hover-card woodash-glow mb-8">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-lg font-bold woodash-gradient-text">Integration Status Overview</h2>
+                <p class="text-gray-500 text-sm">Monitor your connected services</p>
+            </div>
+            <div class="flex gap-2">
+                <button class="woodash-btn woodash-btn-secondary woodash-hover-card" id="refresh-integrations">
+                    <i class="fa-solid fa-refresh"></i>
+                    <span>Refresh</span>
+                </button>
+                <button class="woodash-btn woodash-btn-primary woodash-hover-card" id="add-integration">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Integration</span>
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div class="darkmode-toggle4 text-center p-4 bg-green-50 rounded-lg">
+                <div class="text-2xl font-bold text-green-600" id="connected-count">8</div>
+                <div class="text-sm text-green-800">Connected</div>
+            </div>
+            <div class="darkmode-toggle4 text-center p-4 bg-yellow-50 rounded-lg">
+                <div class="text-2xl font-bold text-yellow-600" id="pending-count">3</div>
+                <div class="text-sm text-yellow-800">Pending</div>
+            </div>
+            <div class="darkmode-toggle4 text-center p-4 bg-red-50 rounded-lg">
+                <div class="text-2xl font-bold text-red-600" id="failed-count">1</div>
+                <div class="text-sm text-red-800">Failed</div>
+            </div>
+            <div class="darkmode-toggle4 text-center p-4 bg-gray-50 rounded-lg">
+                <div class="text-2xl font-bold text-gray-600" id="available-count">18</div>
+                <div class="text-sm text-gray-800">Available</div>
+            </div>
+        </div>
+        <div class="overflow-x-auto woodash-scrollbar">
+            <table class="woodash-table w-full">
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Last Sync</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="integrations-table">
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-paypal text-green-600"></i>
+                                <span>PayPal</span>
+                            </div>
+                        </td>
+                        <td>Payment</td>
+                        <td><span class="woodash-badge woodash-badge-success">Connected</span></td>
+                        <td>2 minutes ago</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Test">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                                    <i class="fa-solid fa-unlink"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-stripe text-blue-600"></i>
+                                <span>Stripe</span>
+                            </div>
+                        </td>
+                        <td>Payment</td>
+                        <td><span class="woodash-badge woodash-badge-success">Connected</span></td>
+                        <td>5 minutes ago</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Test">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                                    <i class="fa-solid fa-unlink"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-solid fa-truck text-orange-600"></i>
+                                <span>FedEx</span>
+                            </div>
+                        </td>
+                        <td>Shipping</td>
+                        <td><span class="woodash-badge woodash-badge-success">Connected</span></td>
+                        <td>1 hour ago</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Test">
+                                    <i class="fa-solid fa-play"></i>
+                                </button>
+                                <button class="text-red-500 hover:text-red-700" title="Disconnect">
+                                    <i class="fa-solid fa-unlink"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-mailchimp text-red-600"></i>
+                                <span>Mailchimp</span>
+                            </div>
+                        </td>
+                        <td>Marketing</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Pending</span></td>
+                        <td>Never</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Retry">
+                                    <i class="fa-solid fa-refresh"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-google text-blue-600"></i>
+                                <span>Google Analytics</span>
+                            </div>
+                        </td>
+                        <td>Analytics</td>
+                        <td><span class="woodash-badge woodash-badge-danger">Failed</span></td>
+                        <td>3 hours ago</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Retry">
+                                    <i class="fa-solid fa-refresh"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-slack text-purple-600"></i>
+                                <span>Slack</span>
+                            </div>
+                        </td>
+                        <td>Communication</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Pending</span></td>
+                        <td>Never</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Connect">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-discord text-indigo-600"></i>
+                                <span>Discord</span>
+                            </div>
+                        </td>
+                        <td>Communication</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Pending</span></td>
+                        <td>Never</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Connect">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="flex items-center gap-3">
+                                <i class="fa-brands fa-instagram text-pink-600"></i>
+                                <span>Instagram</span>
+                            </div>
+                        </td>
+                        <td>Social Media</td>
+                        <td><span class="woodash-badge woodash-badge-warning">Pending</span></td>
+                        <td>Never</td>
+                        <td>
+                            <div class="flex gap-2">
+                                <button class="text-blue-600 hover:text-blue-800" title="Configure">
+                                    <i class="fa-solid fa-cog"></i>
+                                </button>
+                                <button class="text-green-600 hover:text-green-800" title="Connect">
+                                    <i class="fa-solid fa-link"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Popular Integrations -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Popular Payment Integrations -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Popular Payment Integrations</h2>
+                    <p class="text-gray-500 text-sm">Most used payment gateways</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-paypal text-2xl text-blue-600"></i>
+                        <div>
+                            <h3 class="font-medium">PayPal</h3>
+                            <p class="text-sm text-gray-500">Accept payments worldwide</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-stripe text-2xl text-purple-600"></i>
+                        <div>
+                            <h3 class="font-medium">Stripe</h3>
+                            <p class="text-sm text-gray-500">Modern payment processing</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-amazon text-2xl text-orange-600"></i>
+                        <div>
+                            <h3 class="font-medium">Amazon Pay</h3>
+                            <p class="text-sm text-gray-500">Leverage Amazon's network</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-blue-600">$29/mo</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Popular Marketing Integrations -->
+        <div class="woodash-chart-container woodash-hover-card woodash-glow">
+            <div class="flex justify-between items-center mb-6">
+                <div>
+                    <h2 class="text-lg font-bold woodash-gradient-text">Popular Marketing Integrations</h2>
+                    <p class="text-gray-500 text-sm">Grow your customer base</p>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-mailchimp text-2xl text-red-600"></i>
+                        <div>
+                            <h3 class="font-medium">Mailchimp</h3>
+                            <p class="text-sm text-gray-500">Email marketing automation</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-google text-2xl text-blue-600"></i>
+                        <div>
+                            <h3 class="font-medium">Google Ads</h3>
+                            <p class="text-sm text-gray-500">Run targeted ad campaigns</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-blue-600">Pay per click</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-facebook text-2xl text-blue-700"></i>
+                        <div>
+                            <h3 class="font-medium">Facebook Ads</h3>
+                            <p class="text-sm text-gray-500">Social media advertising</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-blue-600">Pay per click</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-slack text-2xl text-purple-600"></i>
+                        <div>
+                            <h3 class="font-medium">Slack</h3>
+                            <p class="text-sm text-gray-500">Team communication & notifications</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-discord text-2xl text-indigo-600"></i>
+                        <div>
+                            <h3 class="font-medium">Discord</h3>
+                            <p class="text-sm text-gray-500">Community engagement & support</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+                <div class="flex items-center justify-between p-4 bg-white border border-gray-200 rounded-lg hover:border-purple-300 transition-colors cursor-pointer">
+                    <div class="flex items-center gap-4">
+                        <i class="fa-brands fa-instagram text-2xl text-pink-600"></i>
+                        <div>
+                            <h3 class="font-medium">Instagram</h3>
+                            <p class="text-sm text-gray-500">Social media marketing & insights</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-sm font-medium text-green-600">Free</div>
+                        <button class="woodash-btn woodash-btn-primary text-xs mt-1">Install</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Integration Logs -->
+    <div class="woodash-chart-container woodash-hover-card woodash-glow mt-6">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h2 class="text-lg font-bold woodash-gradient-text">Integration Activity Logs</h2>
+                <p class="text-gray-500 text-sm">Recent integration activities and errors</p>
+            </div>
+            <button class="woodash-btn woodash-btn-secondary woodash-hover-card">
+                <i class="fa-solid fa-download"></i>
+                <span>Export Logs</span>
+            </button>
+        </div>
+        <div class="space-y-3 max-h-64 overflow-y-auto woodash-scrollbar">
+            <div class="darkmode-toggle4 flex items-start gap-3 p-3 bg-green-50 border-l-4 border-green-500 rounded-lg">
+                <i class="fa-solid fa-check-circle text-green-600 mt-1"></i>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium text-green-800">PayPal payment processed successfully</p>
+                        <span class="text-sm text-green-600">2 min ago</span>
+                    </div>
+                    <p class="text-sm text-green-700">Order #1234 - $299.99</p>
+                </div>
+            </div>
+            <div class="darkmode-toggle4 flex items-start gap-3 p-3 bg-blue-50 border-l-4 border-blue-500 rounded-lg">
+                <i class="fa-solid fa-info-circle text-blue-600 mt-1"></i>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium text-blue-800">Stripe webhook received</p>
+                        <span class="text-sm text-blue-600">5 min ago</span>
+                    </div>
+                    <p class="text-sm text-blue-700">Payment intent succeeded</p>
+                </div>
+            </div>
+            <div class="darkmode-toggle4 flex items-start gap-3 p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded-lg">
+                <i class="fa-solid fa-exclamation-triangle text-yellow-600 mt-1"></i>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium text-yellow-800">FedEx API rate limit warning</p>
+                        <span class="text-sm text-yellow-600">15 min ago</span>
+                    </div>
+                    <p class="text-sm text-yellow-700">Approaching API call limit</p>
+                </div>
+            </div>
+            <div class="darkmode-toggle4 flex items-start gap-3 p-3 bg-red-50 border-l-4 border-red-500 rounded-lg">
+                <i class="fa-solid fa-times-circle text-red-600 mt-1"></i>
+                <div class="flex-1">
+                    <div class="flex items-center justify-between">
+                        <p class="font-medium text-red-800">Google Analytics connection failed</p>
+                        <span class="text-sm text-red-600">1 hour ago</span>
+                    </div>
+                    <p class="text-sm text-red-700">Invalid API credentials</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Integrations Page -->
 
                     <!-- Settings Page -->
                     <div id="settings-page" class="woodash-page-content hidden">
@@ -4011,6 +5090,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    document.getElementById('darkmode-toggle').addEventListener('click', function() {
+    const dashboard = document.getElementById('woodash-dashboard');
+    if (dashboard.classList.contains('dark-theme')) {
+        dashboard.classList.remove('dark-theme');
+        localStorage.setItem('woodash_theme', 'light');
+    } else {
+        dashboard.classList.add('dark-theme');
+        localStorage.setItem('woodash_theme', 'dark');
+    }
+    });
     // Handle form submission
     addTaskForm.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -4098,60 +5187,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     };
 
-    function updateTaskProgress() {
-        const allTasks = taskList.querySelectorAll('.flex');
-        const completedTasks = taskList.querySelectorAll('input[type="checkbox"]:checked');
-        const total = allTasks.length;
-        const completed = completedTasks.length;
-        
-        if (total > 0) {
-            const percentage = (completed / total) * 100;
-            const progressBar = document.querySelector('.woodash-progress-bar');
-            const progressText = document.querySelector('.woodash-progress').previousElementSibling;
-            
-            if (progressBar) {
-                progressBar.style.width = `${percentage}%`;
-            }
-            if (progressText) {
-                progressText.textContent = `${completed} of ${total} tasks completed`;
-            }
-        }
-    }
+function updateTaskProgress() {
+    const taskList = document.getElementById('task-list');
+    if (!taskList) return;
 
-    function showNotification(message, type = 'info') {
-        const notification = document.createElement('div');
-        notification.className = `fixed top-4 right-4 z-50 px-4 py-2 rounded-lg shadow-lg text-white transform transition-all duration-300 translate-x-full`;
-        
-        const bgColors = {
-            'success': 'bg-purple-500',
-            'error': 'bg-red-500',
-            'info': 'bg-blue-500',
-            'warning': 'bg-yellow-500'
-        };
-        
-        notification.classList.add(bgColors[type] || bgColors.info);
-        notification.innerHTML = `
-            <div class="flex items-center gap-2">
-                <i class="fa-solid fa-check-circle"></i>
-                <span>${message}</span>
-            </div>
-        `;
-        
-        document.body.appendChild(notification);
-        
-        // Animate in
-        setTimeout(() => {
-            notification.classList.remove('translate-x-full');
-        }, 100);
-        
-        // Animate out and remove
-        setTimeout(() => {
-            notification.classList.add('translate-x-full');
-            setTimeout(() => {
-                document.body.removeChild(notification);
-            }, 300);
-        }, 3000);
+    const allTasks = taskList.querySelectorAll('div.flex');
+    const completedTasks = taskList.querySelectorAll('input[type="checkbox"]:checked');
+    const total = allTasks.length;
+    const completed = completedTasks.length;
+
+    // Find the correct progress bar and text inside the Task Manager card
+    const card = taskList.closest('.woodash-chart-container');
+    const progressText = card ? card.querySelector('.mt-4.text-center p') : null;
+    const progressBar = card ? card.querySelector('.woodash-progress-bar') : null;
+
+    if (progressText) {
+        progressText.textContent = `${completed} of ${total} tasks completed`;
     }
+    if (progressBar) {
+        const percentage = total > 0 ? (completed / total) * 100 : 0;
+        progressBar.style.width = `${percentage}%`;
+    }
+}
+
 });
 
 // Optimize asset loading
@@ -4248,7 +5306,34 @@ async function fetchData(endpoint, forceRefresh = false) {
     }
 
     try {
-        const response = await fetch(endpoint);
+        const response = await fetch(endpoint, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        // Check if response is ok
+        if (!response.ok) {
+            console.error(`HTTP error! status: ${response.status}`);
+            // Read the response as text to see the actual content
+            const responseText = await response.text();
+            console.error('Response content:', responseText);
+            console.warn(`API endpoint ${endpoint} not available (${response.status}), using mock data`);
+            return getMockData(endpoint);
+        }
+        
+        // Check if response is JSON
+        const contentType = response.headers.get('content-type');
+        if (!contentType || !contentType.includes('application/json')) {
+            console.warn(`API endpoint ${endpoint} returned non-JSON content (${contentType}), using mock data`);
+            // Read the response as text to see what we actually got
+            const responseText = await response.text();
+            console.error('Non-JSON response content:', responseText);
+            return getMockData(endpoint);
+        }
+        
+        // Attempt to parse as JSON
         const data = await response.json();
         dataCache.set(endpoint, {
             data,
@@ -4257,7 +5342,38 @@ async function fetchData(endpoint, forceRefresh = false) {
         return data;
     } catch (error) {
         console.error('Error fetching data:', error);
-        return null;
+        
+        // If it's a JSON parsing error, try to get the response text for debugging
+        if (error instanceof SyntaxError && error.message.includes('Unexpected token')) {
+            console.error('JSON parsing failed - likely received HTML instead of JSON');
+            console.error('This usually means the server returned an error page (404, 500, etc.)');
+        }
+        
+        console.log('Using mock data instead');
+        return getMockData(endpoint);
+    }
+}
+
+function getMockData(endpoint) {
+    switch(endpoint) {
+        case '/api/top-products':
+            return [
+                { name: 'Wireless Headphones', sales: 245, revenue: 12250 },
+                { name: 'Gaming Mouse', sales: 189, revenue: 9450 },
+                { name: 'USB Cable', sales: 156, revenue: 3120 },
+                { name: 'Bluetooth Speaker', sales: 134, revenue: 6700 },
+                { name: 'Phone Case', sales: 98, revenue: 1960 }
+            ];
+        case '/api/top-customers':
+            return [
+                { name: 'John Smith', orders: 12, total: 2450 },
+                { name: 'Sarah Johnson', orders: 8, total: 1890 },
+                { name: 'Mike Wilson', orders: 15, total: 3200 },
+                { name: 'Emily Davis', orders: 6, total: 1200 },
+                { name: 'David Brown', orders: 10, total: 2100 }
+            ];
+        default:
+            return [];
     }
 }
 
@@ -4596,6 +5712,654 @@ if (document.readyState === 'loading') {
 } else {
     initializeDashboard();
 }
+
+// Comprehensive error handling function
+function handleApiError(error, endpoint) {
+    console.error(`API Error for ${endpoint}:`, error);
+    
+    if (error instanceof SyntaxError && error.message.includes('Unexpected token')) {
+        console.error('🔍 JSON Parsing Error Detected:');
+        console.error('   - Expected: JSON data');
+        console.error('   - Received: HTML or other non-JSON content');
+        console.error('   - Likely cause: Server returned error page (404, 500, etc.)');
+        console.error('   - Solution: Check if API endpoint exists and is working');
+    } else if (error.name === 'TypeError' && error.message.includes('fetch')) {
+        console.error('🔍 Network Error Detected:');
+        console.error('   - Likely cause: Network connectivity issue or CORS problem');
+        console.error('   - Solution: Check network connection and CORS settings');
+    } else {
+        console.error('🔍 Unknown Error:', error.name, error.message);
+    }
+}
+
+// Global error handler for unhandled promise rejections
+window.addEventListener('unhandledrejection', function(event) {
+    console.error('🚨 Unhandled promise rejection:', event.reason);
+    
+    // Check if it's a JSON parsing error
+    if (event.reason instanceof SyntaxError && event.reason.message.includes('Unexpected token')) {
+        handleApiError(event.reason, 'Unknown endpoint');
+    }
+    
+    // Prevent the default behavior (which would log the error to console)
+    event.preventDefault();
+});
+
+// Global error handler for JavaScript errors
+window.addEventListener('error', function(event) {
+    console.error('🚨 JavaScript error:', event.error);
+    
+    // Check if it's a JSON parsing error
+    if (event.error instanceof SyntaxError && event.error.message.includes('Unexpected token')) {
+        handleApiError(event.error, 'Unknown endpoint');
+    }
+});
+
+// Keyboard Shortcuts System
+class KeyboardShortcuts {
+    constructor() {
+        this.shortcuts = new Map();
+        this.init();
+    }
+    
+    init() {
+        document.addEventListener('keydown', (e) => {
+            this.handleKeydown(e);
+        });
+        
+        // Register default shortcuts
+        this.registerShortcuts();
+    }
+    
+    registerShortcuts() {
+        // Theme toggle: Ctrl/Cmd + Shift + T
+        this.add('ctrl+shift+t', () => {
+            toggleTheme();
+            showNotification('Theme toggled (Ctrl+Shift+T)', 'info');
+        });
+        
+        // Refresh data: Ctrl/Cmd + R
+        this.add('ctrl+r', (e) => {
+            e.preventDefault();
+            refreshDashboardData();
+        });
+        
+        // Search: Ctrl/Cmd + K
+        this.add('ctrl+k', (e) => {
+            e.preventDefault();
+            const searchInput = document.querySelector('.woodash-search-input');
+            if (searchInput) {
+                searchInput.focus();
+                showNotification('Search activated (Ctrl+K)', 'info');
+            }
+        });
+        
+        // Add Product: Ctrl/Cmd + Shift + P
+        this.add('ctrl+shift+p', () => {
+            const addProductBtn = document.getElementById('openProductModal');
+            if (addProductBtn) {
+                addProductBtn.click();
+                showNotification('Add Product opened (Ctrl+Shift+P)', 'info');
+            }
+        });
+        
+        // Fullscreen: F11
+        this.add('f11', (e) => {
+            e.preventDefault();
+            toggleFullscreen();
+        });
+        
+        // Help: Ctrl/Cmd + ?
+        this.add('ctrl+?', (e) => {
+            e.preventDefault();
+            this.showHelp();
+        });
+        
+        // Escape: Close modals
+        this.add('escape', () => {
+            const modals = document.querySelectorAll('[id$="Modal"]');
+            modals.forEach(modal => {
+                if (modal.style.display !== 'none') {
+                    window.closeModal();
+                }
+            });
+        });
+        
+        // Navigation shortcuts
+        this.add('ctrl+1', () => this.navigateToPage('dashboard'));
+        this.add('ctrl+2', () => this.navigateToPage('products'));
+        this.add('ctrl+3', () => this.navigateToPage('orders'));
+        this.add('ctrl+4', () => this.navigateToPage('analytics'));
+    }
+    
+    add(keys, callback) {
+        this.shortcuts.set(keys, callback);
+    }
+    
+    handleKeydown(e) {
+        const key = this.getKeyString(e);
+        const shortcut = this.shortcuts.get(key);
+        
+        if (shortcut) {
+            shortcut(e);
+        }
+    }
+    
+    getKeyString(e) {
+        const parts = [];
+        
+        if (e.ctrlKey || e.metaKey) parts.push('ctrl');
+        if (e.shiftKey) parts.push('shift');
+        if (e.altKey) parts.push('alt');
+        
+        parts.push(e.key.toLowerCase());
+        
+        return parts.join('+');
+    }
+    
+    navigateToPage(page) {
+        const navLink = document.querySelector(`[data-page="${page}"]`);
+        if (navLink) {
+            navLink.click();
+            showNotification(`Navigated to ${page} (Ctrl+${page === 'dashboard' ? '1' : page === 'products' ? '2' : page === 'orders' ? '3' : '4'})`, 'info');
+        }
+    }
+    
+    showHelp() {
+        const helpContent = `
+            <div class="p-6">
+                <h3 class="text-lg font-bold mb-4">Keyboard Shortcuts</h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between">
+                        <span>Toggle Theme</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+Shift+T</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Refresh Data</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+R</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Search</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+K</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Add Product</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+Shift+P</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Fullscreen</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">F11</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Dashboard</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+1</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Products</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+2</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Orders</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+3</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Analytics</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+4</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Close Modals</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Escape</kbd>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Show Help</span>
+                        <kbd class="px-2 py-1 bg-gray-200 rounded text-xs">Ctrl+?</kbd>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        showNotification('Keyboard shortcuts help opened!', 'info');
+        
+        // Create a temporary modal for help
+        const helpModal = document.createElement('div');
+        helpModal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+        helpModal.innerHTML = `
+            <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4">
+                ${helpContent}
+                <div class="flex justify-end p-6 border-t border-gray-200">
+                    <button onclick="this.closest('.fixed').remove()" class="woodash-btn woodash-btn-primary">
+                        Close
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(helpModal);
+        
+        // Close on outside click
+        helpModal.addEventListener('click', (e) => {
+            if (e.target === helpModal) {
+                helpModal.remove();
+            }
+        });
+    }
+}
+
+// Initialize keyboard shortcuts
+const keyboardShortcuts = new KeyboardShortcuts();
+
+// Performance Optimization System
+class PerformanceOptimizer {
+    constructor() {
+        this.observers = new Map();
+        this.cache = new Map();
+        this.init();
+    }
+    
+    init() {
+        this.setupIntersectionObserver();
+        this.setupLazyLoading();
+        this.optimizeImages();
+        this.debounceScrollEvents();
+    }
+    
+    setupIntersectionObserver() {
+        // Lazy load charts and heavy components
+        const chartObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const chartType = element.dataset.chartType;
+                    
+                    if (chartType) {
+                        this.loadChart(element, chartType);
+                        chartObserver.unobserve(element);
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        // Observe all chart elements
+        document.querySelectorAll('[data-chart-type]').forEach(el => {
+            chartObserver.observe(el);
+        });
+    }
+    
+    setupLazyLoading() {
+        // Lazy load images
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    if (img.dataset.src) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('woodash-skeleton');
+                        imageObserver.unobserve(img);
+                    }
+                }
+            });
+        });
+        
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
+    
+    optimizeImages() {
+        // Add loading states to images
+        document.querySelectorAll('img').forEach(img => {
+            if (!img.src) {
+                img.classList.add('woodash-skeleton');
+            }
+        });
+    }
+    
+    debounceScrollEvents() {
+        let scrollTimeout;
+        window.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                this.handleScroll();
+            }, 16); // ~60fps
+        });
+    }
+    
+    handleScroll() {
+        // Optimize scroll performance
+        const scrollY = window.scrollY;
+        
+        // Update sticky elements
+        document.querySelectorAll('.woodash-sticky').forEach(el => {
+            el.style.transform = `translateY(${scrollY * 0.1}px)`;
+        });
+    }
+    
+    loadChart(element, chartType) {
+        // Simulate chart loading with skeleton
+        element.classList.add('woodash-skeleton');
+        
+        setTimeout(() => {
+            element.classList.remove('woodash-skeleton');
+            element.classList.add('woodash-card-entrance');
+            
+            // Initialize actual chart here
+            console.log(`Loading ${chartType} chart`);
+        }, 500);
+    }
+    
+    // Cache management
+    setCache(key, value, ttl = 300000) { // 5 minutes default
+        this.cache.set(key, {
+            value,
+            timestamp: Date.now(),
+            ttl
+        });
+    }
+    
+    getCache(key) {
+        const cached = this.cache.get(key);
+        if (cached && Date.now() - cached.timestamp < cached.ttl) {
+            return cached.value;
+        }
+        this.cache.delete(key);
+        return null;
+    }
+    
+    // Memory management
+    cleanup() {
+        // Clear old cache entries
+        for (const [key, value] of this.cache.entries()) {
+            if (Date.now() - value.timestamp > value.ttl) {
+                this.cache.delete(key);
+            }
+        }
+    }
+}
+
+// Initialize performance optimizer
+const performanceOptimizer = new PerformanceOptimizer();
+
+// Cleanup cache every 5 minutes
+setInterval(() => {
+    performanceOptimizer.cleanup();
+}, 300000);
+
+// Advanced Search System
+class AdvancedSearch {
+    constructor() {
+        this.searchIndex = new Map();
+        this.searchHistory = [];
+        this.init();
+    }
+    
+    init() {
+        this.buildSearchIndex();
+        this.setupSearchUI();
+    }
+    
+    buildSearchIndex() {
+        // Index all searchable content
+        const searchableElements = document.querySelectorAll('[data-searchable]');
+        
+        searchableElements.forEach(element => {
+            const text = element.textContent.toLowerCase();
+            const keywords = text.split(/\s+/).filter(word => word.length > 2);
+            
+            keywords.forEach(keyword => {
+                if (!this.searchIndex.has(keyword)) {
+                    this.searchIndex.set(keyword, []);
+                }
+                this.searchIndex.get(keyword).push({
+                    element,
+                    text: element.textContent,
+                    type: element.dataset.searchable
+                });
+            });
+        });
+    }
+    
+    setupSearchUI() {
+        // Create search overlay
+        const searchOverlay = document.createElement('div');
+        searchOverlay.id = 'search-overlay';
+        searchOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 z-50 hidden';
+        searchOverlay.innerHTML = `
+            <div class="flex items-center justify-center min-h-screen p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-2xl">
+                    <div class="p-6">
+                        <div class="relative mb-4">
+                            <input type="text" id="search-input" 
+                                   class="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                                   placeholder="Search products, orders, customers...">
+                            <i class="fa-solid fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                            <button id="search-close" class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                                <i class="fa-solid fa-times"></i>
+                            </button>
+                        </div>
+                        <div id="search-results" class="max-h-96 overflow-y-auto">
+                            <div class="text-center text-gray-500 py-8">
+                                <i class="fa-solid fa-search text-4xl mb-2"></i>
+                                <p>Start typing to search...</p>
+                            </div>
+                        </div>
+                        <div id="search-history" class="mt-4 hidden">
+                            <h4 class="text-sm font-medium text-gray-700 mb-2">Recent searches</h4>
+                            <div id="history-items" class="space-y-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(searchOverlay);
+        
+        // Setup event listeners
+        this.setupSearchEvents();
+    }
+    
+    setupSearchEvents() {
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        const searchClose = document.getElementById('search-close');
+        const searchOverlay = document.getElementById('search-overlay');
+        
+        let searchTimeout;
+        
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(searchTimeout);
+            searchTimeout = setTimeout(() => {
+                this.performSearch(e.target.value);
+            }, 300);
+        });
+        
+        searchClose.addEventListener('click', () => {
+            this.closeSearch();
+        });
+        
+        searchOverlay.addEventListener('click', (e) => {
+            if (e.target === searchOverlay) {
+                this.closeSearch();
+            }
+        });
+        
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.closeSearch();
+            }
+        });
+    }
+    
+    performSearch(query) {
+        if (!query.trim()) {
+            this.showSearchHistory();
+            return;
+        }
+        
+        const results = this.search(query);
+        this.displayResults(results, query);
+        this.addToHistory(query);
+    }
+    
+    search(query) {
+        const keywords = query.toLowerCase().split(/\s+/);
+        const results = new Map();
+        
+        keywords.forEach(keyword => {
+            // Exact matches
+            if (this.searchIndex.has(keyword)) {
+                this.searchIndex.get(keyword).forEach(item => {
+                    const key = `${item.type}-${item.element.id || item.text}`;
+                    if (!results.has(key)) {
+                        results.set(key, { ...item, score: 0 });
+                    }
+                    results.get(key).score += 10;
+                });
+            }
+            
+            // Partial matches
+            for (const [indexKeyword, items] of this.searchIndex.entries()) {
+                if (indexKeyword.includes(keyword)) {
+                    items.forEach(item => {
+                        const key = `${item.type}-${item.element.id || item.text}`;
+                        if (!results.has(key)) {
+                            results.set(key, { ...item, score: 0 });
+                        }
+                        results.get(key).score += 5;
+                    });
+                }
+            }
+        });
+        
+        return Array.from(results.values()).sort((a, b) => b.score - a.score);
+    }
+    
+    displayResults(results, query) {
+        const searchResults = document.getElementById('search-results');
+        const searchHistory = document.getElementById('search-history');
+        
+        searchHistory.classList.add('hidden');
+        
+        if (results.length === 0) {
+            searchResults.innerHTML = `
+                <div class="text-center text-gray-500 py-8">
+                    <i class="fa-solid fa-search text-4xl mb-2"></i>
+                    <p>No results found for "${query}"</p>
+                </div>
+            `;
+            return;
+        }
+        
+        const resultsHTML = results.slice(0, 10).map(result => `
+            <div class="p-3 hover:bg-gray-50 rounded-lg cursor-pointer search-result-item" 
+                 data-element-id="${result.element.id || ''}">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                        <i class="fa-solid fa-${this.getIconForType(result.type)} text-purple-600"></i>
+                    </div>
+                    <div class="flex-1">
+                        <div class="font-medium">${this.highlightQuery(result.text, query)}</div>
+                        <div class="text-sm text-gray-500">${result.type}</div>
+                    </div>
+                    <div class="text-xs text-gray-400">${result.score}%</div>
+                </div>
+            </div>
+        `).join('');
+        
+        searchResults.innerHTML = resultsHTML;
+        
+        // Add click handlers
+        document.querySelectorAll('.search-result-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const elementId = item.dataset.elementId;
+                if (elementId) {
+                    const element = document.getElementById(elementId);
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                        element.classList.add('woodash-pulse-glow');
+                        setTimeout(() => {
+                            element.classList.remove('woodash-pulse-glow');
+                        }, 2000);
+                    }
+                }
+                this.closeSearch();
+            });
+        });
+    }
+    
+    highlightQuery(text, query) {
+        const regex = new RegExp(`(${query})`, 'gi');
+        return text.replace(regex, '<mark class="bg-yellow-200 px-1 rounded">$1</mark>');
+    }
+    
+    getIconForType(type) {
+        const icons = {
+            'product': 'box',
+            'order': 'shopping-cart',
+            'customer': 'user',
+            'analytics': 'chart-line',
+            'settings': 'cog'
+        };
+        return icons[type] || 'file';
+    }
+    
+    addToHistory(query) {
+        if (!this.searchHistory.includes(query)) {
+            this.searchHistory.unshift(query);
+            this.searchHistory = this.searchHistory.slice(0, 5); // Keep only 5 recent searches
+        }
+    }
+    
+    showSearchHistory() {
+        const searchResults = document.getElementById('search-results');
+        const searchHistory = document.getElementById('search-history');
+        const historyItems = document.getElementById('history-items');
+        
+        searchResults.innerHTML = '';
+        searchHistory.classList.remove('hidden');
+        
+        if (this.searchHistory.length === 0) {
+            historyItems.innerHTML = '<p class="text-gray-500 text-sm">No recent searches</p>';
+            return;
+        }
+        
+        historyItems.innerHTML = this.searchHistory.map(query => `
+            <div class="p-2 hover:bg-gray-50 rounded cursor-pointer history-item" data-query="${query}">
+                <i class="fa-solid fa-clock text-gray-400 mr-2"></i>
+                ${query}
+            </div>
+        `).join('');
+        
+        // Add click handlers for history
+        document.querySelectorAll('.history-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const query = item.dataset.query;
+                document.getElementById('search-input').value = query;
+                this.performSearch(query);
+            });
+        });
+    }
+    
+    openSearch() {
+        const searchOverlay = document.getElementById('search-overlay');
+        const searchInput = document.getElementById('search-input');
+        
+        searchOverlay.classList.remove('hidden');
+        searchInput.focus();
+        this.showSearchHistory();
+    }
+    
+    closeSearch() {
+        const searchOverlay = document.getElementById('search-overlay');
+        searchOverlay.classList.add('hidden');
+    }
+}
+
+// Initialize advanced search
+const advancedSearch = new AdvancedSearch();
+
+// Global function to open search
+window.openSearch = () => advancedSearch.openSearch();
 
 // Real-time metrics simulation
 function simulateRealTimeMetrics() {
@@ -5086,20 +6850,20 @@ async function initMiniChart(chartId) {
 }
 
 // Initialize top products chart
-function initTopProductsChart() {
+async function initTopProductsChart() {
     const ctx = document.getElementById('top-products-chart')?.getContext('2d');
     if (!ctx) return;
 
-    const data = fetchData('/api/top-products');
+    const data = await fetchData('/api/top-products');
     if (!data) return;
 
     const chartConfig = {
         type: 'bar',
         data: {
-            labels: data.labels,
+            labels: data.map(item => item.name),
             datasets: [{
                 label: 'Sales',
-                data: data.data,
+                data: data.map(item => item.sales),
                 backgroundColor: '#814ce4',
                 borderColor: '#814ce4',
                 borderWidth: 1
@@ -5130,20 +6894,20 @@ function initTopProductsChart() {
 }
 
 // Initialize top customers chart
-function initTopCustomersChart() {
+async function initTopCustomersChart() {
     const ctx = document.getElementById('top-customers-chart')?.getContext('2d');
     if (!ctx) return;
 
-    const data = fetchData('/api/top-customers');
+    const data = await fetchData('/api/top-customers');
     if (!data) return;
 
     const chartConfig = {
         type: 'bar',
         data: {
-            labels: data.labels,
+            labels: data.map(item => item.name),
             datasets: [{
                 label: 'Total Spent',
-                data: data.data,
+                data: data.map(item => item.total),
                 backgroundColor: '#814ce4',
                 borderColor: '#814ce4',
                 borderWidth: 1
@@ -5337,16 +7101,43 @@ function exportAsExcel() {
 // Theme toggle functionality
 function toggleTheme() {
     const dashboard = document.getElementById('woodash-dashboard');
+    const themeToggle = document.getElementById('theme-toggle');
     const isDark = dashboard.classList.contains('dark-theme');
     
     if (isDark) {
+        // Switch to light theme
         dashboard.classList.remove('dark-theme');
         localStorage.setItem('woodash_theme', 'light');
+        
+        // Update theme toggle icon and text
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            const text = themeToggle.querySelector('span');
+            if (icon) icon.className = 'fa-solid fa-sun text-yellow-500';
+            if (text) text.textContent = 'Switch to Dark';
+        }
+        
         showNotification('Switched to light theme', 'success');
     } else {
+        // Switch to dark theme
         dashboard.classList.add('dark-theme');
         localStorage.setItem('woodash_theme', 'dark');
+        
+        // Update theme toggle icon and text
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            const text = themeToggle.querySelector('span');
+            if (icon) icon.className = 'fa-solid fa-moon text-blue-400';
+            if (text) text.textContent = 'Switch to Light';
+        }
+        
         showNotification('Switched to dark theme', 'success');
+    }
+    
+    // Update system theme preference if supported
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // System prefers dark theme
+        console.log('System theme preference detected');
     }
 }
 
@@ -5407,11 +7198,49 @@ function animateNumbers() {
     });
 }
 
-// Load theme preference
+// Load theme preference and initialize theme toggle
 document.addEventListener('DOMContentLoaded', function() {
+    const dashboard = document.getElementById('woodash-dashboard');
+    const themeToggle = document.getElementById('theme-toggle');
     const savedTheme = localStorage.getItem('woodash_theme');
-    if (savedTheme === 'dark') {
-        document.getElementById('woodash-dashboard').classList.add('dark-theme');
+    
+    // Check system preference if no saved theme
+    const systemPrefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const shouldUseDark = savedTheme === 'dark' || (!savedTheme && systemPrefersDark);
+    
+    if (shouldUseDark) {
+        dashboard.classList.add('dark-theme');
+        localStorage.setItem('woodash_theme', 'dark');
+        
+        // Update theme toggle button
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            const text = themeToggle.querySelector('span');
+            if (icon) icon.className = 'fa-solid fa-moon text-blue-400';
+            if (text) text.textContent = 'Switch to Light';
+        }
+    } else {
+        // Update theme toggle button for light theme
+        if (themeToggle) {
+            const icon = themeToggle.querySelector('i');
+            const text = themeToggle.querySelector('span');
+            if (icon) icon.className = 'fa-solid fa-sun text-yellow-500';
+            if (text) text.textContent = 'Switch to Dark';
+        }
+    }
+    
+    // Listen for system theme changes
+    if (window.matchMedia) {
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(e) {
+            if (!localStorage.getItem('woodash_theme')) {
+                // Only auto-switch if user hasn't manually set a preference
+                if (e.matches) {
+                    dashboard.classList.add('dark-theme');
+                } else {
+                    dashboard.classList.remove('dark-theme');
+                }
+            }
+        });
     }
 });
 
@@ -5663,7 +7492,7 @@ document.addEventListener('click', function(e) {
 class WoodashPageManager {
     constructor() {
         this.currentPage = 'dashboard';
-        this.pages = ['dashboard', 'analytics', 'products', 'orders', 'customers', 'coupons', 'inventory', 'reviews', 'reports', 'settings'];
+        this.pages = ['dashboard', 'analytics', 'products', 'orders', 'customers', 'coupons', 'inventory', 'reviews', 'reports','integrations', 'settings'];
         this.pageData = {
             'dashboard': {
                 title: 'Dashboard',
@@ -5700,6 +7529,10 @@ class WoodashPageManager {
             'reports': {
                 title: 'Reports',
                 description: 'Generate comprehensive business reports.'
+            },
+            'integrations': {
+                title: 'Integrations',
+                description: 'Integration'
             },
             'settings': {
                 title: 'Settings',
@@ -5901,7 +7734,7 @@ class WoodashPageManager {
         const reportButtons = document.querySelectorAll('#reports-page .woodash-btn-primary');
         reportButtons.forEach(button => {
             button.addEventListener('click', () => {
-                const reportType = button.closest('.woodash-chart-container').querySelector('h3').textContent;
+                const reportType = button.closest('.woodash-chart-container').querySelector('h3');
                 showNotification(`Generating ${reportType}...`, 'success');
                 
                 setTimeout(() => {
@@ -5920,12 +7753,188 @@ class WoodashPageManager {
             });
         }
     }
+
+    initProductModal() {
+        // Product modal functionality
+        const openModalBtn = document.getElementById('openProductModal');
+        const closeModalBtn = document.getElementById('closeProductModal');
+        const cancelBtn = document.getElementById('cancelProductForm');
+        const modal = document.getElementById('addProductModal');
+        const form = document.getElementById('addProductForm');
+        const imageInput = document.getElementById('productImage');
+        const imageUploadArea = document.getElementById('imageUploadArea');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImg = document.getElementById('previewImg');
+
+        console.log('Initializing product modal...', {
+            openModalBtn: !!openModalBtn,
+            modal: !!modal,
+            form: !!form
+        });
+
+        // Open modal
+        if (openModalBtn) {
+            openModalBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                console.log('Add Product button clicked');
+                if (modal) {
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                    console.log('Modal opened');
+                } else {
+                    console.error('Modal not found');
+                }
+            });
+        } else {
+            console.error('Open modal button not found');
+        }
+
+        // Close modal functions
+        const closeModal = () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            if (form) form.reset();
+            if (imagePreview) imagePreview.style.display = 'none';
+        };
+
+        if (closeModalBtn) {
+            closeModalBtn.addEventListener('click', closeModal);
+        }
+
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', closeModal);
+        }
+
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+                closeModal();
+            }
+        });
+
+        // Image upload functionality
+        if (imageUploadArea && imageInput) {
+            imageUploadArea.addEventListener('click', () => {
+                imageInput.click();
+            });
+
+            imageInput.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        previewImg.src = e.target.result;
+                        imagePreview.classList.remove('hidden');
+                        imageUploadArea.classList.add('hidden');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Drag and drop functionality
+            imageUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                imageUploadArea.classList.add('border-purple-400', 'bg-purple-50');
+            });
+
+            imageUploadArea.addEventListener('dragleave', (e) => {
+                e.preventDefault();
+                imageUploadArea.classList.remove('border-purple-400', 'bg-purple-50');
+            });
+
+            imageUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                imageUploadArea.classList.remove('border-purple-400', 'bg-purple-50');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    const file = files[0];
+                    if (file.type.startsWith('image/')) {
+                        imageInput.files = files;
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            previewImg.src = e.target.result;
+                            imagePreview.classList.remove('hidden');
+                            imageUploadArea.classList.add('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    } else {
+                        showNotification('Please select a valid image file', 'error');
+                    }
+                }
+            });
+        }
+
+        // Form submission
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Get form data
+                const formData = new FormData(form);
+                const productData = {
+                    name: formData.get('productName'),
+                    sku: formData.get('productSku'),
+                    category: formData.get('productCategory'),
+                    price: parseFloat(formData.get('productPrice')),
+                    stock: parseInt(formData.get('productStock')),
+                    weight: parseFloat(formData.get('productWeight')) || 0,
+                    dimensions: formData.get('productDimensions'),
+                    description: formData.get('productDescription'),
+                    status: formData.get('productStatus'),
+                    image: formData.get('productImage')
+                };
+
+                // Validate required fields
+                if (!productData.name || !productData.sku || !productData.category || !productData.price || productData.stock === null) {
+                    showNotification('Please fill in all required fields', 'error');
+                    return;
+                }
+
+                // Show loading state
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i>Adding Product...';
+                submitBtn.disabled = true;
+
+                // Simulate API call (replace with actual API call)
+                setTimeout(() => {
+                    // Here you would typically send the data to your backend
+                    console.log('Product data:', productData);
+                    
+                    // Show success notification
+                    showNotification('Product added successfully!', 'success');
+                    
+                    // Close modal and reset form
+                    closeModal();
+                    
+                    // Reset button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    
+                    // Here you could also refresh the product table or add the new product to the table
+                    // refreshProductTable();
+                    
+                }, 1500);
+            });
+        }
+    }
 }
 
 // Initialize page manager
 let pageManager;
 document.addEventListener('DOMContentLoaded', function() {
     pageManager = new WoodashPageManager();
+    
+    // Initialize product modal
+    pageManager.initProductModal();
     
     // Handle browser back/forward
     window.addEventListener('popstate', function(e) {
@@ -5960,6 +7969,25 @@ document.addEventListener('keydown', function(e) {
             e.preventDefault();
             pageManager.navigateToPage(keyMap[e.key]);
         }
+    }
+});
+</script>
+
+<script>
+// Feedback form handler for Updates page
+document.addEventListener('DOMContentLoaded', function() {
+    const feedbackForm = document.getElementById('update-feedback-form');
+    const feedbackInput = document.getElementById('update-feedback-input');
+    const feedbackSuccess = document.getElementById('update-feedback-success');
+    if (feedbackForm) {
+        feedbackForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (feedbackInput.value.trim()) {
+                feedbackSuccess.classList.remove('hidden');
+                feedbackInput.value = '';
+                setTimeout(() => feedbackSuccess.classList.add('hidden'), 3000);
+            }
+        });
     }
 });
 </script>

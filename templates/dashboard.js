@@ -89,21 +89,56 @@ async function fetchNewCustomers(after, before) {
 
 // Fetch processing orders count via admin-ajax
 async function fetchProcessingCount(after, before) {
-  const params = new URLSearchParams();
-  params.append('action', 'woodash_get_processing_count');
-  params.append('nonce', woodashData.nonce);
-  params.append('after', after);
-  params.append('before', before);
-  const res = await fetch(woodashData.ajaxurl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
-    body: params.toString(),
-  });
-  const json = await res.json();
-  if (json && json.success && json.data && typeof json.data.processing === 'number') {
-    return json.data.processing;
+  try {
+    const params = new URLSearchParams();
+    params.append('action', 'woodash_get_processing_count');
+    params.append('nonce', woodashData.nonce);
+    params.append('after', after);
+    params.append('before', before);
+    
+    const res = await fetch(woodashData.ajaxurl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' },
+      body: params.toString(),
+    });
+    
+    // Check if response is ok
+    if (!res.ok) {
+      console.error(`HTTP error! status: ${res.status}`);
+      const responseText = await res.text();
+      console.error('Response content:', responseText);
+      console.warn('Server returned error, using fallback value');
+      return 0;
+    }
+    
+    // Check if response is JSON
+    const contentType = res.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      console.warn(`Server returned non-JSON content (${contentType}), using fallback value`);
+      const responseText = await res.text();
+      console.error('Non-JSON response content:', responseText);
+      return 0;
+    }
+    
+    const json = await res.json();
+    if (json && json.success && json.data && typeof json.data.processing === 'number') {
+      return json.data.processing;
+    }
+    return 0;
+  } catch (error) {
+    console.error('Error fetching processing count:', error);
+    
+    // If it's a JSON parsing error, provide helpful debugging info
+    if (error instanceof SyntaxError && error.message.includes('Unexpected token')) {
+      console.error('🔍 JSON Parsing Error in fetchProcessingCount:');
+      console.error('   - Expected: JSON data from WordPress AJAX');
+      console.error('   - Received: HTML error page (likely 500 Internal Server Error)');
+      console.error('   - Likely cause: WordPress AJAX handler not working properly');
+      console.error('   - Solution: Check WordPress AJAX handler for "woodash_get_processing_count"');
+    }
+    
+    return 0;
   }
-  return 0;
 }
 
 // Fetch from WooCommerce Analytics REST
@@ -328,6 +363,23 @@ function updateSalesOverview(data) {
   }, 100);
 }
 
+// Global error handler for unhandled promise rejections
+window.addEventListener('unhandledrejection', function(event) {
+  console.error('🚨 Unhandled promise rejection in dashboard.js:', event.reason);
+  
+  // Check if it's a JSON parsing error
+  if (event.reason instanceof SyntaxError && event.reason.message.includes('Unexpected token')) {
+    console.error('🔍 JSON Parsing Error Detected:');
+    console.error('   - Expected: JSON data from WordPress AJAX');
+    console.error('   - Received: HTML error page (likely 500 Internal Server Error)');
+    console.error('   - Likely cause: WordPress AJAX handler not working properly');
+    console.error('   - Solution: Check WordPress AJAX handlers and server logs');
+  }
+  
+  // Prevent the default behavior
+  event.preventDefault();
+});
+
 // DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function () {
   if (typeof woodashData === 'undefined') return;
@@ -362,9 +414,15 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       // Processing badge
-      const processing = await fetchProcessingCount(after, before);
-      const elPending = document.getElementById('pending-orders');
-      if (elPending) elPending.textContent = `Processing : ${processing.toLocaleString()}`;
+      try {
+        const processing = await fetchProcessingCount(after, before);
+        const elPending = document.getElementById('pending-orders');
+        if (elPending) elPending.textContent = `Processing : ${processing.toLocaleString()}`;
+      } catch (e) {
+        console.error('Error loading processing count:', e);
+        const elPending = document.getElementById('pending-orders');
+        if (elPending) elPending.textContent = 'Processing : 0';
+      }
 
       // Overview net revenue
       const intervals = revenue?.intervals || [];
